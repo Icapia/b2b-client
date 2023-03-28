@@ -1,12 +1,12 @@
 $black: #232323;
-$brown: #D89972;
-$brownHover: #E3B687;
-$white: #FFFFFF;
-$grey: #F8F8F8;
-$text: #A7A6A6;
+$brown: #e68512;
+$brownHover: #e3b687;
+$white: #ffffff;
+$grey: #f8f8f8;
+$text: #a7a6a6;
 
 * {
-  font-family: 'Poppins', sans-serif !important;
+  font-family: "Poppins", sans-serif !important;
 }
 
 body::-webkit-scrollbar {
@@ -14,13 +14,13 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-track {
-  background: #FFF;
+  background: #fff;
 }
 
 body::-webkit-scrollbar-thumb {
   background-color: $brown;
   border-radius: 50px;
-  border: 3px solid #FFF;
+  border: 3px solid #fff;
 }
 
 .content {
@@ -34,7 +34,7 @@ body::-webkit-scrollbar-thumb {
   left: 0;
   top: 0;
   width: calc(15vw);
-  transition: width .2s linear;
+  transition: width 0.2s linear;
   background-color: #232323;
 
   &__user {
@@ -49,19 +49,19 @@ body::-webkit-scrollbar-thumb {
       h6 {
         font-size: 14px;
         font-weight: 600;
-        color: #FFF;
+        color: #fff;
         line-height: 100%;
         margin-bottom: 5px;
-        transition: .15s linear;
-        
+        transition: 0.15s linear;
+
         &:hover {
-          opacity: .7;
+          opacity: 0.7;
         }
       }
       p {
         font-size: 14px;
         font-weight: 400;
-        color: #A7A6A6;
+        color: #a7a6a6;
         line-height: 115%;
       }
     }
@@ -71,21 +71,21 @@ body::-webkit-scrollbar-thumb {
       width: 40px;
       height: 40px;
       position: relative;
-      
+
       &::after {
-        content: '';
+        content: "";
         width: 8px;
         height: 8px;
         display: block;
         border-radius: 50%;
-        background-color: #2ED97C;
+        background-color: #2ed97c;
         border: 3px solid $black;
-        
-        position: absolute;  
+
+        position: absolute;
         bottom: 2px;
         right: -2px;
       }
-      
+
       & span {
         width: 40px !important;
         height: 40px !important;
@@ -103,24 +103,24 @@ body::-webkit-scrollbar-thumb {
       align-items: flex-start;
       justify-content: space-between;
       li {
-        color: #FFF;
+        color: #fff;
         position: relative;
-        transition: .15s linear;
+        transition: 0.15s linear;
         a {
-          transition: .15s linear;
+          transition: 0.15s linear;
         }
         &::before {
-          content: '';
+          content: "";
           display: block;
           width: 4px;
           height: 50px;
-          background-color: #D89972;
+          background-color: #e68512;
           border-radius: 0px 3px 3px 0px;
           position: absolute;
           left: -35px;
           top: 50%;
           transform: translateY(-50%);
-          transition: .15s linear;
+          transition: 0.15s linear;
           opacity: 0;
           visibility: hidden;
         }
@@ -139,14 +139,14 @@ body::-webkit-scrollbar-thumb {
         }
         .sidebar__menu-item--image {
           &::before {
-            content: '';
+            content: "";
             display: block;
             width: 100%;
             height: 100%;
-            background-color: #D89972;
+            background-color: #e68512;
             z-index: 2;
             mix-blend-mode: darken;
-            transition: .15s linear;
+            transition: 0.15s linear;
             position: absolute;
             left: 0;
             top: 0;
@@ -167,7 +167,7 @@ body::-webkit-scrollbar-thumb {
           }
         }
         a {
-          color: #D89972;
+          color: #e68512;
         }
       }
     }
@@ -183,7 +183,7 @@ body::-webkit-scrollbar-thumb {
     & .sidebar__user-info {
       display: none;
     }
-    
+
     & .sidebar__user-link {
       & a {
         text-decoration: none;
@@ -196,7 +196,6 @@ body::-webkit-scrollbar-thumb {
     }
 
     & .sidebar__menu {
-
       &-wrapper {
         flex-direction: row;
         justify-content: center;
@@ -205,21 +204,20 @@ body::-webkit-scrollbar-thumb {
       & ul {
         li {
           &::before {
-            content: '';
+            content: "";
             display: block;
             width: 4px;
             height: 50px;
-            background-color: #D89972;
+            background-color: #e68512;
             border-radius: 0px 3px 3px 0px;
             position: absolute;
             left: -27px;
             top: 50%;
             transform: translateY(-50%);
-            transition: .15s linear;
+            transition: 0.15s linear;
           }
         }
       }
-
     }
 
     .sibebar__toggle {
@@ -230,7 +228,6 @@ body::-webkit-scrollbar-thumb {
         display: none;
       }
     }
-
   }
 
   &__wrapper {
@@ -239,7 +236,6 @@ body::-webkit-scrollbar-thumb {
     height: 100%;
   }
 }
-
 
 .sidebar__menu-item--image {
   display: flex;
@@ -257,15 +253,15 @@ body::-webkit-scrollbar-thumb {
   -moz-column-gap: 10px;
   column-gap: 10px;
   padding: 8px 0px;
-  color: #FFF;
+  color: #fff;
   position: relative;
-  transition: .15s linear;
+  transition: 0.15s linear;
   cursor: pointer;
   position: absolute;
   bottom: 35px;
   span {
     font-weight: 500;
-    transition: .15s linear;
+    transition: 0.15s linear;
     padding-top: 2px;
   }
   &:hover {
@@ -290,14 +286,14 @@ body::-webkit-scrollbar-thumb {
   align-items: center;
   position: relative;
   &::before {
-    content: '';
+    content: "";
     display: block;
     width: 100%;
     height: 100%;
-    background-color: #D89972;
+    background-color: #e68512;
     z-index: 2;
     mix-blend-mode: darken;
-    transition: .15s linear;
+    transition: 0.15s linear;
     position: absolute;
     left: 0;
     top: 0;
@@ -315,17 +311,17 @@ body::-webkit-scrollbar-thumb {
   padding: 8px 0px;
 
   &::before {
-    content: '';
+    content: "";
     display: block;
     width: 4px;
     height: 50px;
-    background-color: #D89972;
+    background-color: #e68512;
     border-radius: 0px 3px 3px 0px;
     position: absolute;
     left: -35px;
     top: 50%;
     transform: translateY(-50%);
-    transition: .15s linear;
+    transition: 0.15s linear;
     opacity: 0;
     visibility: hidden;
   }
@@ -341,7 +337,7 @@ body::-webkit-scrollbar-thumb {
   top: 15px;
   left: calc(15vw + 10px);
   width: calc(85vw - 40px);
-  transition: all .15s linear;
+  transition: all 0.15s linear;
 
   &--small {
     left: calc(80px + 10px);
@@ -366,7 +362,7 @@ body::-webkit-scrollbar-thumb {
       line-height: 115%;
       color: $black;
       margin-bottom: 8px;
-      
+
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -381,7 +377,6 @@ body::-webkit-scrollbar-thumb {
   }
 
   & .breadcrumbs {
-
     & ol {
       display: flex;
       flex-direction: row;
@@ -393,7 +388,7 @@ body::-webkit-scrollbar-thumb {
         padding-right: 10px;
         position: relative;
         &::after {
-          content: '>';
+          content: ">";
           position: absolute;
           font-size: 12px;
           color: $text;
@@ -403,7 +398,7 @@ body::-webkit-scrollbar-thumb {
 
         &:last-child {
           &::after {
-            content: '';
+            content: "";
           }
         }
       }
@@ -411,7 +406,7 @@ body::-webkit-scrollbar-thumb {
 
     &-item {
       & a {
-        transition: .15s linear;
+        transition: 0.15s linear;
         color: $brown;
         font-size: 14px;
 
@@ -426,7 +421,6 @@ body::-webkit-scrollbar-thumb {
         }
       }
     }
-
   }
 
   &__lang {
@@ -448,7 +442,7 @@ body::-webkit-scrollbar-thumb {
       color: $text;
       line-height: 130%;
       font-weight: 500;
-      transition: .15s linear;
+      transition: 0.15s linear;
 
       &.active {
         color: $brown;
@@ -469,9 +463,9 @@ body::-webkit-scrollbar-thumb {
       column-gap: 10px;
 
       & li {
-        transition: .15s linear;
+        transition: 0.15s linear;
         cursor: pointer;
-        opacity: .6;
+        opacity: 0.6;
 
         &:hover {
           opacity: 1;
@@ -511,7 +505,7 @@ body::-webkit-scrollbar-thumb {
       & button {
         padding: 10px;
         background-color: $brown;
-        transition: .1s linear;
+        transition: 0.1s linear;
         border-radius: 0px 3px 3px 0px;
         cursor: pointer;
         border: 0;
@@ -532,7 +526,7 @@ body::-webkit-scrollbar-thumb {
   top: 130px;
   left: calc(15vw + 10px);
   width: calc(85vw - 40px);
-  transition: all .15s linear;
+  transition: all 0.15s linear;
 
   padding-right: 60px;
   padding-left: 60px;
@@ -596,7 +590,6 @@ body::-webkit-scrollbar-thumb {
       color: $text;
       line-height: 100%;
     }
-
   }
 
   &__form {
@@ -680,17 +673,17 @@ body::-webkit-scrollbar-thumb {
       display: inline-block;
       font-size: 16px;
       font-weight: 500;
-      transition: .15s linear;
+      transition: 0.15s linear;
       margin-top: 20px;
       color: $black;
       position: relative;
 
       &::after {
-        content: '';
+        content: "";
         width: 100%;
         height: 1px;
         background-color: $black;
-        transition: .15s linear;
+        transition: 0.15s linear;
         position: absolute;
         bottom: -5px;
         left: 0;
@@ -707,20 +700,19 @@ body::-webkit-scrollbar-thumb {
   }
 }
 
-
 .dashboardList {
   &__wrapper {
     display: flex;
     width: 100%;
     max-width: 100%;
-    align-items: center;;
+    align-items: center;
     column-gap: 10px;
     column-gap: 10px;
   }
 
   &__item {
     cursor: pointer;
-    transition: .15s linear;
+    transition: 0.15s linear;
     flex: 1 1 auto;
     padding: 10px;
     border-radius: 4px;
@@ -729,7 +721,6 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
-
 
     &-image {
       display: flex;
@@ -758,7 +749,6 @@ body::-webkit-scrollbar-thumb {
       font-size: 14px;
     }
 
-
     &:hover {
       background-color: $brown;
 
@@ -772,7 +762,7 @@ body::-webkit-scrollbar-thumb {
 
       & p {
         color: $white;
-        opacity: .7;
+        opacity: 0.7;
       }
     }
   }
@@ -797,7 +787,7 @@ body::-webkit-scrollbar-thumb {
     & .chartItem__graphic {
       margin-top: 20px;
       padding-top: 20px;
-      border-top: 1px solid #E5E5E5;
+      border-top: 1px solid #e5e5e5;
     }
   }
 }
@@ -847,13 +837,12 @@ body::-webkit-scrollbar-thumb {
     color: $text;
     max-width: 40%;
   }
-
 }
 // Start Chart
 
 .topline {
   &::before {
-    content: '';
+    content: "";
     display: block;
     width: 50px;
     height: 4px;
@@ -873,7 +862,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .datagrid__header {
-  background-color: #D89972;
+  background-color: #e68512;
 }
 
 .datagrid-user {
@@ -928,7 +917,7 @@ body::-webkit-scrollbar-thumb {
     font-size: 16px;
     font-weight: normal;
     color: $text;
-    transition: .15s linear;
+    transition: 0.15s linear;
 
     &:hover {
       color: $brown;
@@ -962,7 +951,7 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
 
     & span {
-      color: #47E790;
+      color: #47e790;
       font-size: 15px;
       font-weight: 500;
       line-height: 115%;
@@ -976,7 +965,7 @@ body::-webkit-scrollbar-thumb {
       align-items: center;
 
       border-radius: 50%;
-      border: 1px solid #E6E6E6;
+      border: 1px solid #e6e6e6;
     }
   }
 }
@@ -985,7 +974,7 @@ body::-webkit-scrollbar-thumb {
   display: block;
   width: 100%;
   height: 1px;
-  background-color: #E6E6E6;
+  background-color: #e6e6e6;
   margin: 15px 0px 10px 0px;
 
   &-l {
@@ -1020,8 +1009,8 @@ body::-webkit-scrollbar-thumb {
     justify-content: space-between;
     align-items: center;
     padding: 10px 0px;
-    border-bottom: 1px solid #E6E6E6;
-    transition: .15s linear;
+    border-bottom: 1px solid #e6e6e6;
+    transition: 0.15s linear;
 
     & span {
       font-size: 16px;
@@ -1035,7 +1024,6 @@ body::-webkit-scrollbar-thumb {
       }
     }
   }
-
 }
 
 .modal__wrapper {
@@ -1046,7 +1034,6 @@ body::-webkit-scrollbar-thumb {
   padding: 15px;
   outline: none !important;
   outline-offset: 0px !important;
-
 
   display: flex;
   justify-content: center;
@@ -1098,7 +1085,7 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     width: 100%;
     padding-bottom: 10px;
-    border-bottom: 1px solid #E6E6E6;
+    border-bottom: 1px solid #e6e6e6;
 
     & span {
       font-size: 16px;
@@ -1131,7 +1118,6 @@ body::-webkit-scrollbar-thumb {
 .mw-700 {
   min-width: 700px !important;
 }
-
 
 .mt-40 {
   margin-top: 40px !important;
@@ -1166,15 +1152,15 @@ body::-webkit-scrollbar-thumb {
 }
 
 .MuiSelect-select label {
-  color: #A7A6A6;
+  color: #a7a6a6;
   font-weight: 600;
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
 
 .css-1sumxir-MuiFormLabel-root-MuiInputLabel-root {
-  color: #A7A6A6 !important;
+  color: #a7a6a6 !important;
   font-weight: 500;
-  transition: .15s linear;
+  transition: 0.15s linear;
 }
 
 .css-1sumxir-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
@@ -1190,7 +1176,7 @@ body::-webkit-scrollbar-thumb {
 
   opacity: 0;
   visibility: hidden;
-  transition: .15s linear;
+  transition: 0.15s linear;
   z-index: 100000;
 
   &.open {
@@ -1199,7 +1185,7 @@ body::-webkit-scrollbar-thumb {
   }
 
   &__content {
-    background-color: #FFF;
+    background-color: #fff;
     padding: 15px 20px;
     border-radius: 60px;
     border: 1px solid $brown;
@@ -1221,10 +1207,10 @@ body::-webkit-scrollbar-thumb {
   top: 15px;
   right: 15px;
   cursor: pointer;
-  transition: .15s linear;
+  transition: 0.15s linear;
 
   &:hover {
-    opacity: .5;
+    opacity: 0.5;
   }
 }
 
@@ -1259,7 +1245,7 @@ body::-webkit-scrollbar-thumb {
   }
 
   &-btn:nth-child(2),
-  &-btn:nth-child(3)  {
+  &-btn:nth-child(3) {
     width: calc((100% - 45px - 30px) / 2);
   }
 
@@ -1298,15 +1284,15 @@ body::-webkit-scrollbar-thumb {
 
     & span {
       &.green {
-        color: #47E790;
+        color: #47e790;
       }
 
       &.orange {
-        color: #FFB946;
+        color: #ffb946;
       }
 
       &.red {
-        color: #FA7F73;
+        color: #fa7f73;
       }
     }
   }
@@ -1322,7 +1308,7 @@ body::-webkit-scrollbar-thumb {
     flex-direction: row;
     column-gap: 6px;
     align-items: center;
-    border-bottom: 1px solid #E6E6E6;
+    border-bottom: 1px solid #e6e6e6;
 
     & span {
       font-size: 15px;
@@ -1339,19 +1325,17 @@ body::-webkit-scrollbar-thumb {
     background-color: $text;
 
     &.green {
-      background-color: #47E790;
+      background-color: #47e790;
     }
 
     &.orange {
-      background-color: #FFB946;
+      background-color: #ffb946;
     }
 
     &.red {
-      background-color: #FA7F73;
+      background-color: #fa7f73;
     }
   }
-
-
 }
 
 .box {
@@ -1399,7 +1383,7 @@ body::-webkit-scrollbar-thumb {
     width: 120px;
     height: 120px;
     cursor: pointer;
-    transition: .15s linear;
+    transition: 0.15s linear;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -1408,16 +1392,16 @@ body::-webkit-scrollbar-thumb {
     position: relative;
 
     &::before {
-      content: '';
+      content: "";
       display: block;
       position: absolute;
       width: 100%;
       height: 100%;
       border-radius: 4px;
       overflow: hidden;
-      background-color: rgba(#D89972, .7);
+      background-color: rgba(#e68512, 0.7);
       opacity: 0;
-      transition: .15s linear;
+      transition: 0.15s linear;
     }
 
     &:hover {
@@ -1451,7 +1435,7 @@ body::-webkit-scrollbar-thumb {
     justify-content: space-between;
     align-items: center;
     padding: 15px 0px;
-    border-bottom: 1px solid #E6E6E6;
+    border-bottom: 1px solid #e6e6e6;
     & span {
       font-size: 16px;
       color: $text;
@@ -1492,7 +1476,7 @@ body::-webkit-scrollbar-thumb {
     justify-content: space-between;
     align-items: center;
     padding: 15px 0px;
-    border-bottom: 1px solid #E6E6E6;
+    border-bottom: 1px solid #e6e6e6;
     & span {
       font-size: 16px;
       color: $text;
@@ -1614,7 +1598,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 .notifications {
-
   &__header {
     display: flex;
     flex-direction: row;
@@ -1654,10 +1637,10 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     flex-direction: column;
     grid-row-gap: 5px;
-    transition: .15s linear;
+    transition: 0.15s linear;
 
     &:hover {
-      box-shadow: 0px 6px 6px rgba(117, 71, 42, 0.10);
+      box-shadow: 0px 6px 6px rgba(117, 71, 42, 0.1);
     }
 
     & h5 {
@@ -1711,7 +1694,7 @@ body::-webkit-scrollbar-thumb {
     max-width: 100%;
     flex-wrap: nowrap;
     padding: 20px;
-    border: 1px solid #E6E6E6;
+    border: 1px solid #e6e6e6;
     border-top: 0px;
 
     column-gap: 15px;
@@ -1756,7 +1739,6 @@ body::-webkit-scrollbar-thumb {
     & .a-r {
       text-align: right;
     }
-
   }
 }
 
@@ -1772,7 +1754,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .MuiCheckbox-colorPrimary {
-  color: #A7A6A6 !important;
+  color: #a7a6a6 !important;
 }
 .MuiCheckbox-colorPrimary.Mui-checked {
   color: $brown !important;
@@ -1782,16 +1764,17 @@ body::-webkit-scrollbar-thumb {
   color: $white !important;
 }
 
-.css-1hk6021-MuiDataGrid-root .MuiDataGrid-columnHeader:focus-within, .css-1hk6021-MuiDataGrid-root .MuiDataGrid-cell:focus-within {
+.css-1hk6021-MuiDataGrid-root .MuiDataGrid-columnHeader:focus-within,
+.css-1hk6021-MuiDataGrid-root .MuiDataGrid-cell:focus-within {
   outline: none !important;
 }
 
 .MuiDataGrid-cell {
-  background-color: #FFF !important;
+  background-color: #fff !important;
 }
 
 .MuiDataGrid-columnHeadersInner .MuiButtonBase-root {
-  color: #FFF !important;
+  color: #fff !important;
 }
 
 .MuiDataGrid-root {
@@ -1799,7 +1782,6 @@ body::-webkit-scrollbar-thumb {
   border-radius: 3px;
   overflow: hidden;
 }
-
 
 .form {
   &--flex {
@@ -1820,10 +1802,9 @@ body::-webkit-scrollbar-thumb {
 }
 
 .css-1oigg60-MuiButtonBase-root-MuiButton-root.Mui-disabled {
-  opacity: .3;
-  color: #FFF;
+  opacity: 0.3;
+  color: #fff;
 }
-
 
 .col-2 {
   box-sizing: border-box;
@@ -1832,7 +1813,7 @@ body::-webkit-scrollbar-thumb {
   flex-wrap: wrap;
   column-gap: 20px;
   grid-row-gap: 10px;
-  
+
   & .flex-w {
     flex: 1 1 45%;
   }
@@ -1856,13 +1837,12 @@ body::-webkit-scrollbar-thumb {
   }
 }
 
-
 .selectSubscribe {
   &-item {
     margin-bottom: 15px;
     padding: 25px;
     border-radius: 3px;
-    border: 1px solid #E6E6E6;
+    border: 1px solid #e6e6e6;
     box-shadow: 0px 4px 6px rgba(117, 71, 42, 0.06);
     background-color: $white;
     min-width: 600px;
@@ -1870,13 +1850,12 @@ body::-webkit-scrollbar-thumb {
     flex-direction: row;
     align-items: start;
     justify-content: space-between;
-    transition: .1s linear;
-    
-    
+    transition: 0.1s linear;
+
     &:hover {
       border-color: $brown;
     }
-    
+
     & h4 {
       font-size: 18px;
       font-weight: 500;
@@ -1884,7 +1863,7 @@ body::-webkit-scrollbar-thumb {
       letter-spacing: 0px;
       color: $black;
     }
-    
+
     & p {
       margin-top: 10px;
       font-size: 14px;
@@ -1915,8 +1894,12 @@ body::-webkit-scrollbar-thumb {
   }
 }
 
-.mt-10 { margin-top: 10px; }
-.mt-15 { margin-top: 15px; }
+.mt-10 {
+  margin-top: 10px;
+}
+.mt-15 {
+  margin-top: 15px;
+}
 
 .modal__content-formGroup {
   width: 100%;
@@ -1927,7 +1910,6 @@ body::-webkit-scrollbar-thumb {
     box-sizing: border-box;
     padding: 19px 14px;
   }
-
 
   width: 100%;
   & p {
@@ -1972,7 +1954,6 @@ body::-webkit-scrollbar-thumb {
   right: 25px;
 }
 
-
 //Chat
 .ChatList {
   display: flex;
@@ -1997,10 +1978,10 @@ body::-webkit-scrollbar-thumb {
     align-items: stretch;
     border-radius: 8px;
     overflow: hidden;
-    transition: .15s linear;
+    transition: 0.15s linear;
 
     &.disabled {
-      opacity: .5;
+      opacity: 0.5;
       pointer-events: none;
     }
   }
@@ -2009,7 +1990,7 @@ body::-webkit-scrollbar-thumb {
     padding: 20px;
     background-color: $white;
     border-top: 1px solid;
-    border-color: rgba(0,0,0, .1);
+    border-color: rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: row;
     column-gap: 15px;
@@ -2017,21 +1998,21 @@ body::-webkit-scrollbar-thumb {
     position: relative;
 
     cursor: pointer;
-    transition: .15s linear;
+    transition: 0.15s linear;
 
     &:first-child {
       border-top: 0px;
     }
 
     &::after {
-      content: '';
+      content: "";
       display: block;
       width: 4px;
       height: 100%;
       background-color: $brown;
       border-radius: 1px solid $brown;
       opacity: 0;
-      transition: .15s linear;
+      transition: 0.15s linear;
 
       position: absolute;
       right: 1px;
@@ -2063,13 +2044,13 @@ body::-webkit-scrollbar-thumb {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      
+
       & h6 {
         display: block;
         font-size: 16px;
         color: $black;
         font-weight: 500;
-        transition: .15s linear;
+        transition: 0.15s linear;
       }
 
       & span {
@@ -2122,9 +2103,8 @@ body::-webkit-scrollbar-thumb {
 
   &.disabled {
     pointer-events: none;
-    opacity: .5;
+    opacity: 0.5;
   }
-
 
   &__header {
     display: flex;
@@ -2132,7 +2112,7 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     justify-content: space-between;
     padding: 15px 35px;
-    border-bottom: 1px solid rgba(0,0,0, .1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     background-color: $white;
     box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.06);
 
@@ -2164,7 +2144,7 @@ body::-webkit-scrollbar-thumb {
         width: 8px;
         height: 8px;
         overflow: hidden;
-        background-color: #FFB946;
+        background-color: #ffb946;
         border-radius: 50%;
       }
     }
@@ -2264,15 +2244,14 @@ body::-webkit-scrollbar-thumb {
     }
   }
 
-
-  &.white{
+  &.white {
     & .Message__content {
       background-color: $white;
-      border-color: #E4E9EE;
+      border-color: #e4e9ee;
       color: $black;
     }
   }
-  &.brown{
+  &.brown {
     & .Message__content {
       background-color: $brown;
       border-color: $brown;
@@ -2364,10 +2343,8 @@ body::-webkit-scrollbar-thumb {
     padding-right: 20px;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
   }
-
 }
 .ChatMessages__field {
-
   & .MuiInputBase-root,
   & .MuiFormControl-root,
   & .MuiInputBase-root fieldset {
@@ -2375,17 +2352,18 @@ body::-webkit-scrollbar-thumb {
     padding: 5px 20px;
   }
 
-
-  & .MuiFormControl-root { width: 80% !important }
+  & .MuiFormControl-root {
+    width: 80% !important;
+  }
 }
 .userChat__avatar-image {
   position: relative;
   &::after {
-    content: '';
+    content: "";
     display: block;
     width: 12px;
     height: 12px;
-    background-color: #47E790;
+    background-color: #47e790;
     border-radius: 50%;
     border: 4px solid $white;
     z-index: 1000;
@@ -2395,14 +2373,15 @@ body::-webkit-scrollbar-thumb {
     bottom: 5px;
   }
 }
-.userProfile__avatar--chat{
-& .userProfile__avatar-link {
-  color: $text;
-  font-size: 15px;
+.userProfile__avatar--chat {
+  & .userProfile__avatar-link {
+    color: $text;
+    font-size: 15px;
+  }
 }
+.green {
+  color: #47e790;
 }
-.green { color: #47E790 }
-
 
 .Message.left + .Message.left {
   .Message__header {
@@ -2447,7 +2426,6 @@ body::-webkit-scrollbar-thumb {
     }
   }
 }
-
 
 .filter {
   margin-bottom: 20px;
@@ -2549,7 +2527,7 @@ body::-webkit-scrollbar-thumb {
   & button {
     padding: 10px;
     background-color: $brown;
-    transition: .1s linear;
+    transition: 0.1s linear;
     border-radius: 0px 3px 3px 0px;
     cursor: pointer;
     border: 0;
@@ -2566,9 +2544,7 @@ body::-webkit-scrollbar-thumb {
     min-height: 54px;
     border: 0px !important;
     font-size: 14px !important;
-    background-color: #FFF !important;
+    background-color: #fff !important;
     border-radius: 3px 0px 0px 3px !important;
   }
 }
-
-

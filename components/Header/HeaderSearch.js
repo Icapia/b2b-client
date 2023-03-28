@@ -1,12 +1,10 @@
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import SearchIcon from "../../public/image/sidebar-icons/header/Search.svg";
+import Autocomplete from "@mui/material/Autocomplete";
+import Box from "@mui/material/Box";
 import Link from "next/link";
+import SearchIcon from "../../public/image/sidebar-icons/header/Search.svg";
+import TextField from "@mui/material/TextField";
 
 export default function HeaderSearch(props) {
-
-
   return (
     <>
       <Autocomplete
@@ -21,7 +19,11 @@ export default function HeaderSearch(props) {
         renderOption={(props, option) => (
           <Link href={option.url}>
             <a>
-              <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+              <Box
+                component="li"
+                sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+                {...props}
+              >
                 <img
                   loading="lazy"
                   width="20"
@@ -43,7 +45,7 @@ export default function HeaderSearch(props) {
               placeholder="Globals Search"
               inputProps={{
                 ...params.inputProps,
-                autoComplete: 'new-password', // disable autocomplete and autofill
+                autoComplete: "new-password", // disable autocomplete and autofill
               }}
             />
             <button>
@@ -58,38 +60,43 @@ export default function HeaderSearch(props) {
 
 const tabs = [
   {
-    image: '/image/sidebar-icons/Chart/Black.svg',
-    label: 'Dashboard',
-    url: '/dashboard'
+    image: "/image/sidebar-icons/Chart/Black.svg",
+    label: "Dashboard",
+    url: "/dashboard",
   },
   {
-    image: '/image/sidebar-icons/Chart_alt/Black.svg',
-    label: 'Analytics',
-    url: '/analytics'
+    image: "/image/sidebar-icons/Chart_alt/Black.svg",
+    label: "Analytics",
+    url: "/analytics",
   },
   {
-    image: '/image/sidebar-icons/User/Black.svg',
-    label: 'Users',
-    url: '/users'
+    image: "/image/sidebar-icons/Chart_alt/Black.svg",
+    label: "Organizations",
+    url: "/organizations",
   },
   {
-    image: '/image/sidebar-icons/Chat/Black.svg',
-    label: 'Chat Manager',
-    url: '/chat-manager'
+    image: "/image/sidebar-icons/User/Black.svg",
+    label: "Users",
+    url: "/users",
   },
   {
-    image: '/image/sidebar-icons/Bell/Black.svg',
-    label: 'Notifications',
-    url: '/notifications'
+    image: "/image/sidebar-icons/Chat/Black.svg",
+    label: "Chat Manager",
+    url: "/chat-manager",
   },
   {
-    image: '/image/sidebar-icons/User_box/Black.svg',
-    label: 'CRM Users',
-    url: '/crm-users'
+    image: "/image/sidebar-icons/Bell/Black.svg",
+    label: "Notifications",
+    url: "/notifications",
   },
   {
-    image: '/image/sidebar-icons/Setting_alt_line/Black.svg  ',
-    label: 'Global Settings',
-    url: '/settings'
+    image: "/image/sidebar-icons/User_box/Black.svg",
+    label: "CRM Users",
+    url: "/crm-users",
+  },
+  {
+    image: "/image/sidebar-icons/Setting_alt_line/Black.svg  ",
+    label: "Global Settings",
+    url: "/settings",
   },
 ];
