@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.12.3",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/joy": "^5.0.0-alpha.73",
     "@mui/lab": "^5.0.0-alpha.71",
     "@mui/styles": "^5.4.4",
     "@nestjs/common": "^8.3.1",

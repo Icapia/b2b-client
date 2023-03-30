@@ -27,6 +27,19 @@ body::-webkit-scrollbar-thumb {
   padding-bottom: 80px;
 }
 
+.connector_edit_form {
+  padding: 16px;
+  margin-bottom: 16px;
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+  border-radius: 13px;
+}
+
+.connector_edit_form input {
+  background: $white;
+  border-radius: 10px;
+}
+
 // Start Sidebar
 .sidebar {
   height: 100vh;
