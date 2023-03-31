@@ -10,9 +10,7 @@ const pageData = {
   pageTitle: "Users",
 };
 
-export default function Home({ users }) {
-  console.log(db.users);
-
+export default function Home() {
   return (
     <MainLayout name={pageData.pageTitle}>
       <UsersGridFilter users={db.users}></UsersGridFilter>
