@@ -1,14 +1,13 @@
 import { InputAdornment, MenuItem, Select } from "@mui/material";
 
 export default function OrganizationsGridFilter(props) {
-  const users = props.users;
   return (
     <div className="filter">
       <div className="filter__wrapper">
         <div className="filter__sort">
           {/* <h6>{"Total & Sort"}</h6> */}
           <div className="filter-items">
-            <span>Total: {users.length} Organization</span>
+            <span>Total: Organization</span>
             {/* <Select
               className={"filter__select"}
               defaultValue={"ASC"}

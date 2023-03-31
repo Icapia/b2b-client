@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import ChargingSitesGridFilter from "./ChargingSitesGridFilter";
 import IconButton from "@mui/joy/IconButton";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
@@ -8,30 +9,25 @@ import PropTypes from "prop-types";
 import Sheet from "@mui/joy/Sheet";
 import Table from "@mui/joy/Table";
 import Typography from "@mui/joy/Typography";
+import { green } from "@mui/material/colors";
 
-function createData(name, calories, fat, carbs, protein, prote, prot, price) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    prote,
-    prot,
-    price,
-    history: [
-      {
-        date: "2020-01-05",
-        customerId: "11091700",
-        amount: 3,
-      },
-      {
-        date: "2020-01-02",
-        customerId: "Anonymous",
-        amount: 1,
-      },
-    ],
-  };
+const color = {
+  connected: "green",
+  available: "green",
+  charging: "red",
+  finishing: "#D68910",
+  unavailable: "red",
+  faulted: "red",
+};
+
+function Status(props) {
+  return (
+    <React.Fragment>
+      <div style={{ color: color[props.status.toLowerCase()] }}>
+        <b>{props.status}</b>
+      </div>
+    </React.Fragment>
+  );
 }
 
 function Row(props) {
@@ -52,13 +48,23 @@ function Row(props) {
             {open ? <KeyboardArrowDownIcon /> : <KeyboardArrowRight />}
           </IconButton>
         </td>
-        <th scope="row">{row.name}</th>
-        <td>{row.calories}</td>
-        <td>{row.fat}</td>
-        <td>{row.carbs}</td>
-        <td>{row.protein}</td>
-        <td>{row.prote}</td>
-        <td>{row.prot}</td>
+        <th scope="row">{row.chargePointHardwareId}</th>
+        <td>{row.chargePointHardwareId}</td>
+        <td>{row.siteId}</td>
+        <td>
+          <div>
+            <Typography noWrap>
+              {row.connectors.map((e) => `${e.connectorTypeName}, `)}
+            </Typography>
+          </div>
+        </td>
+        <td>
+          <Status status={row.status}></Status>
+        </td>
+        <td>{row.instantPower}</td>
+        <td>
+          <button>edit {row.id}</button>
+        </td>
       </tr>
       <tr>
         <td style={{ height: 0, padding: 0 }} colSpan={8}>
@@ -83,8 +89,10 @@ function Row(props) {
                 size="sm"
                 aria-label="purchases"
                 sx={{
-                  "& > thead > tr > th:nth-child(n + 3), & > tbody > tr > td:nth-child(n + 3)":
+                  "& > thead > tr > th:nth-child(n + 4), & > tbody > tr > td:nth-child(n + 4)":
                     { textAlign: "right" },
+                  "& > thead > tr > th:nth-child(3), & > tbody > tr > td:nth-child(3)":
+                    { textAlign: "center" },
                   "& > tr:not(:first-of-type) th:not([colspan]):first-child": {
                     border: "none",
                   },
@@ -104,14 +112,14 @@ function Row(props) {
                   </tr>
                 </thead>
                 <tbody>
-                  {row.history.map((historyRow) => (
+                  {row.connectors.map((historyRow) => (
                     <tr key={historyRow.date}>
-                      <th scope="row">{historyRow.date}</th>
-                      <td>{historyRow.customerId}</td>
-                      <td>{historyRow.amount}</td>
+                      <th scope="row">{historyRow.connectorTypeName}</th>
+                      <td>{historyRow.price}</td>
                       <td>
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
+                        <Status status={historyRow.statusName}></Status>
                       </td>
+                      <td>{historyRow.power}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -124,117 +132,58 @@ function Row(props) {
   );
 }
 
-Row.propTypes = {
-  initialOpen: PropTypes.bool,
-  row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
-      PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
-    prote: PropTypes.number.isRequired,
-    prot: PropTypes.number.isRequired,
-  }).isRequired,
-};
-
-const rows = [
-  createData(
-    "UCAPIA #17",
-    "132Upland Dr, Houston, T 722...",
-    "UCAPIA #17",
-    "Type 1, Tesla",
-    4.0,
-    4.3,
-    4.3,
-    2.5
-  ),
-  createData(
-    "UCAPIA #18",
-    "132Upland Dr, Houston, T 722...",
-    "UCAPIA #17",
-    "Type 1, Tesla",
-    4.3,
-    4.3,
-    4.3,
-    2.5
-  ),
-  createData(
-    "UCAPIA #19",
-    "132Upland Dr, Houston, T 722...",
-    "UCAPIA #17",
-    "Type 1, Tesla",
-    6.0,
-    4.3,
-    4.3,
-    2.5
-  ),
-  createData(
-    "UCAPIA #20",
-    "132Upland Dr, Houston, T 722...",
-    "UCAPIA #17",
-    "Type 1, Tesla",
-    4.3,
-    4.3,
-    4.3,
-    2.5
-  ),
-  createData(
-    "UCAPIA #21",
-    "132Upland Dr, Houston, T 722...",
-    "UCAPIA #17",
-    "Type 1, Tesla",
-    3.9,
-    4.3,
-    4.3,
-    2.5
-  ),
-];
-
-export default function ChargingSitesGrid() {
+export default function ChargingSitesGrid(props) {
   return (
-    <Sheet>
-      <Table
-        aria-label="collapsible table"
-        sx={{
-          "& > thead > tr > th:nth-child(n + 8), & > tbody > tr > td:nth-child(n + 8)":
-            { textAlign: "right" },
-          "& > thead > tr > th": {
-            color: "#fff",
-            backgroundColor: "#3F3F3F",
-          },
-          '& > tbody > tr:nth-child(odd) > td, & > tbody > tr:nth-child(odd) > th[scope="row"]':
-            {
-              borderBottom: 0,
-            },
-          borderRadius: 1,
-        }}
-      >
-        <thead>
-          <tr>
-            <th style={{ width: 40 }} aria-label="empty" />
-            <th style={{ width: "20%" }}>Charge Point</th>
-            <th style={{ width: "30%" }}>Address</th>
-            <th>Site</th>
-            <th>Connectors</th>
-            <th>Status</th>
-            <th>Power</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, index) => (
-            <Row key={row.name} row={row} initialOpen={index === 0} />
-          ))}
-        </tbody>
-      </Table>
-    </Sheet>
+    <>
+      {props.data.map((e, i) => {
+        return (
+          <div key={i} className="mt-40">
+            <ChargingSitesGridFilter
+              data={{ id: e.id, site: e.site, site_area: e.site_area }}
+            ></ChargingSitesGridFilter>
+            <Sheet>
+              <Table
+                aria-label="collapsible table"
+                sx={{
+                  "& > thead > tr > th:nth-child(n + 8), & > tbody > tr > td:nth-child(n + 8)":
+                    { textAlign: "right" },
+                  "& > thead > tr > th": {
+                    color: "#fff",
+                    backgroundColor: "#3F3F3F",
+                  },
+                  '& > tbody > tr:nth-child(odd) > td, & > tbody > tr:nth-child(odd) > th[scope="row"]':
+                    {
+                      borderBottom: 0,
+                    },
+                  borderRadius: 1,
+                }}
+              >
+                <thead>
+                  <tr>
+                    <th style={{ width: 40 }} aria-label="empty" />
+                    <th style={{ width: "20%" }}>Charge Point</th>
+                    <th style={{ width: "20%" }}>Address</th>
+                    <th>Site</th>
+                    <th style={{ width: "20%" }}>Connectors</th>
+                    <th>Status</th>
+                    <th>Power</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {e.chargePoints.map((row, index) => (
+                    <Row
+                      key={row.name}
+                      row={row}
+                      // initialOpen={index === 0}
+                    />
+                  ))}
+                </tbody>
+              </Table>
+            </Sheet>
+          </div>
+        );
+      })}
+    </>
   );
 }

@@ -51,8 +51,8 @@ export default function Home({ users }) {
         </ButtonDefault>
       }
     >
-      <OrganizationsGridFilter users={users}></OrganizationsGridFilter>
-      <OrganizationsGrid users={users}></OrganizationsGrid>
+      <OrganizationsGridFilter data={organizations}></OrganizationsGridFilter>
+      <OrganizationsGrid data={organizations}></OrganizationsGrid>
       <ModalComponent handleClose={handleClose} open={open}>
         <CreateOrganizationForm handleClose={handleClose} />
       </ModalComponent>
@@ -60,13 +60,96 @@ export default function Home({ users }) {
   );
 }
 
-export async function getServerSideProps() {
-  const res = await fetch(`http://localhost:4200/users`);
-  const users = await res.json();
+const organizations = [
+  {
+    id: 1,
+    name: "OCAPIA",
+    address: "132Upland Dr, Houston, T 722...",
+    email: "icapia@gmail.com",
+    phone: "+1922-233-23-23",
+    actions: "",
+  },
+  {
+    id: 2,
+    name: "OCAPIA",
+    address: "132Upland Dr, Houston, T 722...",
+    email: "icapia@gmail.com",
+    phone: "+1922-233-23-23",
+    actions: "",
+  },
+  {
+    id: 3,
+    name: "OCAPIA",
+    address: "132Upland Dr, Houston, T 722...",
+    email: "icapia@gmail.com",
+    phone: "+1922-233-23-23",
+    actions: "",
+  },
+  {
+    id: 4,
+    name: "OCAPIA",
+    address: "132Upland Dr, Houston, T 722...",
+    email: "icapia@gmail.com",
+    phone: "+1922-233-23-23",
+    actions: "",
+  },
+  {
+    id: 5,
+    name: "OCAPIA",
+    address: "132Upland Dr, Houston, T 722...",
+    email: "icapia@gmail.com",
+    phone: "+1922-233-23-23",
+    actions: "",
+  },
+  {
+    id: 6,
+    name: "OCAPIA",
+    address: "132Upland Dr, Houston, T 722...",
+    email: "icapia@gmail.com",
+    phone: "+1922-233-23-23",
+    actions: "",
+  },
+  {
+    id: 7,
+    name: "OCAPIA",
+    address: "132Upland Dr, Houston, T 722...",
+    email: "icapia@gmail.com",
+    phone: "+1922-233-23-23",
+    actions: "",
+  },
+  {
+    id: 8,
+    name: "OCAPIA",
+    address: "132Upland Dr, Houston, T 722...",
+    email: "icapia@gmail.com",
+    phone: "+1922-233-23-23",
+    actions: "",
+  },
+  {
+    id: 9,
+    name: "OCAPIA",
+    address: "132Upland Dr, Houston, T 722...",
+    email: "icapia@gmail.com",
+    phone: "+1922-233-23-23",
+    actions: "",
+  },
+  {
+    id: 10,
+    name: "OCAPIA",
+    address: "132Upland Dr, Houston, T 722...",
+    email: "icapia@gmail.com",
+    phone: "+1922-233-23-23",
+    actions: "",
+  },
+];
 
-  return {
-    props: {
-      users: users,
-    },
-  };
-}
+// export async function getServerSideProps() {
+//   const res = await fetch(`http://localhost:4200/users`);
+//   const users = await res.json();
+
+//   return {
+//     props: {
+//       users: users,
+//     },
+//   };
+// }

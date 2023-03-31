@@ -13,7 +13,7 @@ import Tumer from "../../public/image/Tumer.svg";
 
 const columns = [
   {
-    field: "userName",
+    field: "name",
     headerName: "Organization name",
     headerClassName: "datagrid__header",
     flex: 1,
@@ -38,7 +38,7 @@ const columns = [
   },
 
   {
-    field: "registrationDate",
+    field: "address",
     headerName: "Address",
     headerClassName: "datagrid__header",
     flex: 1.5,
@@ -93,25 +93,23 @@ const columns = [
   },
 ];
 
-export default function OrganizationsGrid({ users }) {
-  const usersList = Array.from(users);
-  const detailsRows = usersList.map((row) => {
-    return {
-      id: row.id,
-      userName: row.firstname + " " + row.lastname,
-      registrationDate: row.registrationDate,
-      email: row.email,
-      phone: row.phone,
-      status: getStatus(row.accStatus),
-      verification: getVereficationStatus(row.accStatus),
-      userAvatar: row.avatarUrl,
-    };
-  });
+export default function OrganizationsGrid(props) {
+  //const usersList = Array.from(users);
+  // const detailsRows = props.data.map((row) => {
+  //   return {
+  //     id: row.id,
+  //     name: row.name,
+  //     address: row.address,
+  //     email: row.email,
+  //     phone: row.phone,
+  //     actions: "",
+  //   };
+  // });
 
   return (
     <div style={{ height: "80vh", width: "100%" }}>
       <DataGrid
-        rows={detailsRows}
+        rows={props.data}
         columns={columns}
         checkboxSelection={true}
         autoHeight={false}

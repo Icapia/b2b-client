@@ -4,14 +4,13 @@ import { InputAdornment, MenuItem, Select } from "@mui/material";
 import Link from "next/link";
 
 export default function ChargingSitesGridFilter(props) {
-  const users = props.users;
   return (
     <div className="filter">
       <div className="filter__wrapper">
         <div className="filter__sort">
-          <h3>UCAPIA #17</h3>
+          <h3>{props.data.site}</h3>
           <div className="filter-items">
-            <span>1321 Upland Dr, Houston, TX 723, 02302</span>
+            <span>{props.data.site_area}</span>
             <span>+1 123 123-12-12</span>
             {/* <Select
               className={"filter__select"}

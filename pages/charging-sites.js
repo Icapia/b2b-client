@@ -3,12 +3,13 @@ import {
   ButtonDefault,
   ButtonDelete,
 } from "../components/Buttons/Buttons";
+import { gql, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 
 import ChargingSitesGrid from "../components/ChargingSites/ChargingSitesGrid";
-import ChargingSitesGridFilter from "../components/ChargingSites/ChargingSitesGridFilter";
 import { CreateChargingSitesForm } from "../components/ChargingSites/CreateChargingSitesForm";
 import { CreateOrganizationForm } from "../components/Organizations/CreateOrganizationForm";
+import { GET_SITES_GQL } from "../graphql/gql/queries/sites-queries.gql";
 import { MainLayout } from "../components/layouts/MainLayout.js";
 import { ModalComponent } from "../components/Modal/Modal";
 
@@ -20,6 +21,19 @@ const pageData = {
 
 export default function Home({ users }) {
   const [open, setOpen] = useState(false);
+
+  const sites = useQuery(GET_SITES_GQL, {
+    variables: {
+      filter: {},
+      sorting: [],
+      chargePointFilter: {},
+      chargePointSorting: [],
+      connectorFilter: {},
+      connectorSorting: [],
+    },
+  });
+
+  if (sites.data) console.log(sites.data.sites);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -36,8 +50,9 @@ export default function Home({ users }) {
         </ButtonDefault>
       }
     >
-      <ChargingSitesGridFilter users={users}></ChargingSitesGridFilter>
-      <ChargingSitesGrid users={users}></ChargingSitesGrid>
+      {sites.data && (
+        <ChargingSitesGrid data={sites.data.sites}></ChargingSitesGrid>
+      )}
       <ModalComponent handleClose={handleClose} open={open}>
         <CreateOrganizationForm handleClose={handleClose} />
       </ModalComponent>
@@ -45,13 +60,13 @@ export default function Home({ users }) {
   );
 }
 
-export async function getServerSideProps() {
-  const res = await fetch(`http://localhost:4200/users`);
-  const users = await res.json();
+// export async function getServerSideProps() {
+//   const res = await fetch(`http://localhost:4200/users`);
+//   const users = await res.json();
 
-  return {
-    props: {
-      users: users,
-    },
-  };
-}
+//   return {
+//     props: {
+//       users: users,
+//     },
+//   };
+// }

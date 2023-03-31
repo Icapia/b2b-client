@@ -1,28 +1,33 @@
-import { useState, useEffect } from 'react';
-import { MainLayout } from '../components/layouts/MainLayout.js'
-import UsersGrid from '../components/Users/UsersGrid.js';
-import UsersGridFilter from '../components/Users/UsersGridFilter.js';
+import * as db from "../db.json";
+
+import { useEffect, useState } from "react";
+
+import { MainLayout } from "../components/layouts/MainLayout.js";
+import UsersGrid from "../components/Users/UsersGrid.js";
+import UsersGridFilter from "../components/Users/UsersGridFilter.js";
 
 const pageData = {
-  pageTitle: 'Users'
-}
+  pageTitle: "Users",
+};
 
 export default function Home({ users }) {
+  console.log(db.users);
+
   return (
     <MainLayout name={pageData.pageTitle}>
-      <UsersGridFilter users={users}></UsersGridFilter>
-      <UsersGrid users={users}></UsersGrid>
+      <UsersGridFilter users={db.users}></UsersGridFilter>
+      <UsersGrid users={db.users}></UsersGrid>
     </MainLayout>
-  )
+  );
 }
 
-export async function getServerSideProps() {
-  const res = await fetch(`http://localhost:4200/users`)
-  const users = await res.json()
+// export async function getServerSideProps() {
+//   const res = await fetch(`http://localhost:4200/users`);
+//   const users = await res.json();
 
-  return { 
-    props: { 
-      users: users
-    } 
-  }
-}
+//   return {
+//     props: {
+//       users: users,
+//     },
+//   };
+// }
