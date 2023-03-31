@@ -3,9 +3,11 @@ import {
   ButtonDefault,
   ButtonDelete,
 } from "../components/Buttons/Buttons";
+import { gql, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 
 import { CreateOrganizationForm } from "../components/Organizations/CreateOrganizationForm";
+import { GET_SITES_GQL } from "../graphql/gql/queries/sites-queries.gql";
 import { MainLayout } from "../components/layouts/MainLayout.js";
 import { ModalComponent } from "../components/Modal/Modal";
 import OrganizationsGrid from "../components/Organizations/OrganizationsGrid";
@@ -26,6 +28,20 @@ export default function Home({ users }) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const sites = useQuery(GET_SITES_GQL, {
+    variables: {
+      filter: {},
+      sorting: [],
+      chargePointFilter: {},
+      chargePointSorting: [],
+      connectorFilter: {},
+      connectorSorting: [],
+    },
+  });
+
+  if (sites.data) console.log(sites.data);
+
   return (
     <MainLayout
       name={pageData.pageTitle}

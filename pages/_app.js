@@ -1,9 +1,12 @@
-import '../styles/globals.scss';
-import '../styles/main.scss';
-import ThemeContext from '../components/Context/Theme';
-import AuthContext from '../components/Context/AuthContext';
-import { useState } from 'react';
-import { useAuth } from '../hooks/auth.hook';
+import "../styles/globals.scss";
+import "../styles/main.scss";
+
+import { ApolloProvider } from "@apollo/client";
+import AuthContext from "../components/Context/AuthContext";
+import ThemeContext from "../components/Context/Theme";
+import client from "../libs/apollo-client";
+import { useAuth } from "../hooks/auth.hook";
+import { useState } from "react";
 
 function CrmApp({ Component, pageProps }) {
   const [isActive, setActive] = useState(false);
@@ -11,11 +14,15 @@ function CrmApp({ Component, pageProps }) {
   const isAuthenticated = !!token;
 
   return (
-    <AuthContext.Provider value={{ userId, token, login, logout, isAuthenticated, user }}>
-      <ThemeContext.Provider value={{ isActive, setActive }}>
-        <Component {...pageProps} />
-      </ThemeContext.Provider>
-    </AuthContext.Provider>
+    <ApolloProvider client={client}>
+      <AuthContext.Provider
+        value={{ userId, token, login, logout, isAuthenticated, user }}
+      >
+        <ThemeContext.Provider value={{ isActive, setActive }}>
+          <Component {...pageProps} />
+        </ThemeContext.Provider>
+      </AuthContext.Provider>
+    </ApolloProvider>
   );
 }
 
