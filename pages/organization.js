@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 import { CreateOrganizationForm } from "../components/Organizations/CreateOrganizationForm";
 import { GET_SITES_GQL } from "../graphql/gql/queries/sites-queries.gql";
-import { MainLayout } from "../components/layouts/MainLayout.js";
+import { MainLayout } from "../components/Layouts/MainLayout.js";
 import { ModalComponent } from "../components/Modal/Modal";
 import OrganizationsGrid from "../components/Organizations/OrganizationsGrid";
 import OrganizationsGridFilter from "../components/Organizations/OrganizationsGridFilter";

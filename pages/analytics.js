@@ -10,7 +10,7 @@ import DashboardList from "../components/Dashboard/DashboardList";
 import Delete from "../public/image/Trash.svg";
 import Head from "next/head";
 import Image from "next/image";
-import { MainLayout } from "../components/layouts/MainLayout";
+import { MainLayout } from "../components/Layouts/MainLayout";
 
 const pageData = {
   pageTitle: "Analytics",

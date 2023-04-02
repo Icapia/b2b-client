@@ -1,4 +1,4 @@
-import { MainLayout } from "../../components/layouts/MainLayout";
+import { MainLayout } from "../../components/Layouts/MainLayout";
 import UserAvatar from "../../components/UserProfile/UserAvatar.js";
 import UserProfileImages from "../../components/UserProfile/UserProfileImages.js";
 import VereficationUserProfileInfo from "../../components/UserProfile/VereficationUserProfileInfo.js";

@@ -2,7 +2,7 @@ import * as db from "../db.json";
 
 import { useEffect, useState } from "react";
 
-import { MainLayout } from "../components/layouts/MainLayout.js";
+import { MainLayout } from "../components/Layouts/MainLayout.js";
 import UsersGrid from "../components/Users/UsersGrid.js";
 import UsersGridFilter from "../components/Users/UsersGridFilter.js";
 
