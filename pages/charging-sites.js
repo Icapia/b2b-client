@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import ChargingSitesGrid from "../components/ChargingSites/ChargingSitesGrid";
 import { CreateOrganizationForm } from "../components/Organizations/CreateOrganizationForm";
 import { GET_SITES_GQL } from "../graphql/gql/queries/sites-queries.gql";
-import { MainLayout } from "../components/layouts/MainLayout";
+import { MainLayout } from "../components/Layouts/MainLayout";
 import { ModalComponent } from "../components/Modal/Modal";
 
 // import { ButtonDefault } from "../components/Buttons/Buttons";
