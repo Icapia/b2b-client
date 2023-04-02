@@ -7,10 +7,9 @@ import { gql, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 
 import ChargingSitesGrid from "../components/ChargingSites/ChargingSitesGrid";
-import { CreateChargingSitesForm } from "../components/ChargingSites/CreateChargingSitesForm";
 import { CreateOrganizationForm } from "../components/Organizations/CreateOrganizationForm";
 import { GET_SITES_GQL } from "../graphql/gql/queries/sites-queries.gql";
-import { MainLayout } from "../components/layouts/MainLayout.js";
+import { MainLayout } from "../components/layouts/MainLayout";
 import { ModalComponent } from "../components/Modal/Modal";
 
 // import { ButtonDefault } from "../components/Buttons/Buttons";

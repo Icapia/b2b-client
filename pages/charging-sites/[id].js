@@ -5,7 +5,7 @@ import { ButtonClose } from "../../components/Buttons/Buttons";
 import ChargePointEdit from "../../components/ChargingSites/ChargingSiteEdit/ChargePoint/ChargePointEditWrap";
 import { ChargingSiteEditForm } from "../../components/ChargingSites/ChargingSiteEdit/ChargingSiteEditForm";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { MainLayout } from "../../components/layouts/MainLayout.js";
+import { MainLayout } from "../../components/layouts/MainLayout";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 
