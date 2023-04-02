@@ -1,5 +1,5 @@
 import CrmUserGrid from "../components/CrmUser/CrmUserGrid";
-import { MainLayout } from "../components/layouts/MainLayout";
+import { MainLayout } from "../components/Layouts/MainLayout";
 import UsersGridFilter from "../components/Users/UsersGridFilter";
 
 const pageData = {

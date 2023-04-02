@@ -1,7 +1,7 @@
 import CrmRolesSettings from "../components/Settings/CrmRolesSettings.js";
 import GeneralSettings from "../components/Settings/GeneralSettings.js";
 import GlobalSettings from "../components/Settings/GlobalSettings.js";
-import { MainLayout } from "../components/layouts/MainLayout";
+import { MainLayout } from "../components/Layouts/MainLayout";
 import SubscribesSettings from "../components/Settings/SubscribesSettings.js";
 import { useHttp } from "../hooks/http.hook";
 import { useState } from "react";
