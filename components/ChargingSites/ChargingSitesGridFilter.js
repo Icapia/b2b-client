@@ -25,7 +25,7 @@ export default function ChargingSitesGridFilter(props) {
           </div>
         </div>
         <div className="filter__filters">
-          <Link href={`/charging-sites/1`}>
+          <Link href={`/charging-sites/${props.data.id}`}>
             <ButtonClose>Manage site</ButtonClose>
           </Link>
           {/* <h6>Filters</h6>

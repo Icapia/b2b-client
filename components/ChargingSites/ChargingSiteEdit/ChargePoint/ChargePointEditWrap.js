@@ -5,17 +5,19 @@ import { ChargePointEditForm } from "./ChargePointEditForm";
 import { ConnectorsEditWrap } from "./Connector/ConnectorEditWrap";
 import Grid from "@mui/material/Grid";
 
-export default function ChargePointEditWrap() {
+export default function ChargePointEditWrap(props) {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <ChargePointEditForm></ChargePointEditForm>
+      {props.data && (
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <ChargePointEditForm {...props}></ChargePointEditForm>
+          </Grid>
+          <Grid item xs={6}>
+            <ConnectorsEditWrap {...props}></ConnectorsEditWrap>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <ConnectorsEditWrap></ConnectorsEditWrap>
-        </Grid>
-      </Grid>
+      )}
     </Box>
   );
 }

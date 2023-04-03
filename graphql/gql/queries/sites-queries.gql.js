@@ -44,6 +44,7 @@ export const GET_SITE_GQL = gql`
       site
       site_area
       chargePoints(filter: $chargePointFilter, sorting: $chargePointSorting) {
+        id
         chargePointHardwareId
         siteId
         status
