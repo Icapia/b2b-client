@@ -105,6 +105,7 @@ export const ConnectorEditForm = (props) => {
           </Grid>
           <Grid item xs={6}>
             <TextField
+              fullWidth
               autoComplete="off"
               value={form.id}
               className={"mt-20 col-6"}
@@ -125,7 +126,7 @@ export const ConnectorEditForm = (props) => {
           </Grid>
           <Grid item xs={6}>
             <TextField
-              lg={6}
+              fullWidth
               autoComplete="off"
               value={form.price}
               className={"mt-20 flex-w"}
@@ -146,6 +147,7 @@ export const ConnectorEditForm = (props) => {
           </Grid>
           <Grid item xs={6}>
             <TextField
+              fullWidth
               autoComplete="off"
               value={form.power}
               className={"mt-20 flex-w"}
