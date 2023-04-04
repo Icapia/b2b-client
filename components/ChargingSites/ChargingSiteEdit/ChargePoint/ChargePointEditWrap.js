@@ -6,6 +6,8 @@ import { ConnectorsEditWrap } from "./Connector/ConnectorEditWrap";
 import Grid from "@mui/material/Grid";
 
 export default function ChargePointEditWrap(props) {
+  console.log(props.data);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       {props.data && (

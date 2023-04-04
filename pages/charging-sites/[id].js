@@ -1,9 +1,11 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import { ButtonClose } from "../../components/Buttons/Buttons";
+import { CREATE_CHARGE_POINT_GQL } from "../../graphql/gql/mutations/charge-point-mutations.gql";
+import { CREATE_CONNECTOR_GQL } from "../../graphql/gql/mutations/connector-mutations.gql";
 import ChargePointEdit from "../../components/ChargingSites/ChargingSiteEdit/ChargePoint/ChargePointEditWrap";
 import { ChargingSiteEditForm } from "../../components/ChargingSites/ChargingSiteEdit/ChargingSiteEditForm";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -17,41 +19,67 @@ export default function ChargingSite() {
   const router = useRouter();
   const { id } = router.query;
 
-  // const [userData, setUserData] = useState({
-  //   id: user.id,
-  //   gender: user.gender,
-  //   firstname: user.firstname,
-  //   lastname: user.lastname,
-  //   phone: user.phone,
-  //   email: user.email,
-  //   registrationDate: getDateFormat(user.registrationDate),
-  //   birthday: getDateFormat(user.birthday),
-  //   country: user.country,
-  // });
-
-  // const updateUserData = (userData) => {
-  //   setUserData({
-  //     id: userData.id,
-  //     gender: userData.gender,
-  //     firstname: userData.firstname,
-  //     lastname: userData.lastname,
-  //     phone: userData.phone,
-  //     email: userData.email,
-  //     registrationDate: userData.registrationDate,
-  //     birthday: getDateFormat(userData.birthday),
-  //     country: userData.country,
-  //   });
-  // };
+  const getSiteVariables = {
+    id: id,
+    chargePointFilter: {},
+    chargePointSorting: [],
+    connectorFilter: {},
+    connectorSorting: [],
+  };
 
   const site = useQuery(GET_SITE_GQL, {
-    variables: {
-      id: id,
-      chargePointFilter: {},
-      chargePointSorting: [],
-      connectorFilter: {},
-      connectorSorting: [],
-    },
+    variables: getSiteVariables,
   });
+
+  const [mutationCreateChargePoint, createChargePoint] = useMutation(
+    CREATE_CHARGE_POINT_GQL
+  );
+
+  const [mutationCreateConnector, createConnector] =
+    useMutation(CREATE_CONNECTOR_GQL);
+
+  const handleCreateChargePoint = async (siteId) => {
+    await mutationCreateChargePoint({
+      refetchQueries: [
+        {
+          query: GET_SITE_GQL,
+          variables: getSiteVariables,
+        }, // DocumentNode object parsed with gql
+        "GetSite", // Query name
+      ],
+      variables: {
+        input: {
+          chargePoint: {
+            siteId: parseInt(site.data.site.id),
+          },
+        },
+      },
+    });
+  };
+
+  const handleCreateConnector = async (chargePointId) => {
+    await mutationCreateConnector({
+      refetchQueries: [
+        {
+          query: GET_SITE_GQL,
+          variables: getSiteVariables,
+        }, // DocumentNode object parsed with gql
+        "GetSite", // Query name
+      ],
+      variables: {
+        input: {
+          connector: {
+            siteId: parseInt(site.data.site.id),
+            chargePointId: parseInt(chargePointId),
+          },
+        },
+      },
+    });
+  };
+
+  const handleUpdateConnector = (chargePointId) => {
+    console.log("handleAddConnector", chargePointId);
+  };
 
   if (site.data) console.log(site.data.site.chargePoints);
 
@@ -62,7 +90,7 @@ export default function ChargingSite() {
           <div>
             <ChargingSiteEditForm data={site.data.site}></ChargingSiteEditForm>
           </div>
-          <div className="box">
+          <div>
             <div className={"mt-40"}>
               {site.data.site.chargePoints.map((e, i) => {
                 return (
@@ -75,16 +103,34 @@ export default function ChargingSite() {
                       <Typography>Charge Point #{e.id}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <ChargePointEdit data={e}></ChargePointEdit>
+                      <ChargePointEdit
+                        getSiteVariables={getSiteVariables}
+                        handleAddConnector={handleCreateConnector}
+                        handleUpdateConnector={handleUpdateConnector}
+                        loading={createConnector.loading}
+                        data={e}
+                      ></ChargePointEdit>
                     </AccordionDetails>
                   </Accordion>
                 );
               })}
             </div>
           </div>
-          <ButtonClose className={"mt-20 "} fullWidth>
-            + Add new Charge Point
+          <ButtonClose
+            onClick={handleCreateChargePoint}
+            className={"mt-20 "}
+            fullWidth
+          >
+            {(createChargePoint.loading && `Loading...`) ||
+              `+ Add new Charge Point`}
           </ButtonClose>
+          {/* <ButtonClose
+            onClick={() => handleCreateConnector()}
+            className={"mt-20 "}
+            fullWidth
+          >
+            + Add new Charge Point
+          </ButtonClose> */}
         </MainLayout>
       )}
     </>

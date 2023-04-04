@@ -6,10 +6,15 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 
-export function ChargePointEditForm({ data }) {
-  const { chargePointHardwareId } = data;
+import { ButtonClose } from "../../../Buttons/Buttons";
+import { GET_SITE_GQL } from "../../../../graphql/gql/queries/sites-queries.gql";
+import { UPDATE_CHARGE_POINT_GQL } from "../../../../graphql/gql/mutations/charge-point-mutations.gql";
+
+export function ChargePointEditForm(props) {
+  const { chargePointHardwareId, id } = props.data;
 
   const [form, setForm] = useState({ chargePointHardwareId });
   const [formButton, setFormButton] = useState(true);
@@ -22,6 +27,30 @@ export function ChargePointEditForm({ data }) {
     if (form.chpid) {
       setFormButton(false);
     }
+  };
+
+  const [mutationUpdateChargePoint, updateChargePoint] = useMutation(
+    UPDATE_CHARGE_POINT_GQL
+  );
+
+  const handleUpdateChargePoint = async () => {
+    await mutationUpdateChargePoint({
+      refetchQueries: [
+        {
+          query: GET_SITE_GQL,
+          variables: props.getSiteVariables,
+        }, // DocumentNode object parsed with gql
+        "GetSite", // Query name
+      ],
+      variables: {
+        input: {
+          id: parseInt(id),
+          update: {
+            chargePointHardwareId: form.chargePointHardwareId,
+          },
+        },
+      },
+    });
   };
 
   const handlerUpdate = () => {
@@ -57,6 +86,7 @@ export function ChargePointEditForm({ data }) {
         placeholder={"Enter " + "subscribe name"}
         onChange={(event) => handlerChange(event)}
       />
+      <ButtonClose onClick={handleUpdateChargePoint}>Save</ButtonClose>
     </FormGroup>
   );
 }

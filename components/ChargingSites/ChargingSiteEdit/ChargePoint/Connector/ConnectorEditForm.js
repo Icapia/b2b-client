@@ -2,11 +2,18 @@ import {
   Box,
   FormGroup,
   InputAdornment,
+  MenuItem,
   Modal,
+  Select,
   Stack,
   TextField,
 } from "@mui/material";
+import { ButtonClose, ButtonDefault } from "../../../../Buttons/Buttons";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
+
+import { GET_SITE_GQL } from "../../../../../graphql/gql/queries/sites-queries.gql";
+import { UPDATE_CONNECTOR_GQL } from "../../../../../graphql/gql/mutations/connector-mutations.gql";
 
 export const ConnectorEditForm = (props) => {
   const [message, setMessage] = useState({
@@ -31,6 +38,33 @@ export const ConnectorEditForm = (props) => {
     // }
   };
 
+  // console.log("JJJJJJJJJJJJJJJJJJJJJJJJJJ", props);
+
+  const [mutationUpdateConnector, updateConnector] =
+    useMutation(UPDATE_CONNECTOR_GQL);
+
+  const handleUpdateConnector = async () => {
+    await mutationUpdateConnector({
+      refetchQueries: [
+        {
+          query: GET_SITE_GQL,
+          variables: props.getSiteVariables,
+        }, // DocumentNode object parsed with gql
+        "GetSite", // Query name
+      ],
+      variables: {
+        input: {
+          id: parseInt(props.data.id),
+          update: {
+            connectorTypeName: form.connectorTypeName,
+            price: parseFloat(form.price),
+            power: parseFloat(form.power),
+          },
+        },
+      },
+    });
+  };
+
   const handlerUpdate = () => {
     props.onChange({ ...form });
   };
@@ -48,7 +82,23 @@ export const ConnectorEditForm = (props) => {
       style={{ backgroundColor: "#FAFAFA" }}
     >
       <FormGroup className="modal__content-formGroup col-2 mt-20">
-        <TextField
+        <Select
+          className={"mt-20 flex-w"}
+          label={"Connector Type"}
+          name={"connectorTypeName"}
+          value={form.connectorTypeName}
+          defaultValue={"Type 1"}
+          onChange={(event) => handlerChange(event)}
+        >
+          <MenuItem value={"Type 1"}>Type 1</MenuItem>
+          <MenuItem value={"Type 2"}>Type 2</MenuItem>
+          <MenuItem value={"Tesla"}>Tesla</MenuItem>
+          <MenuItem value={"CHAdeMO"}>CHAdeMO</MenuItem>
+          <MenuItem value={"CCS1"}>CCS1</MenuItem>
+          <MenuItem value={"CCS2"}>CCS2</MenuItem>
+        </Select>
+
+        {/* <TextField
           autoComplete="off"
           value={form.connectorTypeName}
           className={"mt-20 flex-w"}
@@ -65,7 +115,7 @@ export const ConnectorEditForm = (props) => {
           //     <InputAdornment position="start">$</InputAdornment>
           //   ),
           // }}
-        />
+        /> */}
         <TextField
           autoComplete="off"
           value={form.id}
@@ -122,7 +172,7 @@ export const ConnectorEditForm = (props) => {
           // }}
         />
 
-        <TextField
+        {/* <TextField
           autoComplete="off"
           value={props.chargePointId}
           className={"mt-20 flex-fw"}
@@ -134,7 +184,11 @@ export const ConnectorEditForm = (props) => {
           label={"Charge Point"}
           placeholder={"Enter " + "subscribe name"}
           onChange={(event) => handlerChange(event)}
-        />
+        /> */}
+        <ButtonDefault onClick={handleUpdateConnector}>
+          {(updateConnector.loading && `Loading...`) || `Save`}
+        </ButtonDefault>
+        <ButtonClose>Delete</ButtonClose>
       </FormGroup>
     </Box>
   );
