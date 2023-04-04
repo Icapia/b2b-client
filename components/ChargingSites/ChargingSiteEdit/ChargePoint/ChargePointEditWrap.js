@@ -11,7 +11,7 @@ export default function ChargePointEditWrap(props) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       {props.data && (
-        <Grid container spacing={2}>
+        <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item xs={6}>
             <ChargePointEditForm {...props}></ChargePointEditForm>
           </Grid>

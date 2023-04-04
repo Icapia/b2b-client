@@ -1,6 +1,7 @@
 import {
   Box,
   FormGroup,
+  Grid,
   InputAdornment,
   MenuItem,
   Modal,
@@ -81,22 +82,97 @@ export const ConnectorEditForm = (props) => {
       className={"connector_edit_form"}
       style={{ backgroundColor: "#FAFAFA" }}
     >
-      <FormGroup className="modal__content-formGroup col-2 mt-20">
-        <Select
-          className={"mt-20 flex-w"}
-          label={"Connector Type"}
-          name={"connectorTypeName"}
-          value={form.connectorTypeName}
-          defaultValue={"Type 1"}
-          onChange={(event) => handlerChange(event)}
-        >
-          <MenuItem value={"Type 1"}>Type 1</MenuItem>
-          <MenuItem value={"Type 2"}>Type 2</MenuItem>
-          <MenuItem value={"Tesla"}>Tesla</MenuItem>
-          <MenuItem value={"CHAdeMO"}>CHAdeMO</MenuItem>
-          <MenuItem value={"CCS1"}>CCS1</MenuItem>
-          <MenuItem value={"CCS2"}>CCS2</MenuItem>
-        </Select>
+      <FormGroup className=" col-2 mt-20">
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Grid item xs={6}>
+            <Select
+              fullWidth
+              style={{ backgroundColor: "#FAFAFA" }}
+              className={"mt-20 flex-w"}
+              label={"Connector Type"}
+              name={"connectorTypeName"}
+              value={form.connectorTypeName}
+              defaultValue={"Type 1"}
+              onChange={(event) => handlerChange(event)}
+            >
+              <MenuItem value={"Type 1"}>Type 1</MenuItem>
+              <MenuItem value={"Type 2"}>Type 2</MenuItem>
+              <MenuItem value={"Tesla"}>Tesla</MenuItem>
+              <MenuItem value={"CHAdeMO"}>CHAdeMO</MenuItem>
+              <MenuItem value={"CCS1"}>CCS1</MenuItem>
+              <MenuItem value={"CCS2"}>CCS2</MenuItem>
+            </Select>
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              autoComplete="off"
+              value={form.id}
+              className={"mt-20 col-6"}
+              type={"number"}
+              focused={true}
+              name={"priceR"}
+              required={true}
+              InputLabelProps={{ required: false }}
+              label={"Connector ID"}
+              placeholder={"5000"}
+              onChange={(event) => handlerChange(event)}
+              // InputProps={{
+              //   startAdornment: (
+              //     <InputAdornment position="start">₽</InputAdornment>
+              //   ),
+              // }}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              lg={6}
+              autoComplete="off"
+              value={form.price}
+              className={"mt-20 flex-w"}
+              type={"number"}
+              focused={true}
+              name={"price"}
+              required={true}
+              InputLabelProps={{ required: false }}
+              label={"Price, $/kWh"}
+              placeholder={"0"}
+              onChange={(event) => handlerChange(event)}
+              // InputProps={{
+              //   startAdornment: (
+              //     <InputAdornment position="start">$</InputAdornment>
+              //   ),
+              // }}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              autoComplete="off"
+              value={form.power}
+              className={"mt-20 flex-w"}
+              type={"number"}
+              focused={true}
+              name={"power"}
+              required={true}
+              InputLabelProps={{ required: false }}
+              label={"Power, kW"}
+              placeholder={"0"}
+              onChange={(event) => handlerChange(event)}
+              // InputProps={{
+              //   startAdornment: (
+              //     <InputAdornment position="start">₽</InputAdornment>
+              //   ),
+              // }}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <ButtonClose fullWidth>Delete</ButtonClose>
+          </Grid>
+          <Grid item xs={6}>
+            <ButtonDefault fullWidth onClick={handleUpdateConnector}>
+              {(updateConnector.loading && `Loading...`) || `Save`}
+            </ButtonDefault>
+          </Grid>
+        </Grid>
 
         {/* <TextField
           autoComplete="off"
@@ -116,61 +192,6 @@ export const ConnectorEditForm = (props) => {
           //   ),
           // }}
         /> */}
-        <TextField
-          autoComplete="off"
-          value={form.id}
-          className={"mt-20 flex-w"}
-          type={"number"}
-          focused={true}
-          name={"priceR"}
-          required={true}
-          InputLabelProps={{ required: false }}
-          label={"Connector ID"}
-          placeholder={"5000"}
-          onChange={(event) => handlerChange(event)}
-          // InputProps={{
-          //   startAdornment: (
-          //     <InputAdornment position="start">₽</InputAdornment>
-          //   ),
-          // }}
-        />
-
-        <TextField
-          autoComplete="off"
-          value={form.price}
-          className={"mt-20 flex-w"}
-          type={"number"}
-          focused={true}
-          name={"price"}
-          required={true}
-          InputLabelProps={{ required: false }}
-          label={"Price, $/kWh"}
-          placeholder={"0"}
-          onChange={(event) => handlerChange(event)}
-          // InputProps={{
-          //   startAdornment: (
-          //     <InputAdornment position="start">$</InputAdornment>
-          //   ),
-          // }}
-        />
-        <TextField
-          autoComplete="off"
-          value={form.power}
-          className={"mt-20 flex-w"}
-          type={"number"}
-          focused={true}
-          name={"power"}
-          required={true}
-          InputLabelProps={{ required: false }}
-          label={"Power, kW"}
-          placeholder={"0"}
-          onChange={(event) => handlerChange(event)}
-          // InputProps={{
-          //   startAdornment: (
-          //     <InputAdornment position="start">₽</InputAdornment>
-          //   ),
-          // }}
-        />
 
         {/* <TextField
           autoComplete="off"
@@ -185,10 +206,6 @@ export const ConnectorEditForm = (props) => {
           placeholder={"Enter " + "subscribe name"}
           onChange={(event) => handlerChange(event)}
         /> */}
-        <ButtonDefault onClick={handleUpdateConnector}>
-          {(updateConnector.loading && `Loading...`) || `Save`}
-        </ButtonDefault>
-        <ButtonClose>Delete</ButtonClose>
       </FormGroup>
     </Box>
   );
