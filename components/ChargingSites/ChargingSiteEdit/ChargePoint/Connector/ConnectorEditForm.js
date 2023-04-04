@@ -82,7 +82,7 @@ export const ConnectorEditForm = (props) => {
       className={"connector_edit_form"}
       style={{ backgroundColor: "#FAFAFA" }}
     >
-      <FormGroup className=" col-2 mt-20">
+      <FormGroup className="">
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item xs={6}>
             <Select
@@ -166,10 +166,10 @@ export const ConnectorEditForm = (props) => {
               // }}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={6} className={"mt-20 flex-w"}>
             <ButtonClose fullWidth>Delete</ButtonClose>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={6} className={"mt-20 flex-w"}>
             <ButtonDefault fullWidth onClick={handleUpdateConnector}>
               {(updateConnector.loading && `Loading...`) || `Save`}
             </ButtonDefault>
