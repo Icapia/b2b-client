@@ -4,107 +4,101 @@ import {
   GridRowsProp,
   GridToolbar,
 } from "@mui/x-data-grid";
+import { useEffect, useState } from "react";
 
 import Button from "@mui/material/Button";
+import { EditOrganizationForm } from "../../components/Organizations/EditOrganizationForm";
 import Image from "next/image";
 import Link from "next/link";
+import { ModalComponent } from "../../components/Modal/Modal";
 import Trash from "../../public/image/Trash.svg";
 import Tumer from "../../public/image/Tumer.svg";
 
-const columns = [
-  {
-    field: "name",
-    headerName: "Organization name",
-    headerClassName: "datagrid__header",
-    flex: 1,
-    editable: false,
-    // renderCell: (cellContent) => {
-    //   return (
-    //     <Link href={`/users/${cellContent.row.id}`}>
-    //       <a className="datagrid-user">
-    //         <div className="datagrid-image">
-    //           <Image
-    //             width={30}
-    //             height={30}
-    //             src={`http://localhost:3000/image${cellContent.row.userAvatar}`}
-    //             alt="Name: "
-    //           ></Image>
-    //         </div>
-    //         <span>{cellContent.row.userName}</span>
-    //       </a>
-    //     </Link>
-    //   );
-    // },
-  },
-
-  {
-    field: "address",
-    headerName: "Address",
-    headerClassName: "datagrid__header",
-    flex: 1.5,
-    renderCell: (cellValues) => {},
-  },
-  {
-    field: "email",
-    headerName: "E-mail",
-    headerClassName: "datagrid__header",
-    flex: 1.5,
-  },
-  {
-    field: "phone",
-    headerName: "Phone Number",
-    headerClassName: "datagrid__header",
-    align: "left",
-    flex: 1,
-    type: "number",
-  },
-  // {
-  //   field: "status",
-  //   headerName: "Status",
-  //   headerClassName: "datagrid__header",
-  //   flex: 0.5,
-  // },
-  // {
-  //   field: "verification",
-  //   headerName: "Verification",
-  //   headerClassName: "datagrid__header",
-  //   flex: 0.5,
-  // },
-  {
-    field: "actions",
-    headerName: "Actions",
-    headerClassName: "datagrid__header",
-    align: "right",
-    sortable: false,
-    flex: 1,
-    renderCell: (cellValues) => {
-      return (
-        <>
-          <Button size={"small"}>
-            Edit
-            {/* <Trash widht={24} height={24}></Trash> */}
-          </Button>
-          <Button size={"small"}>
-            <Tumer widht={24} height={24}></Tumer>
-          </Button>
-        </>
-      );
-    },
-  },
-];
-
 export default function OrganizationsGrid(props) {
-  //const usersList = Array.from(users);
-  // const detailsRows = props.data.map((row) => {
-  //   return {
-  //     id: row.id,
-  //     name: row.name,
-  //     address: row.address,
-  //     email: row.email,
-  //     phone: row.phone,
-  //     actions: "",
-  //   };
-  // });
+  const [open, setOpen] = useState(false);
+  const [editId, setEditId] = useState(0);
+
+  const handleClickOpen = (id) => {
+    setOpen(true);
+    setEditId(id);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const columns = [
+    {
+      field: "name",
+      headerName: "Organization name",
+      headerClassName: "datagrid__header",
+      flex: 1,
+      editable: false,
+      // renderCell: (cellContent) => {
+      //   return (
+      //     <Link href={`/users/${cellContent.row.id}`}>
+      //       <a className="datagrid-user">
+      //         <div className="datagrid-image">
+      //           <Image
+      //             width={30}
+      //             height={30}
+      //             src={`http://localhost:3000/image${cellContent.row.userAvatar}`}
+      //             alt="Name: "
+      //           ></Image>
+      //         </div>
+      //         <span>{cellContent.row.userName}</span>
+      //       </a>
+      //     </Link>
+      //   );
+      // },
+    },
+
+    {
+      field: "address",
+      headerName: "Address",
+      headerClassName: "datagrid__header",
+      flex: 1.5,
+      renderCell: (cellValues) => {},
+    },
+    {
+      field: "email",
+      headerName: "E-mail",
+      headerClassName: "datagrid__header",
+      flex: 1.5,
+    },
+    {
+      field: "phone_number",
+      headerName: "Phone Number",
+      headerClassName: "datagrid__header",
+      align: "left",
+      flex: 1,
+      type: "number",
+    },
+
+    {
+      field: "actions",
+      headerName: "Actions",
+      headerClassName: "datagrid__header",
+      align: "right",
+      sortable: false,
+      flex: 1,
+      renderCell: (cellValues) => {
+        return (
+          <>
+            <Button
+              onClick={() => handleClickOpen(cellValues.id)}
+              size={"small"}
+            >
+              Edit {cellValues.id}
+              {/* <Trash widht={24} height={24}></Trash> */}
+            </Button>
+            <Button size={"small"}>
+              <Tumer widht={24} height={24}></Tumer>
+            </Button>
+          </>
+        );
+      },
+    },
+  ];
 
   return (
     <div style={{ height: "80vh", width: "100%" }}>
@@ -136,6 +130,9 @@ export default function OrganizationsGrid(props) {
         onCellClick={() => {}}
         onCellDoubleClick={() => {}}
       ></DataGrid>
+      <ModalComponent handleClose={handleClose} open={open}>
+        <EditOrganizationForm id={editId} handleClose={handleClose} />
+      </ModalComponent>
     </div>
   );
 }

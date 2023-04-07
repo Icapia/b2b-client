@@ -7,8 +7,11 @@ import {
   TextField,
 } from "@mui/material";
 import { ButtonClose, ButtonDefault, ButtonDelete } from "../Buttons/Buttons";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 
+import { CREATE_ORGANIZATION_GQL } from "../../graphql/gql/mutations/organization-mutations.gql";
+import { GET_ORGANIZATIONS_GQL } from "../../graphql/gql/queries/organizations-queries.gql";
 import Message from "../Messages/Message";
 
 export const CreateOrganizationForm = (props) => {
@@ -24,18 +27,53 @@ export const CreateOrganizationForm = (props) => {
     setForm({ ...form, [event.target.name]: event.target.value });
 
     if (
-      form.descriptionEn &&
+      // form.descriptionEn &&
       form.name &&
-      form.priceD &&
-      form.priceR &&
-      form.descriptionRu
+      form.address &&
+      form.email &&
+      form.zip_code &&
+      form.phone_number
     ) {
       setFormButton(false);
     }
   };
 
+  const [mutationCreateOrganization, createOrganization] = useMutation(
+    CREATE_ORGANIZATION_GQL
+  );
+
   const handlerUpdate = () => {
     props.onChange({ ...form });
+  };
+
+  const handleCreateOrganization = async () => {
+    await mutationCreateOrganization({
+      onCompleted: () => {
+        props.handleClose();
+      },
+      refetchQueries: [
+        {
+          query: GET_ORGANIZATIONS_GQL,
+          variables: {
+            filter: {},
+            sorting: [],
+          },
+        }, // DocumentNode object parsed with gql
+        "GetOrganizations", // Query name
+      ],
+      variables: {
+        input: {
+          organization: {
+            ...form,
+            zip_code: parseInt(form.zip_code),
+            location: {
+              type: "Point",
+              coordinates: [0, 0],
+            },
+          },
+        },
+      },
+    });
   };
 
   const handleMessage = () => {
@@ -59,11 +97,11 @@ export const CreateOrganizationForm = (props) => {
             className={"mt-20 flex-w"}
             type={"string"}
             focused={true}
-            name={"priceD"}
+            name={"name"}
             required={true}
             InputLabelProps={{ required: false }}
             label={"Organization Name"}
-            placeholder={"1000"}
+            placeholder={"Enter name"}
             onChange={(event) => handlerChange(event)}
             // InputProps={{
             //   startAdornment: (
@@ -76,11 +114,11 @@ export const CreateOrganizationForm = (props) => {
             className={"mt-20 flex-w"}
             type={"number"}
             focused={true}
-            name={"priceR"}
+            name={"zip_code"}
             required={true}
             InputLabelProps={{ required: false }}
             label={"ZIP Code"}
-            placeholder={"5000"}
+            placeholder={"Enter zip code"}
             onChange={(event) => handlerChange(event)}
             // InputProps={{
             //   startAdornment: (
@@ -94,24 +132,24 @@ export const CreateOrganizationForm = (props) => {
             className={"mt-20 flex-fw"}
             autoFocus={true}
             focused={true}
-            name={"name"}
+            name={"address"}
             required={true}
             InputLabelProps={{ required: false }}
             label={"Organization Address"}
-            placeholder={"Enter " + "subscribe name"}
+            placeholder={"Enter " + "address"}
             onChange={(event) => handlerChange(event)}
           />
 
           <TextField
             autoComplete="off"
             className={"mt-20 flex-w"}
-            type={"number"}
+            type={"string"}
             focused={true}
-            name={"priceD"}
+            name={"phone_number"}
             required={true}
             InputLabelProps={{ required: false }}
             label={"Phone Number"}
-            placeholder={"1000"}
+            placeholder={"Enter phone"}
             onChange={(event) => handlerChange(event)}
             // InputProps={{
             //   startAdornment: (
@@ -124,11 +162,11 @@ export const CreateOrganizationForm = (props) => {
             className={"mt-20 flex-w"}
             type={"email"}
             focused={true}
-            name={"priceR"}
+            name={"email"}
             required={true}
             InputLabelProps={{ required: false }}
             label={"E-mail"}
-            placeholder={"5000"}
+            placeholder={"Enter email"}
             onChange={(event) => handlerChange(event)}
             // InputProps={{
             //   startAdornment: (
@@ -191,10 +229,10 @@ export const CreateOrganizationForm = (props) => {
           disabled={false}
           className={"mt-20 flex-fw"}
           fullWidth={false}
-          onClick={handleMessage}
+          onClick={handleCreateOrganization}
           minRows={5}
         >
-          Create
+          {(createOrganization.loading && "Loading...") || "Create"}
         </ButtonDefault>
       </Stack>
     </Box>
