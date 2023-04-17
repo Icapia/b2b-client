@@ -39,12 +39,12 @@ export const VerificationForm = (props) => {
                 className={"mt-20 flex-w"}
                 type={"email"}
                 focused={true}
-                name={"email"}
+                name={"password"}
                 required={true}
                 InputLabelProps={{ required: false }}
-                label={"E-mail"}
-                placeholder={"Enter email"}
-                onChange={(event) => handlerChange(event)}
+                label={"Verification code"}
+                placeholder={"Verification code"}
+                onChange={(event) => props.handlerChange(event)}
                 // InputProps={{
                 //   startAdornment: (
                 //     <InputAdornment position="start">₽</InputAdornment>
@@ -59,11 +59,21 @@ export const VerificationForm = (props) => {
             alignItems="center"
             spacing={2}
           >
+            <ButtonClose
+              disabled={false}
+              className={"mt-20 flex-fw"}
+              fullWidth={true}
+              minRows={5}
+              onClick={props.handleBack}
+            >
+              Back
+            </ButtonClose>
             <ButtonDefault
               disabled={false}
               className={"mt-20 flex-fw"}
               fullWidth={true}
               minRows={5}
+              onClick={props.handleLogin}
             >
               Login
             </ButtonDefault>

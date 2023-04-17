@@ -33,6 +33,7 @@ export const Login = (props) => {
   const { logout, login, setAuthUser } = useContext(AuthContext);
 
   const [isVerificationForm, setisVerificationForm] = useState(false);
+  const [form, setForm] = useState({});
 
   const handleMessage = () => {
     setMessage({
@@ -45,10 +46,19 @@ export const Login = (props) => {
     setisVerificationForm(true);
   };
 
+  const handleBack = () => {
+    setisVerificationForm(false);
+  };
+
+  const handlerChange = (event) => {
+    setForm({ ...form, [event.target.name]: event.target.value });
+  };
+
   const [mutationLogin, loginMutaion] = useMutation(LOGIN_USER_GQL);
 
-  const handlerUpdate = () => {
-    props.onChange({ ...form });
+  const handleLogin = () => {
+    console.log("FORM", form);
+    handlemutationLogin();
   };
 
   const handleLogout = () => {
@@ -69,8 +79,8 @@ export const Login = (props) => {
       ],
       variables: {
         input: {
-          username: "user",
-          password: "pass",
+          username: form?.username,
+          password: form?.password,
         },
       },
     });
@@ -89,8 +99,17 @@ export const Login = (props) => {
             alignItems="flex-start"
             spacing={2}
           >
-            {(isVerificationForm && <VerificationForm></VerificationForm>) || (
-              <LoginForm sendCode={handleSendCode}></LoginForm>
+            {(isVerificationForm && (
+              <VerificationForm
+                handleLogin={handleLogin}
+                handleBack={handleBack}
+                handlerChange={handlerChange}
+              ></VerificationForm>
+            )) || (
+              <LoginForm
+                handlerChange={handlerChange}
+                sendCode={handleSendCode}
+              ></LoginForm>
             )}
             <div>
               <div style={{ fontSize: "9px" }}>
@@ -99,8 +118,8 @@ export const Login = (props) => {
               </div>
             </div>
           </Stack>
-          <button onClick={handlemutationLogin}>SetTOKEN</button>
-          <button onClick={handleLogout}>LOGOUT</button>
+          {/* <button onClick={handlemutationLogin}>SetTOKEN</button>
+          <button onClick={handleLogout}>LOGOUT</button> */}
         </Grid>
         <Grid item xs={3}>
           <Image

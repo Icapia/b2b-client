@@ -20,10 +20,6 @@ export const LoginForm = (props) => {
   const [form, setForm] = useState({});
   const [formButton, setFormButton] = useState(true);
 
-  const handlerChange = (event) => {
-    setForm({ ...form, [event.target.name]: event.target.value });
-  };
-
   return (
     <>
       <Stack
@@ -47,12 +43,12 @@ export const LoginForm = (props) => {
                 fullWidth
                 type={"email"}
                 focused={true}
-                name={"email"}
+                name={"username"}
                 required={true}
                 InputLabelProps={{ required: false }}
                 label={"E-mail"}
                 placeholder={"test@test.com"}
-                onChange={(event) => handlerChange(event)}
+                onChange={(event) => props.handlerChange(event)}
               />
             </FormGroup>
           </div>
@@ -69,7 +65,7 @@ export const LoginForm = (props) => {
               minRows={5}
               onClick={props.sendCode}
             >
-              Login
+              Send
             </ButtonDefault>
           </Stack>
         </div>
