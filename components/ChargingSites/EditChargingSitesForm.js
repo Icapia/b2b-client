@@ -55,7 +55,7 @@ export const EditChargingSitesForm = (props) => {
       <div className="modal__content-form modal__content-form--fullw mxw-700">
         <FormGroup className="modal__content-formGroup col-2 mt-20">
           <TextField
-            autoComplete="off"
+            autoComplete={false}
             className={"mt-20 flex-w"}
             type={"string"}
             focused={true}
@@ -72,7 +72,7 @@ export const EditChargingSitesForm = (props) => {
             // }}
           />
           <TextField
-            autoComplete="off"
+            autoComplete={false}
             className={"mt-20 flex-w"}
             type={"number"}
             focused={true}
@@ -90,7 +90,7 @@ export const EditChargingSitesForm = (props) => {
           />
 
           <TextField
-            autoComplete="off"
+            autoComplete={false}
             className={"mt-20 flex-fw"}
             autoFocus={true}
             focused={true}
@@ -103,7 +103,7 @@ export const EditChargingSitesForm = (props) => {
           />
 
           <TextField
-            autoComplete="off"
+            autoComplete={false}
             className={"mt-20 flex-w"}
             type={"number"}
             focused={true}
@@ -120,7 +120,7 @@ export const EditChargingSitesForm = (props) => {
             // }}
           />
           <TextField
-            autoComplete="off"
+            autoComplete={false}
             className={"mt-20 flex-w"}
             type={"email"}
             focused={true}
@@ -138,7 +138,7 @@ export const EditChargingSitesForm = (props) => {
           />
 
           {/* <TextField
-            autoComplete="off"
+            autoComplete={false}
             className={"mt-20 flex-fw"}
             fullWidth={true}
             focused={true}
@@ -152,7 +152,7 @@ export const EditChargingSitesForm = (props) => {
             onChange={(event) => handlerChange(event)}
           />
           <TextField
-            autoComplete="off"
+            autoComplete={false}
             className={"mt-20 flex-fw"}
             fullWidth={true}
             focused={true}

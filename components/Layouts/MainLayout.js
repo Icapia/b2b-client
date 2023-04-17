@@ -1,10 +1,14 @@
+import { useEffect, useState } from "react";
+
 import AuthContext from "../Context/AuthContext";
+import { GET_ME_GQL } from "../../graphql/gql/queries/auth-queries.gql";
 import Head from "next/head";
 import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
 import ThemeContext from "../Context/Theme";
 import { useAuth } from "../../hooks/auth.hook";
 import { useContext } from "react";
+import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 
 export function MainLayout(props) {

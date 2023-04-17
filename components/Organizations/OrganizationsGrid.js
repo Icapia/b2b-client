@@ -11,6 +11,7 @@ import { EditOrganizationForm } from "../../components/Organizations/EditOrganiz
 import Image from "next/image";
 import Link from "next/link";
 import { ModalComponent } from "../../components/Modal/Modal";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import Trash from "../../public/image/Trash.svg";
 import Tumer from "../../public/image/Tumer.svg";
 
@@ -88,12 +89,13 @@ export default function OrganizationsGrid(props) {
               onClick={() => handleClickOpen(cellValues.id)}
               size={"small"}
             >
-              Edit {cellValues.id}
+              Edit
+              <ModeEditIcon></ModeEditIcon>
               {/* <Trash widht={24} height={24}></Trash> */}
             </Button>
-            <Button size={"small"}>
-              <Tumer widht={24} height={24}></Tumer>
-            </Button>
+            {/* <Button size={"small"}>
+              <ModeEditIcon></ModeEditIcon>
+            </Button> */}
           </>
         );
       },

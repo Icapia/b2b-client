@@ -106,7 +106,7 @@ export const ConnectorEditForm = (props) => {
           <Grid item xs={6}>
             <TextField
               fullWidth
-              autoComplete="off"
+              autoComplete={false}
               value={form.id}
               className={"mt-20 col-6"}
               type={"number"}
@@ -127,7 +127,7 @@ export const ConnectorEditForm = (props) => {
           <Grid item xs={6}>
             <TextField
               fullWidth
-              autoComplete="off"
+              autoComplete={false}
               value={form.price}
               className={"mt-20 flex-w"}
               type={"number"}
@@ -148,7 +148,7 @@ export const ConnectorEditForm = (props) => {
           <Grid item xs={6}>
             <TextField
               fullWidth
-              autoComplete="off"
+              autoComplete={false}
               value={form.power}
               className={"mt-20 flex-w"}
               type={"number"}
@@ -177,7 +177,7 @@ export const ConnectorEditForm = (props) => {
         </Grid>
 
         {/* <TextField
-          autoComplete="off"
+          autoComplete={false}
           value={form.connectorTypeName}
           className={"mt-20 flex-w"}
           type={"string"}
@@ -196,7 +196,7 @@ export const ConnectorEditForm = (props) => {
         /> */}
 
         {/* <TextField
-          autoComplete="off"
+          autoComplete={false}
           value={props.chargePointId}
           className={"mt-20 flex-fw"}
           autoFocus={true}

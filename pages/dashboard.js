@@ -28,20 +28,20 @@ export default function Home({ notifications }) {
           count={23}
         ></ChartGraph>
       </div>
-      <Notification title="Notifications" posts={notifications}></Notification>
+      {/* <Notification title="Notifications" posts={notifications}></Notification> */}
     </MainLayout>
   );
 }
 
-export async function getServerSideProps(ctx) {
-  const [res] = await Promise.all([
-    fetch(`http://localhost:4200/notifications`),
-  ]);
+// export async function getServerSideProps(ctx) {
+//   const [res] = await Promise.all([
+//     fetch(`http://localhost:4200/notifications`),
+//   ]);
 
-  const notifications = await res.json();
-  return {
-    props: {
-      notifications: notifications,
-    },
-  };
-}
+//   const notifications = await res.json();
+//   return {
+//     props: {
+//       notifications: notifications,
+//     },
+//   };
+// }

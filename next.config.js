@@ -19,7 +19,12 @@ module.exports = {
     return [
       {
         source: "/",
-        destination: "/organization",
+        destination: "/orgnization",
+        permanent: true,
+      },
+      {
+        source: "/dasshboard",
+        destination: "/orgnization",
         permanent: true,
       },
     ];

@@ -60,7 +60,7 @@ export function ChargePointEditForm(props) {
   return (
     <FormGroup className="modal__content-formGroup col-2">
       <TextField
-        autoComplete="off"
+        autoComplete={false}
         value={form.chargePointHardwareId}
         className={"mt-20 flex-fw"}
         autoFocus={true}
@@ -74,7 +74,7 @@ export function ChargePointEditForm(props) {
       />
 
       <TextField
-        autoComplete="off"
+        autoComplete={false}
         value={`https://icapia-ev-b2b.com/charge-point2323`}
         className={"mt-20 flex-fw"}
         autoFocus={true}

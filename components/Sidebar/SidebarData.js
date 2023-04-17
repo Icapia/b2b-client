@@ -19,11 +19,11 @@ export const SidebarData = [
   //   name: "Analytics",
   //   url: "/analytics",
   // },
-  {
-    image: "/image/sidebar-icons/User.svg",
-    name: "Users",
-    url: "/users",
-  },
+  // {
+  //   image: "/image/sidebar-icons/User.svg",
+  //   name: "Users",
+  //   url: "/users",
+  // },
   // {
   //   image: "/image/sidebar-icons/Chat.svg",
   //   name: "Chat Manager",

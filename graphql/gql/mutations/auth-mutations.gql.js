@@ -1,9 +1,16 @@
 import { gql } from "@apollo/client";
 
-export const SIGN_CERT_GQL = gql`
-  mutation signCert($input: CertIDInputDTO!) {
-    sign(input: $input) {
-      msg
+export const LOGIN_USER_GQL = gql`
+  mutation login($input: LoginInputDTO!) {
+    login(input: $input) {
+      accessToken
     }
   }
 `;
+
+// {
+//   "input": {
+//     "username": "user",
+//     "password": "pass"
+//   }
+// }

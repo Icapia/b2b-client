@@ -1,37 +1,52 @@
-import {useCallback, useState, useEffect} from "react";
+import { useCallback, useEffect, useState } from "react";
 
-const storageName = 'userData'
+import { useRouter } from "next/router";
+
+const storageName = "userData";
 
 export const useAuth = () => {
-  const [token, setToken] = useState(null)
-  const [userId, setUserId] = useState(null)
-  const [user, setUser] = useState(null)
+  const router = useRouter();
 
-  const login = useCallback((jwtToken, id, user) => {
-    setToken(jwtToken)
-    setUserId(id)
-    setUser(user)
+  const [token, setToken] = useState(null);
+  const [userId, setUserId] = useState(null);
+  const [user, setUser] = useState(null);
 
-    localStorage.setItem(storageName, JSON.stringify({
-      userId: id,
-      token: jwtToken,
-      user: user
-    }))
-  }, [])
+  const login = useCallback((jwtToken, id, username) => {
+    setToken(jwtToken);
+    setUserId(id);
+    setUser(username);
+
+    localStorage.setItem(
+      storageName,
+      JSON.stringify({
+        userId: id,
+        token: jwtToken,
+        user: username,
+      })
+    );
+  }, []);
+
+  const me = (id, username) => {
+    setUserId(id);
+    setUser(username);
+  };
+
   const logout = useCallback(() => {
-    setToken(null)
-    setUserId(null)
-    setUser(null)
-    localStorage.removeItem(storageName)
-  }, [])
+    setToken(null);
+    setUserId(null);
+    setUser(null);
+    localStorage.removeItem(storageName);
+  }, []);
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem(storageName))
+    const data = JSON.parse(localStorage.getItem(storageName));
 
-    if(data && data.token) {
-      login(data.token, data.userId, data.user)
+    if (data && data.token) {
+      login(data.token, data.userId, data.user);
+    } else {
+      router.push("/login");
     }
-  }, [login])
+  }, [login]);
 
-  return { login, logout, token, userId, user }
-}
+  return { login, logout, token, userId, user };
+};

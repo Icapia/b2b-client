@@ -52,7 +52,7 @@ export const ChargingSiteEditForm = (props) => {
     <Box>
       <FormGroup className="modal__content-formGroup col-2 mt-20">
         <TextField
-          autoComplete="off"
+          autoComplete={false}
           value={"test name1"}
           className={"mt-20 flex-fw"}
           autoFocus={true}
@@ -65,7 +65,7 @@ export const ChargingSiteEditForm = (props) => {
           onChange={(event) => handlerChange(event)}
         />
         <TextField
-          autoComplete="off"
+          autoComplete={false}
           value={form.site}
           className={"mt-20 flex-w"}
           type={"string"}
@@ -83,7 +83,7 @@ export const ChargingSiteEditForm = (props) => {
           // }}
         />
         <TextField
-          autoComplete="off"
+          autoComplete={false}
           value={form.site}
           className={"mt-20 flex-w"}
           type={"string"}
@@ -102,7 +102,7 @@ export const ChargingSiteEditForm = (props) => {
         />
 
         <TextField
-          autoComplete="off"
+          autoComplete={false}
           value={form.site_area}
           className={"mt-20 flex-fw"}
           autoFocus={true}
@@ -116,7 +116,7 @@ export const ChargingSiteEditForm = (props) => {
         />
 
         <TextField
-          autoComplete="off"
+          autoComplete={false}
           value={8333442332}
           className={"mt-20 flex-w"}
           type={"number"}
@@ -134,7 +134,7 @@ export const ChargingSiteEditForm = (props) => {
           // }}
         />
         <TextField
-          autoComplete="off"
+          autoComplete={false}
           value={0.17}
           className={"mt-20 flex-w"}
           type={"email"}
@@ -153,7 +153,7 @@ export const ChargingSiteEditForm = (props) => {
         />
 
         {/* <TextField
-            autoComplete="off"
+            autoComplete={false}
             className={"mt-20 flex-fw"}
             fullWidth={true}
             focused={true}
@@ -167,7 +167,7 @@ export const ChargingSiteEditForm = (props) => {
             onChange={(event) => handlerChange(event)}
           />
           <TextField
-            autoComplete="off"
+            autoComplete={false}
             className={"mt-20 flex-fw"}
             fullWidth={true}
             focused={true}
