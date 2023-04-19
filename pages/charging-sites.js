@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 
 import ChargingSitesGrid from "../components/ChargingSites/ChargingSitesGrid";
 import { CreateOrganizationForm } from "../components/Organizations/CreateOrganizationForm";
+import { CreateSiteForm } from "../components/ChargingSites/CreateSiteForm";
 import { GET_SITES_GQL } from "../graphql/gql/queries/sites-queries.gql";
 import { MainLayout } from "../components/Layouts/MainLayout";
 import { ModalComponent } from "../components/Modal/Modal";
@@ -53,7 +54,7 @@ export default function Home({ users }) {
         <ChargingSitesGrid data={sites.data.sites}></ChargingSitesGrid>
       )}
       <ModalComponent handleClose={handleClose} open={open}>
-        <CreateOrganizationForm handleClose={handleClose} />
+        <CreateSiteForm handleClose={handleClose} />
       </ModalComponent>
     </MainLayout>
   );

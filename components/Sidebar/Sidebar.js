@@ -1,9 +1,15 @@
 import { useContext, useState } from "react";
 
 import { AuthContext } from "../../context/AuthContextProvider";
+import Avatar from "@mui/material/Avatar";
 import Link from "next/link";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import ListItemText from "@mui/material/ListItemText";
 import Logo from "../../public/image/logo-m.svg";
 import LogoM from "../../public/image/logo-small.svg";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import SidebarNavMenu from "../Sidebar/SidebarNavMenu";
 import SidebarToggle from "../../public/image/sidebar-icons/SidebarToggle.svg";
 import SidebarUserInfo from "../Sidebar/SidebarUserInfo";
@@ -29,9 +35,28 @@ export default function Sidebar(props) {
             <a></a>
           )}
         </Link>
-        <Logo className="sidebar__logo"></Logo>
-        <div style={{ color: "#fff" }}>{loggedInUser?.username}</div>
-        <div style={{ color: "#fff" }}>{loggedInUser?.id}</div>
+        <h2 style={{ color: "#fff" }}>ICAPIA EV</h2>
+        <h4 style={{ color: "#fff" }}>CRM</h4>
+        <List sx={{ width: "100%", color: "#fff" }}>
+          <ListItem
+            pl="0"
+            sx={{
+              color: "#fff",
+              "& p": { color: "#fff" },
+            }}
+          >
+            <ListItemAvatar>
+              <Avatar>
+                <PersonOutlineIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              style={{ color: "#fff" }}
+              primary={loggedInUser?.name}
+              secondary={loggedInUser?.email}
+            />
+          </ListItem>
+        </List>
         <button onClick={logout}>Logout</button>
         <SidebarUserInfo state={isActive}></SidebarUserInfo>
         <SidebarNavMenu state={isActive}></SidebarNavMenu>
