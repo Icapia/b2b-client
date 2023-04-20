@@ -36,13 +36,15 @@ export default function Sidebar(props) {
           )}
         </Link>
         <h2 style={{ color: "#fff" }}>ICAPIA EV</h2>
-        <h4 style={{ color: "#fff" }}>CRM</h4>
-        <List sx={{ width: "100%", color: "#fff" }}>
+        <p style={{ color: "#fff", fontSize: "9px" }}>ChargePoint Managment</p>
+        <List sx={{ width: "100%" }}>
           <ListItem
+            color="warning"
             pl="0"
             sx={{
               color: "#fff",
               "& p": { color: "#fff" },
+              "&": { paddingLeft: "0px", fontSize: "9px" },
             }}
           >
             <ListItemAvatar>
@@ -51,7 +53,12 @@ export default function Sidebar(props) {
               </Avatar>
             </ListItemAvatar>
             <ListItemText
-              style={{ color: "#fff" }}
+              primaryTypographyProps={{
+                fontSize: "12px",
+                noWrap: "true",
+                width: "90px",
+              }}
+              secondaryTypographyProps={{ fontSize: "9px" }}
               primary={loggedInUser?.name}
               secondary={loggedInUser?.email}
             />
