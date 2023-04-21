@@ -3,7 +3,9 @@ import {
   Divider,
   FormGroup,
   InputAdornment,
+  MenuItem,
   Modal,
+  Select,
   Stack,
   TextField,
 } from "@mui/material";
@@ -22,20 +24,35 @@ export const ChargingSiteEditForm = (props) => {
     message: "",
   });
 
-  const { id, site, site_area } = props.data;
+  const {
+    id,
+    organizationId,
+    name,
+    zip_code,
+    address,
+    phone_number,
+    default_price,
+  } = props.data;
 
-  const [form, setForm] = useState({ id, site, site_area });
+  const [form, setForm] = useState({
+    organizationId,
+    name,
+    zip_code,
+    address,
+    phone_number,
+    default_price,
+  });
   const [formButton, setFormButton] = useState(true);
 
   const handlerChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
 
-    if (form.site && form.site_area) {
-      setFormButton(false);
-    }
+    // if (form.site && form.site_area) {
+    //   setFormButton(false);
+    // }
   };
 
-  // console.log(form);
+  console.log(props.data);
 
   const handlerUpdate = () => {
     props.onChange({ ...form });
@@ -51,26 +68,29 @@ export const ChargingSiteEditForm = (props) => {
   return (
     <Box>
       <FormGroup className="modal__content-formGroup col-2 mt-20">
-        <TextField
-          autoComplete={false}
-          value={"test name1"}
-          className={"mt-20 flex-fw"}
-          autoFocus={true}
-          focused={true}
-          name={"site"}
-          required={true}
-          InputLabelProps={{ required: false }}
+        <Select
+          fullWidth
+          sx={{ backgroundColor: "#FAFAFA" }}
+          className={"mt-20 flex-w"}
           label={"Organization"}
-          placeholder={"Enter " + "Organization"}
+          name={"organizationId"}
+          value={form.organizationId}
+          defaultValue={"Not set"}
           onChange={(event) => handlerChange(event)}
-        />
+        >
+          {props.organizations.map((e) => {
+            return (
+              <MenuItem key={e.id} value={e.id}>{`${e.id} ${e.name}`}</MenuItem>
+            );
+          })}
+        </Select>
+
         <TextField
-          autoComplete={false}
-          value={form.site}
+          value={form.name}
           className={"mt-20 flex-w"}
           type={"string"}
           focused={true}
-          name={"site"}
+          name={"name"}
           required={true}
           InputLabelProps={{ required: false }}
           label={"Site Name"}
@@ -83,12 +103,11 @@ export const ChargingSiteEditForm = (props) => {
           // }}
         />
         <TextField
-          autoComplete={false}
-          value={form.site}
+          value={form.zip_code}
           className={"mt-20 flex-w"}
           type={"string"}
           focused={true}
-          name={"site"}
+          name={"zip_code"}
           required={true}
           InputLabelProps={{ required: false }}
           label={"ZIP Code"}
@@ -102,26 +121,24 @@ export const ChargingSiteEditForm = (props) => {
         />
 
         <TextField
-          autoComplete={false}
-          value={form.site_area}
+          value={form.address}
           className={"mt-20 flex-fw"}
           autoFocus={true}
           focused={true}
-          name={"site_area"}
+          name={"address"}
           required={true}
           InputLabelProps={{ required: false }}
-          label={"Site Address"}
-          placeholder={"Enter " + "subscribe name"}
+          label={"Address"}
+          placeholder={"Enter " + "address"}
           onChange={(event) => handlerChange(event)}
         />
 
         <TextField
-          autoComplete={false}
-          value={8333442332}
+          value={form.phone_number}
           className={"mt-20 flex-w"}
-          type={"number"}
+          type={"text"}
           focused={true}
-          name={"priceD"}
+          name={"phone_number"}
           required={true}
           InputLabelProps={{ required: false }}
           label={"Phone Number (optional)"}
@@ -134,12 +151,11 @@ export const ChargingSiteEditForm = (props) => {
           // }}
         />
         <TextField
-          autoComplete={false}
-          value={0.17}
+          value={form.default_price}
           className={"mt-20 flex-w"}
-          type={"email"}
+          type={"number"}
           focused={true}
-          name={"priceR"}
+          name={"default_price"}
           required={true}
           InputLabelProps={{ required: false }}
           label={"Default price, $/kWh"}
@@ -151,7 +167,13 @@ export const ChargingSiteEditForm = (props) => {
           //   ),
           // }}
         />
-
+        <ButtonClose
+          onClick={() => props.handleUpdateSite(id, form)}
+          className={"mt-20 "}
+          fullWidth
+        >
+          {`Update site`}
+        </ButtonClose>
         {/* <TextField
             autoComplete={false}
             className={"mt-20 flex-fw"}

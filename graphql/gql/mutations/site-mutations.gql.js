@@ -30,10 +30,24 @@ export const CREATE_SITE_GQL = gql`
 //   }
 // }
 
-export const SIGN_CERT_GQL = gql`
-  mutation signCert($input: CertIDInputDTO!) {
-    sign(input: $input) {
-      msg
+export const UPDATE_SITE_GQL = gql`
+  mutation updateSite($input: UpdateOneSiteInput!) {
+    updateOneSite(input: $input) {
+      id
     }
   }
 `;
+
+// {
+//   "input": {
+//     "id": 21,
+//     "update": {
+//       "organizationId": 14,
+//       "name": "new test name",
+//       "zip_code": 12121212,
+//       "address": "new address",
+//       "phone_number": "+423423423",
+//       "default_price": 0.44
+//     }
+//   }
+// }

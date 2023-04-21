@@ -53,7 +53,7 @@ function Row(props) {
         <td>{row.siteId}</td>
         <td>
           <div>
-            <Typography noWrap>
+            <Typography>
               {row.connectors.map((e) => `${e.connectorTypeName}, `)}
             </Typography>
           </div>

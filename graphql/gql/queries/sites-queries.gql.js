@@ -41,8 +41,13 @@ export const GET_SITE_GQL = gql`
   ) {
     site(id: $id) {
       id
-      site
+      organizationId
+      name
+      zip_code
+      address
       site_area
+      phone_number
+      default_price
       chargePoints(filter: $chargePointFilter, sorting: $chargePointSorting) {
         id
         chargePointHardwareId

@@ -9,9 +9,12 @@ import { CREATE_CONNECTOR_GQL } from "../../graphql/gql/mutations/connector-muta
 import ChargePointEdit from "../../components/ChargingSites/ChargingSiteEdit/ChargePoint/ChargePointEditWrap";
 import { ChargingSiteEditForm } from "../../components/ChargingSites/ChargingSiteEdit/ChargingSiteEditForm";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { GET_ORGANIZATIONS_GQL } from "../../graphql/gql/queries/organizations-queries.gql";
 import { GET_SITE_GQL } from "../../graphql/gql/queries/sites-queries.gql";
 import { MainLayout } from "../../components/Layouts/MainLayout";
 import Typography from "@mui/material/Typography";
+import { UPDATE_SITE_GQL } from "../../graphql/gql/mutations/site-mutations.gql";
+import { parse } from "graphql";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -31,12 +34,43 @@ export default function ChargingSite() {
     variables: getSiteVariables,
   });
 
+  const organizations = useQuery(GET_ORGANIZATIONS_GQL, {
+    variables: getSiteVariables,
+  });
+
   const [mutationCreateChargePoint, createChargePoint] = useMutation(
     CREATE_CHARGE_POINT_GQL
   );
 
   const [mutationCreateConnector, createConnector] =
     useMutation(CREATE_CONNECTOR_GQL);
+
+  const [mutationUpdateSite, updateSite] = useMutation(UPDATE_SITE_GQL);
+
+  const handleUpdateSite = async (id, form) => {
+    await mutationUpdateSite({
+      refetchQueries: [
+        {
+          query: GET_SITE_GQL,
+          variables: getSiteVariables,
+        }, // DocumentNode object parsed with gql
+        "GetSite", // Query name
+      ],
+      variables: {
+        input: {
+          id: parseInt(id),
+          update: {
+            organizationId: parseInt(form.organizationId),
+            name: form.name,
+            zip_code: parseInt(form.zip_code),
+            address: form.address,
+            phone_number: form.phone_number,
+            default_price: parseFloat(form.default_price),
+          },
+        },
+      },
+    });
+  };
 
   const handleCreateChargePoint = async (siteId) => {
     await mutationCreateChargePoint({
@@ -88,8 +122,15 @@ export default function ChargingSite() {
       {site.data && (
         <MainLayout name={`Site #${site.data.site.id}`}>
           <div>
-            <ChargingSiteEditForm data={site.data.site}></ChargingSiteEditForm>
+            {organizations?.data && (
+              <ChargingSiteEditForm
+                organizations={organizations.data.organizations}
+                data={site.data.site}
+                handleUpdateSite={handleUpdateSite}
+              ></ChargingSiteEditForm>
+            )}
           </div>
+
           <div>
             <div className={"mt-40"}>
               {site.data.site.chargePoints.map((e, i) => {
