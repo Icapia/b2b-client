@@ -68,7 +68,7 @@ export default function Sidebar(props) {
         <SidebarUserInfo state={isActive}></SidebarUserInfo>
         <SidebarNavMenu state={isActive}></SidebarNavMenu>
 
-        <div
+        {/* <div
           id="sibebar__toggle"
           className="sibebar__toggle"
           onClick={toggleSidebar}
@@ -77,7 +77,7 @@ export default function Sidebar(props) {
             <SidebarToggle width={24} height={24}></SidebarToggle>
           </div>
           {isActive ? <span></span> : <span>Toggle sidebar</span>}
-        </div>
+        </div> */}
       </div>
     </div>
   );
