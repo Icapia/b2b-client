@@ -22,6 +22,9 @@ export default function ChargingSite() {
   const router = useRouter();
   const { id } = router.query;
 
+  if (id == 0) {
+  }
+
   const getSiteVariables = {
     id: id,
     chargePointFilter: {},

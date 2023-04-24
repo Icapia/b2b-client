@@ -1,6 +1,7 @@
 import {
   Box,
   FormGroup,
+  Grid,
   InputAdornment,
   Modal,
   Stack,
@@ -99,128 +100,118 @@ export const EditOrganizationForm = (props) => {
   return (
     <Box>
       <h2>Edit organization</h2>
-      <h5>Notification:</h5>
+      {/* <h5>Notification:</h5>
       <p className="mt-10">
         After creating a user, login data will be sent to E-mail
-      </p>
+      </p> */}
       <div className="modal__content-form modal__content-form--fullw mxw-700">
         <FormGroup className="modal__content-formGroup col-2 mt-20">
-          <TextField
-            value={form.name}
-            // autoComplete={false}
-            className={"mt-20 flex-w"}
-            type={"string"}
-            focused={true}
-            name={"name"}
-            required={true}
-            InputLabelProps={{ required: false }}
-            label={"Organization Name"}
-            placeholder={"Enter name"}
-            onChange={(event) => handlerChange(event)}
-            // InputProps={{
-            //   startAdornment: (
-            //     <InputAdornment position="start">$</InputAdornment>
-            //   ),
-            // }}
-          />
-          <TextField
-            value={form.zip_code}
-            // autoComplete={false}
-            className={"mt-20 flex-w"}
-            type={"number"}
-            focused={true}
-            name={"zip_code"}
-            required={true}
-            InputLabelProps={{ required: false }}
-            label={"ZIP Code"}
-            placeholder={"Enter zip code"}
-            onChange={(event) => handlerChange(event)}
-            // InputProps={{
-            //   startAdornment: (
-            //     <InputAdornment position="start">₽</InputAdornment>
-            //   ),
-            // }}
-          />
-
-          <TextField
-            value={form.address}
-            // autoComplete={false}
-            className={"mt-20 flex-fw"}
-            autoFocus={true}
-            focused={true}
-            name={"address"}
-            required={true}
-            InputLabelProps={{ required: false }}
-            label={"Organization Address"}
-            placeholder={"Enter " + "address"}
-            onChange={(event) => handlerChange(event)}
-          />
-
-          <TextField
-            value={form.phone_number}
-            // autoComplete={false}
-            className={"mt-20 flex-w"}
-            type={"string"}
-            focused={true}
-            name={"phone_number"}
-            required={true}
-            InputLabelProps={{ required: false }}
-            label={"Phone Number"}
-            placeholder={"Enter phone"}
-            onChange={(event) => handlerChange(event)}
-            // InputProps={{
-            //   startAdornment: (
-            //     <InputAdornment position="start">$</InputAdornment>
-            //   ),
-            // }}
-          />
-          <TextField
-            value={form.email}
-            // autoComplete={false}
-            className={"mt-20 flex-w"}
-            type={"email"}
-            focused={true}
-            name={"email"}
-            required={true}
-            InputLabelProps={{ required: false }}
-            label={"E-mail"}
-            placeholder={"Enter email"}
-            onChange={(event) => handlerChange(event)}
-            // InputProps={{
-            //   startAdornment: (
-            //     <InputAdornment position="start">₽</InputAdornment>
-            //   ),
-            // }}
-          />
-
-          {/* <TextField
-            autoComplete={false}
-            className={"mt-20 flex-fw"}
-            fullWidth={true}
-            focused={true}
-            multiline={true}
-            minRows={5}
-            name={"descriptionEn"}
-            required={true}
-            InputLabelProps={{ required: false }}
-            label={"Subscribe Description (EN)"}
-            placeholder={"Chat with someone who likes you too!"}
-            onChange={(event) => handlerChange(event)}
-          />
-          <TextField
-            autoComplete={false}
-            className={"mt-20 flex-fw"}
-            fullWidth={true}
-            focused={true}
-            required={true}
-            multiline={true}
-            minRows={5}
-            name={"descriptionRu"}
-            InputLabelProps={{ required: false }}
-            label={"Subscribe Description (RU)"}
-            placeholder={"Chat with someone who likes you too!"}
-            onChange={(event) => handlerChange(event)}
-          /> */}
+          <Grid
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          >
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                value={form.name}
+                // autoComplete={false}
+                className={"mt-20 flex-w"}
+                type={"string"}
+                focused={true}
+                name={"name"}
+                required={true}
+                InputLabelProps={{ required: false }}
+                label={"Organization Name"}
+                placeholder={"Enter name"}
+                onChange={(event) => handlerChange(event)}
+                // InputProps={{
+                //   startAdornment: (
+                //     <InputAdornment position="start">$</InputAdornment>
+                //   ),
+                // }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                value={form.zip_code}
+                // autoComplete={false}
+                className={"mt-20 flex-w"}
+                type={"number"}
+                focused={true}
+                name={"zip_code"}
+                required={true}
+                InputLabelProps={{ required: false }}
+                label={"ZIP Code"}
+                placeholder={"Enter zip code"}
+                onChange={(event) => handlerChange(event)}
+                // InputProps={{
+                //   startAdornment: (
+                //     <InputAdornment position="start">₽</InputAdornment>
+                //   ),
+                // }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                value={form.address}
+                // autoComplete={false}
+                className={"mt-20 flex-fw"}
+                autoFocus={true}
+                focused={true}
+                name={"address"}
+                required={true}
+                InputLabelProps={{ required: false }}
+                label={"Organization Address"}
+                placeholder={"Enter " + "address"}
+                onChange={(event) => handlerChange(event)}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                value={form.phone_number}
+                // autoComplete={false}
+                className={"mt-20 flex-w"}
+                type={"string"}
+                focused={true}
+                name={"phone_number"}
+                required={true}
+                InputLabelProps={{ required: false }}
+                label={"Phone Number"}
+                placeholder={"Enter phone"}
+                onChange={(event) => handlerChange(event)}
+                // InputProps={{
+                //   startAdornment: (
+                //     <InputAdornment position="start">$</InputAdornment>
+                //   ),
+                // }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                value={form.email}
+                // autoComplete={false}
+                className={"mt-20 flex-w"}
+                type={"email"}
+                focused={true}
+                name={"email"}
+                required={true}
+                InputLabelProps={{ required: false }}
+                label={"E-mail"}
+                placeholder={"Enter email"}
+                onChange={(event) => handlerChange(event)}
+                // InputProps={{
+                //   startAdornment: (
+                //     <InputAdornment position="start">₽</InputAdornment>
+                //   ),
+                // }}
+              />
+            </Grid>
+          </Grid>
         </FormGroup>
       </div>
       <Message

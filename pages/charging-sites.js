@@ -3,15 +3,17 @@ import {
   ButtonDefault,
   ButtonDelete,
 } from "../components/Buttons/Buttons";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 
+import { CREATE_SITE_GQL } from "../graphql/gql/mutations/site-mutations.gql";
 import ChargingSitesGrid from "../components/ChargingSites/ChargingSitesGrid";
 import { CreateOrganizationForm } from "../components/Organizations/CreateOrganizationForm";
 import { CreateSiteForm } from "../components/ChargingSites/CreateSiteForm";
 import { GET_SITES_GQL } from "../graphql/gql/queries/sites-queries.gql";
 import { MainLayout } from "../components/Layouts/MainLayout";
 import { ModalComponent } from "../components/Modal/Modal";
+import { useRouter } from "next/router";
 
 // import { ButtonDefault } from "../components/Buttons/Buttons";
 
@@ -21,6 +23,7 @@ const pageData = {
 
 export default function Home({ users }) {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
 
   const sites = useQuery(GET_SITES_GQL, {
     variables: {
@@ -35,6 +38,40 @@ export default function Home({ users }) {
 
   if (sites.data) console.log(sites.data.sites);
 
+  const [mutationCreateSite, createSite] = useMutation(CREATE_SITE_GQL);
+
+  const handleCreateSite = async () => {
+    await mutationCreateSite({
+      onCompleted: (data) => {
+        router.push(`/charging-sites/${data.createOneSite.id}`);
+        // console.log(data);
+        // props.handleClose();
+      },
+      variables: {
+        input: {
+          site: {
+            name: "",
+            site: "",
+            site_area: "",
+            address: "",
+            zip_code: 0,
+            phone_number: "",
+            default_price: 0.0,
+            dynamic_asset: "",
+            asset_type: "",
+            information: "",
+            instant_power: 0,
+            battery: "",
+            location: {
+              type: "Point",
+              coordinates: [0, 0],
+            },
+          },
+        },
+      },
+    });
+  };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -45,7 +82,7 @@ export default function Home({ users }) {
     <MainLayout
       name={pageData.pageTitle}
       childComponent={
-        <ButtonDefault onClick={handleClickOpen}>
+        <ButtonDefault onClick={handleCreateSite}>
           Create Charging site
         </ButtonDefault>
       }
@@ -53,9 +90,9 @@ export default function Home({ users }) {
       {sites.data && (
         <ChargingSitesGrid data={sites.data.sites}></ChargingSitesGrid>
       )}
-      <ModalComponent handleClose={handleClose} open={open}>
+      {/* <ModalComponent handleClose={handleClose} open={open}>
         <CreateSiteForm handleClose={handleClose} />
-      </ModalComponent>
+      </ModalComponent> */}
     </MainLayout>
   );
 }
