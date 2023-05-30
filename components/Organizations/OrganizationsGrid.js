@@ -1,19 +1,11 @@
 import {
   DataGrid,
-  GridColDef,
-  GridRowsProp,
-  GridToolbar,
 } from "@mui/x-data-grid";
-import { useEffect, useState } from "react";
-
-import Button from "@mui/material/Button";
+import { useState } from "react";
 import { EditOrganizationForm } from "../../components/Organizations/EditOrganizationForm";
-import Image from "next/image";
-import Link from "next/link";
 import { ModalComponent } from "../../components/Modal/Modal";
+import { ButtonTransparent } from "../Buttons/Buttons";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import Trash from "../../public/image/Trash.svg";
-import Tumer from "../../public/image/Tumer.svg";
 
 export default function OrganizationsGrid(props) {
   const [open, setOpen] = useState(false);
@@ -34,25 +26,7 @@ export default function OrganizationsGrid(props) {
       headerClassName: "datagrid__header",
       flex: 1,
       editable: false,
-      // renderCell: (cellContent) => {
-      //   return (
-      //     <Link href={`/users/${cellContent.row.id}`}>
-      //       <a className="datagrid-user">
-      //         <div className="datagrid-image">
-      //           <Image
-      //             width={30}
-      //             height={30}
-      //             src={`http://localhost:3000/image${cellContent.row.userAvatar}`}
-      //             alt="Name: "
-      //           ></Image>
-      //         </div>
-      //         <span>{cellContent.row.userName}</span>
-      //       </a>
-      //     </Link>
-      //   );
-      // },
     },
-
     {
       field: "address",
       headerName: "Address",
@@ -70,32 +44,27 @@ export default function OrganizationsGrid(props) {
       field: "phone_number",
       headerName: "Phone Number",
       headerClassName: "datagrid__header",
-      align: "left",
       flex: 1,
-      type: "number",
+      editable: false,
     },
-
     {
       field: "actions",
       headerName: "Actions",
       headerClassName: "datagrid__header",
-      align: "right",
       sortable: false,
       flex: 1,
+      align: 'right',
+      headerAlign: 'right',
       renderCell: (cellValues) => {
         return (
           <>
-            <Button
+            <ButtonTransparent
               onClick={() => handleClickOpen(cellValues.id)}
               size={"small"}
             >
               Edit
               <ModeEditIcon></ModeEditIcon>
-              {/* <Trash widht={24} height={24}></Trash> */}
-            </Button>
-            {/* <Button size={"small"}>
-              <ModeEditIcon></ModeEditIcon>
-            </Button> */}
+            </ButtonTransparent>
           </>
         );
       },
@@ -137,32 +106,4 @@ export default function OrganizationsGrid(props) {
       </ModalComponent>
     </div>
   );
-}
-
-function getStatus(userStatus) {
-  if (userStatus == 1) {
-    return "Active";
-  }
-
-  if (userStatus == 2) {
-    return "Frozen";
-  }
-
-  if (userStatus == 3) {
-    return "Blocked";
-  }
-
-  if (userStatus == 4) {
-    return "Deleted";
-  }
-}
-
-function getVereficationStatus(userStatus) {
-  if (userStatus == 1) {
-    return "True";
-  }
-
-  if (userStatus == 2) {
-    return "False";
-  }
 }

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "../../context/AuthContextProvider";
 import Avatar from "@mui/material/Avatar";
@@ -14,20 +14,36 @@ import SidebarNavMenu from "../Sidebar/SidebarNavMenu";
 import SidebarToggle from "../../public/image/sidebar-icons/SidebarToggle.svg";
 import SidebarUserInfo from "../Sidebar/SidebarUserInfo";
 import ThemeContext from "../Context/Theme";
+import { useAtom } from "jotai";
+import { sidebarAtom } from "../../store/sidebar";
+import { useWindowDimensions } from '../../hooks/dimensions.hook'
 
 export default function Sidebar(props) {
-  const { isActive, setActive } = useState(true);
-  const toggleSidebar = () => {
-    setActive(!isActive);
-  };
-
+  const [sidebar, setSidebar] = useAtom(sidebarAtom)
   const { loggedInUser, logout, handleAuthAction } = useContext(AuthContext);
+  const { width } = useWindowDimensions();
+
+  useEffect(() => {
+    if(width < 1600) {
+      setSidebar(true)
+    } else {
+      setSidebar(false)
+    }
+  }, [width])
+  
+  const toggleSidebar = () => {
+    if(width < 1600) {
+      return
+    } else {
+      setSidebar(!sidebar)
+    }
+  }
 
   return (
-    <div className={isActive ? "sidebar sidebar__active" : "sidebar"}>
+    <div className={sidebar ? "sidebar sidebar__active" : "sidebar"}>
       <div className="sidebar__wrapper">
         <Link href={"/dashboard"}>
-          {isActive ? (
+          {sidebar ? (
             <a>
               <LogoM className="sidebar__logo"></LogoM>
             </a>
@@ -35,8 +51,8 @@ export default function Sidebar(props) {
             <a></a>
           )}
         </Link>
-        <h2 style={{ color: "#fff" }}>ICAPIA EV</h2>
-        <p style={{ color: "#fff", fontSize: "9px" }}>ChargePoint Managment</p>
+        <h2 style={{ color: "#fff" }}>{sidebar ? '' : 'ICAPIA EV'}</h2>
+        <p style={{ color: "#fff", fontSize: "9px" }}>{sidebar ? '' : 'ChargePoint Managment'}</p>
         <List sx={{ width: "100%" }}>
           <ListItem
             color="warning"
@@ -52,7 +68,7 @@ export default function Sidebar(props) {
                 <PersonOutlineIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText
+            {!sidebar && <ListItemText
               primaryTypographyProps={{
                 fontSize: "12px",
                 noWrap: "true",
@@ -61,14 +77,13 @@ export default function Sidebar(props) {
               secondaryTypographyProps={{ fontSize: "9px" }}
               primary={loggedInUser?.name}
               secondary={loggedInUser?.email}
-            />
+            />}
           </ListItem>
         </List>
-        <button onClick={logout}>Logout</button>
-        <SidebarUserInfo state={isActive}></SidebarUserInfo>
-        <SidebarNavMenu state={isActive}></SidebarNavMenu>
+        <SidebarUserInfo state={sidebar}></SidebarUserInfo>
+        <SidebarNavMenu state={sidebar}></SidebarNavMenu>
 
-        {/* <div
+        <div
           id="sibebar__toggle"
           className="sibebar__toggle"
           onClick={toggleSidebar}
@@ -76,8 +91,8 @@ export default function Sidebar(props) {
           <div className="sibebar__toggle-image">
             <SidebarToggle width={24} height={24}></SidebarToggle>
           </div>
-          {isActive ? <span></span> : <span>Toggle sidebar</span>}
-        </div> */}
+          {sidebar ? <span></span> : <span>Toggle sidebar</span>}
+        </div>
       </div>
     </div>
   );

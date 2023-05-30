@@ -1,15 +1,13 @@
 import * as React from "react";
-
 import ChargingSitesGridFilter from "./ChargingSitesGridFilter";
 import IconButton from "@mui/joy/IconButton";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import PropTypes from "prop-types";
 import Sheet from "@mui/joy/Sheet";
 import Table from "@mui/joy/Table";
 import Typography from "@mui/joy/Typography";
-import { green } from "@mui/material/colors";
+import { ButtonBlackTransparent } from "../Buttons/Buttons";
+import { useRouter } from "next/router";
 
 const color = {
   connected: "green",
@@ -33,10 +31,15 @@ function Status(props) {
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(props.initialOpen || false);
+  const router = useRouter();
+
+  const handleNavigate = () => {
+    router.push(`/charging-sites/${row.siteId}`)
+  }
 
   return (
     <React.Fragment>
-      <tr>
+      <tr style={{overflowX: 'scroll'}}>
         <td>
           <IconButton
             aria-label="expand row"
@@ -61,12 +64,15 @@ function Row(props) {
         <td>
           <Status status={row.status}></Status>
         </td>
-        <td>{row.instantPower}</td>
+        <td style={{textAlign: 'right'}}>{row.instantPower}</td>
         <td>
-          <button>edit {row.id}</button>
+          <ButtonBlackTransparent onClick={handleNavigate}>
+            Edit
+            <img style={{marginLeft: '4px'}} src="/image/icons/edit.svg"/>
+          </ButtonBlackTransparent>
         </td>
       </tr>
-      <tr>
+      <tr style={{overflowX: 'scroll'}}>
         <td style={{ height: 0, padding: 0 }} colSpan={8}>
           {open && (
             <Sheet
@@ -81,9 +87,6 @@ function Row(props) {
                 backgroundColor: "#F9F9F9",
               }}
             >
-              {/* <Typography level="h6" component="div">
-                History
-              </Typography> */}
               <Table
                 borderAxis="bothBetween"
                 size="sm"
@@ -108,10 +111,10 @@ function Row(props) {
                     <th>Connector</th>
                     <th>Price</th>
                     <th>Status</th>
-                    <th>Power</th>
+                    <th style={{textAlign: 'right'}} >Power</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody style={{overflowX: 'scroll'}}>
                   {row.connectors.map((historyRow) => (
                     <tr key={historyRow.date}>
                       <th scope="row">{historyRow.connectorTypeName}</th>
@@ -119,7 +122,7 @@ function Row(props) {
                       <td>
                         <Status status={historyRow.statusName}></Status>
                       </td>
-                      <td>{historyRow.power}</td>
+                      <td style={{textAlign: 'right'}}>{historyRow.power}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -137,7 +140,7 @@ export default function ChargingSitesGrid(props) {
     <>
       {props.data.map((e, i) => {
         return (
-          <div key={i} className="mt-40">
+          <div key={i} className="chargingsite__grid">
             <ChargingSitesGridFilter
               data={{ id: e.id, site: e.site, site_area: e.site_area }}
             ></ChargingSitesGridFilter>
@@ -166,16 +169,15 @@ export default function ChargingSitesGrid(props) {
                     <th>Site</th>
                     <th style={{ width: "20%" }}>Connectors</th>
                     <th>Status</th>
-                    <th>Power</th>
+                    <th style={{textAlign: 'right'}}>Power</th>
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody style={{overflowX: 'scroll'}}>
                   {e.chargePoints.map((row, index) => (
                     <Row
                       key={row.name}
                       row={row}
-                      // initialOpen={index === 0}
                     />
                   ))}
                 </tbody>

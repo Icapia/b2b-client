@@ -16,8 +16,8 @@ const ButtonDefault = styled(Button)(({ theme }) => ({
   padding: '14px 12px',
   border: '1px solid',
   lineHeight: 1.15,
-  backgroundColor: '#D89972',
-  borderColor: '#D89972',
+  backgroundColor: '#E68512',
+  borderColor: '#E68512',
   borderRadius: 3,
   textTransform: "none",
   boxShadow: '4px 4px 8px 0px rgba(207, 137, 93, 0.1);',
@@ -76,13 +76,13 @@ const CssTextField = styled(TextField)({
     fontFamily: 'Poppins'
   },
   '& label.Mui-hover': {
-    color: '#D89972',
+    color: '#E68512',
   },
   '& label.Mui-focused': {
-    color: '#D89972',
+    color: '#E68512',
   },
   '& .MuiInput-underline:after': {
-    borderBottomColor: '#D89972',
+    borderBottomColor: '#E68512',
   },
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
@@ -90,10 +90,10 @@ const CssTextField = styled(TextField)({
       borderColor: '#E6E6E6',
     },
     '&:hover fieldset': {
-      borderColor: '#D89972',
+      borderColor: '#E68512',
     },
     '&.Mui-focused fieldset': {
-      borderColor: '#D89972',
+      borderColor: '#E68512',
     },
   },
   '& .Mui-disabled': {

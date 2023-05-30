@@ -3,8 +3,8 @@ import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 
 export const ButtonDefault = styled(Button)(({ theme }) => ({
-  fontSize: 15,
-  padding: "15px 43px",
+  fontSize: 14,
+  padding: "15px 40px",
   border: "1px solid",
   lineHeight: 1.15,
   backgroundColor: "#E68512",
@@ -16,17 +16,44 @@ export const ButtonDefault = styled(Button)(({ theme }) => ({
   fontFamily: ["Poppins", "sans-serif"].join(","),
   fontWeight: 500,
   "&:hover": {
-    backgroundColor: "#CF895D",
-    borderColor: "#E3B687",
+    backgroundColor: "#D47709",
+    borderColor: "#D47709",
     boxShadow: "4px 4px 8px 0px rgba(207, 137, 93, 0.3);",
   },
   "&:active": {
-    backgroundColor: "#CF895D",
-    borderColor: "#CF895D",
+    backgroundColor: "#D47709",
+    borderColor: "#D47709",
     boxShadow: "4px 4px 8px 0px rgba(207, 137, 93, 0.3);",
   },
   "&:focus": {},
 }));
+
+export const ButtonBlack = styled(Button)(({ theme }) => ({
+  fontSize: 15,
+  padding: "15px 40px",
+  border: "1px solid",
+  lineHeight: 1.15,
+  backgroundColor: "#292929",
+  borderColor: "#292929",
+  borderRadius: 10,
+  textTransform: "none",
+  color: "#ffffff",
+  boxShadow: "4px 4px 8px 0px rgba(207, 137, 93, 0.1);",
+  fontFamily: ["Poppins", "sans-serif"].join(","),
+  fontWeight: 500,
+  "&:hover": {
+    backgroundColor: "#202020",
+    borderColor: "#202020",
+    boxShadow: "4px 4px 8px 0px rgba(207, 137, 93, 0.3);",
+  },
+  "&:active": {
+    backgroundColor: "#202020",
+    borderColor: "#202020",
+    boxShadow: "4px 4px 8px 0px rgba(207, 137, 93, 0.3);",
+  },
+  "&:focus": {},
+}));
+
 export const ButtonTransparent = styled(Button)(({ theme }) => ({
   fontSize: 15,
   padding: "14px 12px",
@@ -45,6 +72,26 @@ export const ButtonTransparent = styled(Button)(({ theme }) => ({
     backgroundColor: "transparent",
   },
 }));
+
+export const ButtonBlackTransparent = styled(Button)(({ theme }) => ({
+  fontSize: 15,
+  padding: "8px 12px",
+  border: "1px solid",
+  lineHeight: 1.15,
+  backgroundColor: "transparent",
+  borderColor: "transparent",
+  borderRadius: 3,
+  textTransform: "none",
+  color: "#292929",
+  boxShadow: "none",
+  fontFamily: ["Poppins", "sans-serif"].join(","),
+  fontWeight: 500,
+  "&:hover": {
+    color: "#292929",
+    backgroundColor: "transparent",
+  },
+}));
+
 export const ButtonClose = styled(Button)(({ theme }) => ({
   fontSize: 15,
   padding: "15px 43px",

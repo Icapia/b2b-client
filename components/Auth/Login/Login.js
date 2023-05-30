@@ -90,45 +90,42 @@ export const Login = (props) => {
 
   return (
     <>
-      <Grid container spacing={4}>
-        <Grid item xs={2}></Grid>
-        <Grid item xs={5}>
-          <Stack
-            direction="column"
-            justifyContent="space-between"
-            alignItems="flex-start"
-            spacing={2}
-          >
-            {(isVerificationForm && (
-              <VerificationForm
-                handleLogin={handleLogin}
-                handleBack={handleBack}
-                handlerChange={handlerChange}
-              ></VerificationForm>
-            )) || (
-              <LoginForm
-                handlerChange={handlerChange}
-                sendCode={handleSendCode}
-              ></LoginForm>
-            )}
-            <div>
-              <div style={{ fontSize: "9px" }}>
-                This site is protected by reCAPTCHA and the Google Privacy
-                Policy and Terms of Service apply.
+      <div className="login">
+        <div className="login__wrapper">
+          <div className="login__item login__left">
+            <Stack
+              direction="column"
+              justifyContent="space-between"
+              alignItems="flex-start"
+              spacing={2}
+            >
+              {(isVerificationForm && (
+                <VerificationForm
+                  handleLogin={handleLogin}
+                  handleBack={handleBack}
+                  handlerChange={handlerChange}
+                ></VerificationForm>
+              )) || (
+                <LoginForm
+                  handlerChange={handlerChange}
+                  sendCode={handleSendCode}
+                ></LoginForm>
+              )}
+              <div>
+                <div style={{ fontSize: "9px" }}>
+                  This site is protected by reCAPTCHA and the Google Privacy
+                  Policy and Terms of Service apply.
+                </div>
               </div>
-            </div>
-          </Stack>
-          {/* <button onClick={handlemutationLogin}>SetTOKEN</button>
-          <button onClick={handleLogout}>LOGOUT</button> */}
-        </Grid>
-        <Grid item xs={3}>
-          <Image
-            src={"/image/login-background.jpg"}
-            width={680}
-            height={1117}
-          />
-        </Grid>
-      </Grid>
+            </Stack>
+          </div>
+          <div className="login__item login__right">
+            <img
+              src={"/image/login-background.jpg"}
+            />
+          </div>
+        </div>
+      </div>
     </>
   );
 };

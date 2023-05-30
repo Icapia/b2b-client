@@ -1,22 +1,19 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
-
-import Accordion from "@mui/material/Accordion";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import { ButtonClose } from "../../components/Buttons/Buttons";
+import { useMutation, useQuery } from "@apollo/client";
+import { ButtonBlack } from "../../components/Buttons/Buttons";
 import { CREATE_CHARGE_POINT_GQL } from "../../graphql/gql/mutations/charge-point-mutations.gql";
 import { CREATE_CONNECTOR_GQL } from "../../graphql/gql/mutations/connector-mutations.gql";
-import ChargePointEdit from "../../components/ChargingSites/ChargingSiteEdit/ChargePoint/ChargePointEditWrap";
 import { ChargingSiteEditForm } from "../../components/ChargingSites/ChargingSiteEdit/ChargingSiteEditForm";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { GET_ORGANIZATIONS_GQL } from "../../graphql/gql/queries/organizations-queries.gql";
 import { GET_SITE_GQL } from "../../graphql/gql/queries/sites-queries.gql";
 import { MainLayout } from "../../components/Layouts/MainLayout";
-import Typography from "@mui/material/Typography";
 import { UPDATE_SITE_GQL } from "../../graphql/gql/mutations/site-mutations.gql";
-import { parse } from "graphql";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import ChargePointEdit from "../../components/ChargingSites/ChargingSiteEdit/ChargePoint/ChargePointEditWrap";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Typography from "@mui/material/Typography";
 
 export default function ChargingSite() {
   const router = useRouter();
@@ -118,11 +115,9 @@ export default function ChargingSite() {
     console.log("handleAddConnector", chargePointId);
   };
 
-  if (site.data) console.log(site.data.site.chargePoints);
-
   return (
     <>
-      {site.data && (
+      {site?.data && (
         <MainLayout name={`Site #${site.data.site.id}`}>
           <div>
             {organizations?.data && (
@@ -144,7 +139,7 @@ export default function ChargingSite() {
                       aria-controls="panel1a-content"
                       id="panel1a-header"
                     >
-                      <Typography>Charge Point #{e.id}</Typography>
+                      <Typography fontWeight={600}>Charge Point #{e.id}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                       <ChargePointEdit
@@ -160,64 +155,16 @@ export default function ChargingSite() {
               })}
             </div>
           </div>
-          <ButtonClose
+          <ButtonBlack
             onClick={handleCreateChargePoint}
-            className={"mt-20 "}
+            className={"mt-20"}
             fullWidth
           >
             {(createChargePoint.loading && `Loading...`) ||
               `+ Add new Charge Point`}
-          </ButtonClose>
-          {/* <ButtonClose
-            onClick={() => handleCreateConnector()}
-            className={"mt-20 "}
-            fullWidth
-          >
-            + Add new Charge Point
-          </ButtonClose> */}
+          </ButtonBlack>
         </MainLayout>
       )}
     </>
   );
 }
-
-// function getDateFormat(date) {
-//   const nDate = new Date(date);
-//   const nDateDay =
-//     nDate.getDate() < 10 ? "0" + nDate.getDate() : nDate.getDate();
-//   const nDateMonth =
-//     nDate.getMonth() + 1 < 10
-//       ? "0" + (nDate.getMonth() + 1)
-//       : nDate.getMonth() + 1;
-//   return nDate.getFullYear() + "-" + nDateMonth + "-" + nDateDay;
-// }
-
-// export async function getServerSideProps(ctx) {
-//   const [res, verRes, imageRes, subscribesRes, globalSubscribesRes, logsRes] =
-//     await Promise.all([
-//       fetch(`http://localhost:4200/users/${ctx.query.id}`),
-//       fetch(`http://localhost:4200/verification/${ctx.query.id}`),
-//       fetch(`http://localhost:4200/usersImages/${ctx.query.id}`),
-//       fetch(`http://localhost:4200/userSubscribes/${ctx.query.id}`),
-//       fetch(`http://localhost:4200/subscribes/`),
-//       fetch(`http://localhost:4200/usersLog/1`),
-//     ]);
-
-//   const user = await res.json();
-//   const verUser = await verRes.json();
-//   const userImages = await imageRes.json();
-//   const userSubscribes = await subscribesRes.json();
-//   const globalSubscribes = await globalSubscribesRes.json();
-//   const userLogs = await logsRes.json();
-
-//   return {
-//     props: {
-//       user: user,
-//       verUser: verUser,
-//       userImages: userImages,
-//       userSubscribes: userSubscribes,
-//       globalSubscribes: globalSubscribes,
-//       userLogs: userLogs,
-//     },
-//   };
-// }

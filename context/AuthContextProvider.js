@@ -1,23 +1,8 @@
 import React, { createContext, useEffect, useState } from "react";
 
-import { GET_ME_GQL } from "../graphql/gql/queries/auth-queries.gql";
 import Router from "next/router";
+import { GET_ME_GQL } from "../graphql/gql/queries/auth-queries.gql";
 import { useQuery } from "@apollo/client";
-
-// import { User } from "../types";
-
-// interface Props {}
-
-// type Actions = 'signup' | 'signin' | 'request' | 'reset' | 'close'
-
-// type HandleAuthAction = (action: Actions) => void
-
-// interface AuthContextValues {
-//   authAction: Actions
-//   handleAuthAction: HandleAuthAction
-//   loggedInUser: User | null
-//   setAuthUser: (user: User | null) => void
-// }
 
 const storageName = "userData";
 
@@ -100,15 +85,3 @@ const AuthContextProvider = ({ children }) => {
 };
 
 export default AuthContextProvider;
-
-// const { me } = useAuth;
-
-// const { data, loading, error } = useQuery(GET_ME_GQL, {});
-
-// if (error) console.log("EROOR", error);
-// if (data) console.log("DATA", data);
-// if (loading) console.log("LOADING", loading);
-
-// useEffect(() => {
-//   if (data?.me) me(data.me);
-// }, [data?.me]);

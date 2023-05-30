@@ -15,8 +15,6 @@ import { MainLayout } from "../components/Layouts/MainLayout";
 import { ModalComponent } from "../components/Modal/Modal";
 import { useRouter } from "next/router";
 
-// import { ButtonDefault } from "../components/Buttons/Buttons";
-
 const pageData = {
   pageTitle: "Charging sites",
 };
@@ -44,8 +42,6 @@ export default function Home({ users }) {
     await mutationCreateSite({
       onCompleted: (data) => {
         router.push(`/charging-sites/${data.createOneSite.id}`);
-        // console.log(data);
-        // props.handleClose();
       },
       variables: {
         input: {
@@ -90,20 +86,7 @@ export default function Home({ users }) {
       {sites.data && (
         <ChargingSitesGrid data={sites.data.sites}></ChargingSitesGrid>
       )}
-      {/* <ModalComponent handleClose={handleClose} open={open}>
-        <CreateSiteForm handleClose={handleClose} />
-      </ModalComponent> */}
     </MainLayout>
   );
 }
 
-// export async function getServerSideProps() {
-//   const res = await fetch(`http://localhost:4200/users`);
-//   const users = await res.json();
-
-//   return {
-//     props: {
-//       users: users,
-//     },
-//   };
-// }

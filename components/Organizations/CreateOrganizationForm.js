@@ -87,10 +87,10 @@ export const CreateOrganizationForm = (props) => {
   return (
     <Box>
       <h2>Add new organization</h2>
-      {/* <h5>Notification:</h5>
-      <p className="mt-10">
+      <h5>Notification:</h5>
+      <p>
         After creating a user, login data will be sent to E-mail
-      </p> */}
+      </p>
       <div className="modal__content-form modal__content-form--fullw mxw-700">
         <FormGroup className="modal__content-formGroup col-2 mt-20">
           <Grid

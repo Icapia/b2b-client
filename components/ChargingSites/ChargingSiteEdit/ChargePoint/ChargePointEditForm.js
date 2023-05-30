@@ -6,10 +6,10 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { gql, useMutation, useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { useMutation } from "@apollo/client";
+import { useState } from "react";
 
-import { ButtonClose } from "../../../Buttons/Buttons";
+import { ButtonDefault } from "../../../Buttons/Buttons";
 import { GET_SITE_GQL } from "../../../../graphql/gql/queries/sites-queries.gql";
 import { UPDATE_CHARGE_POINT_GQL } from "../../../../graphql/gql/mutations/charge-point-mutations.gql";
 
@@ -18,8 +18,6 @@ export function ChargePointEditForm(props) {
 
   const [form, setForm] = useState({ chargePointHardwareId });
   const [formButton, setFormButton] = useState(true);
-
-  // console.log("ChargePointEditForm", chpid);
 
   const handlerChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
@@ -86,7 +84,7 @@ export function ChargePointEditForm(props) {
         placeholder={"Enter " + "subscribe name"}
         onChange={(event) => handlerChange(event)}
       />
-      <ButtonClose onClick={handleUpdateChargePoint}>Save</ButtonClose>
+      <ButtonDefault onClick={handleUpdateChargePoint}>Save</ButtonDefault>
     </FormGroup>
   );
 }

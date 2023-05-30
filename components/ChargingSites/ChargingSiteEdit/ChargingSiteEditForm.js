@@ -1,19 +1,16 @@
 import {
   Box,
-  Divider,
+  FormControl,
   FormGroup,
   Grid,
-  InputAdornment,
   MenuItem,
-  Modal,
   Select,
-  Stack,
   TextField,
+  InputLabel
 } from "@mui/material";
 import {
   ButtonClose,
   ButtonDefault,
-  ButtonDelete,
 } from "../../Buttons/Buttons";
 import { useEffect, useState } from "react";
 
@@ -47,16 +44,6 @@ export const ChargingSiteEditForm = (props) => {
 
   const handlerChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
-
-    // if (form.site && form.site_area) {
-    //   setFormButton(false);
-    // }
-  };
-
-  console.log(props.data);
-
-  const handlerUpdate = () => {
-    props.onChange({ ...form });
   };
 
   const handleMessage = () => {
@@ -71,25 +58,28 @@ export const ChargingSiteEditForm = (props) => {
       <FormGroup className="modal__content-formGroup col-2 mt-20">
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item xs={12}>
-            <Select
-              fullWidth
-              sx={{ backgroundColor: "#FAFAFA" }}
-              className={"mt-20 flex-w"}
-              label={"Organization"}
-              name={"organizationId"}
-              value={form.organizationId}
-              defaultValue={"Not set"}
-              onChange={(event) => handlerChange(event)}
-            >
-              {props.organizations.map((e) => {
-                return (
-                  <MenuItem
-                    key={e.id}
-                    value={e.id}
-                  >{`${e.id} ${e.name}`}</MenuItem>
-                );
-              })}
-            </Select>
+            <FormControl fullWidth>
+              <InputLabel id="organization-label">Organization</InputLabel>
+              <Select
+                sx={{ backgroundColor: 'white' }}
+                displayEmpty
+                labelId="organization-label"
+                id="organization"
+                value={form?.organizationId}
+                name="organizationId"
+                label="Organization"
+                onChange={(event) => handlerChange(event)}
+              > 
+                {props.organizations.map((e) => {
+                  return (
+                    <MenuItem
+                      key={e.id}
+                      value={e.id}
+                    >{`${e.id} ${e.name}`}</MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -104,11 +94,6 @@ export const ChargingSiteEditForm = (props) => {
               label={"Site Name"}
               placeholder={`Enter Site Name`}
               onChange={(event) => handlerChange(event)}
-              // InputProps={{
-              //   startAdornment: (
-              //     <InputAdornment position="start">$</InputAdornment>
-              //   ),
-              // }}
             />
           </Grid>
           <Grid item xs={6}>
@@ -124,11 +109,6 @@ export const ChargingSiteEditForm = (props) => {
               label={"ZIP Code"}
               placeholder={"5000"}
               onChange={(event) => handlerChange(event)}
-              // InputProps={{
-              //   startAdornment: (
-              //     <InputAdornment position="start">₽</InputAdornment>
-              //   ),
-              // }}
             />
           </Grid>
           <Grid item xs={12}>
@@ -157,13 +137,8 @@ export const ChargingSiteEditForm = (props) => {
               required={true}
               InputLabelProps={{ required: false }}
               label={"Phone Number (optional)"}
-              placeholder={"1000"}
+              placeholder={"+1 111 111-11-11"}
               onChange={(event) => handlerChange(event)}
-              // InputProps={{
-              //   startAdornment: (
-              //     <InputAdornment position="start">$</InputAdornment>
-              //   ),
-              // }}
             />
           </Grid>
           <Grid item xs={6}>
@@ -179,11 +154,6 @@ export const ChargingSiteEditForm = (props) => {
               label={"Default price, $/kWh"}
               placeholder={"5000"}
               onChange={(event) => handlerChange(event)}
-              // InputProps={{
-              //   startAdornment: (
-              //     <InputAdornment position="start">₽</InputAdornment>
-              //   ),
-              // }}
             />
           </Grid>
         </Grid>

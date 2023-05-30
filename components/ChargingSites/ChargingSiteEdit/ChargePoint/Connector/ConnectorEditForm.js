@@ -2,16 +2,15 @@ import {
   Box,
   FormGroup,
   Grid,
-  InputAdornment,
   MenuItem,
-  Modal,
   Select,
-  Stack,
   TextField,
+  FormControl,
+  InputLabel,
 } from "@mui/material";
-import { ButtonClose, ButtonDefault } from "../../../../Buttons/Buttons";
-import { gql, useMutation, useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { ButtonBlack, ButtonClose, ButtonDefault, ButtonTransparent } from "../../../../Buttons/Buttons";
+import { useMutation } from "@apollo/client";
+import { useState } from "react";
 
 import { GET_SITE_GQL } from "../../../../../graphql/gql/queries/sites-queries.gql";
 import { UPDATE_CONNECTOR_GQL } from "../../../../../graphql/gql/mutations/connector-mutations.gql";
@@ -27,19 +26,7 @@ export const ConnectorEditForm = (props) => {
 
   const handlerChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
-
-    // if (
-    //   form.descriptionEn &&
-    //   form.name &&
-    //   form.priceD &&
-    //   form.priceR &&
-    //   form.descriptionRu
-    // ) {
-    //   setFormButton(false);
-    // }
   };
-
-  // console.log("JJJJJJJJJJJJJJJJJJJJJJJJJJ", props);
 
   const [mutationUpdateConnector, updateConnector] =
     useMutation(UPDATE_CONNECTOR_GQL);
@@ -66,10 +53,6 @@ export const ConnectorEditForm = (props) => {
     });
   };
 
-  const handlerUpdate = () => {
-    props.onChange({ ...form });
-  };
-
   const handleMessage = () => {
     setMessage({
       className: "messageBox",
@@ -85,23 +68,28 @@ export const ConnectorEditForm = (props) => {
       <FormGroup className="">
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item xs={6}>
-            <Select
-              fullWidth
-              style={{ backgroundColor: "#FAFAFA" }}
-              className={"mt-20 flex-w"}
-              label={"Connector Type"}
-              name={"connectorTypeName"}
-              value={form.connectorTypeName}
-              defaultValue={"Type 1"}
-              onChange={(event) => handlerChange(event)}
-            >
-              <MenuItem value={"Type 1"}>Type 1</MenuItem>
-              <MenuItem value={"Type 2"}>Type 2</MenuItem>
-              <MenuItem value={"Tesla"}>Tesla</MenuItem>
-              <MenuItem value={"CHAdeMO"}>CHAdeMO</MenuItem>
-              <MenuItem value={"CCS1"}>CCS1</MenuItem>
-              <MenuItem value={"CCS2"}>CCS2</MenuItem>
-            </Select>
+            <FormControl fullWidth className="mt-20">
+              <InputLabel id="connector-label">Connector Type</InputLabel>
+              <Select
+                fullWidth
+                style={{ backgroundColor: "#FAFAFA" }}
+                label={"Connector Type"}
+                labelId="connector-label"
+                id="connector"
+                name={"connectorTypeName"}
+                value={form.connectorTypeName}
+                defaultValue={"Type 1"}
+                onChange={(event) => handlerChange(event)}
+              >
+                <MenuItem value={"Type 1"}>Type 1</MenuItem>
+                <MenuItem value={"Type 2"}>Type 2</MenuItem>
+                <MenuItem value={"Tesla"}>Tesla</MenuItem>
+                <MenuItem value={"CHAdeMO"}>CHAdeMO</MenuItem>
+                <MenuItem value={"CCS1"}>CCS1</MenuItem>
+                <MenuItem value={"CCS2"}>CCS2</MenuItem>
+              </Select>
+            </FormControl>
+            
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -117,11 +105,6 @@ export const ConnectorEditForm = (props) => {
               label={"Connector ID"}
               placeholder={"5000"}
               onChange={(event) => handlerChange(event)}
-              // InputProps={{
-              //   startAdornment: (
-              //     <InputAdornment position="start">₽</InputAdornment>
-              //   ),
-              // }}
             />
           </Grid>
           <Grid item xs={6}>
@@ -138,11 +121,6 @@ export const ConnectorEditForm = (props) => {
               label={"Price, $/kWh"}
               placeholder={"0"}
               onChange={(event) => handlerChange(event)}
-              // InputProps={{
-              //   startAdornment: (
-              //     <InputAdornment position="start">$</InputAdornment>
-              //   ),
-              // }}
             />
           </Grid>
           <Grid item xs={6}>
@@ -159,55 +137,20 @@ export const ConnectorEditForm = (props) => {
               label={"Power, kW"}
               placeholder={"0"}
               onChange={(event) => handlerChange(event)}
-              // InputProps={{
-              //   startAdornment: (
-              //     <InputAdornment position="start">₽</InputAdornment>
-              //   ),
-              // }}
             />
           </Grid>
           <Grid item xs={6} className={"mt-20 flex-w"}>
-            <ButtonClose fullWidth>Delete</ButtonClose>
+            <ButtonBlack fullWidth onClick={handleUpdateConnector}>
+              {(updateConnector.loading && `Loading...`) || `Save`}
+            </ButtonBlack>
           </Grid>
           <Grid item xs={6} className={"mt-20 flex-w"}>
-            <ButtonDefault fullWidth onClick={handleUpdateConnector}>
-              {(updateConnector.loading && `Loading...`) || `Save`}
-            </ButtonDefault>
+            <ButtonTransparent fullWidth>
+              <img style={{marginRight: '5px'}} src="/image/icons/trash.svg"/>
+              Remove
+            </ButtonTransparent>
           </Grid>
         </Grid>
-
-        {/* <TextField
-          autoComplete={false}
-          value={form.connectorTypeName}
-          className={"mt-20 flex-w"}
-          type={"string"}
-          focused={true}
-          name={"connectorTypeName"}
-          required={true}
-          InputLabelProps={{ required: false }}
-          label={"Connector Type"}
-          placeholder={"1000"}
-          onChange={(event) => handlerChange(event)}
-          // InputProps={{
-          //   startAdornment: (
-          //     <InputAdornment position="start">$</InputAdornment>
-          //   ),
-          // }}
-        /> */}
-
-        {/* <TextField
-          autoComplete={false}
-          value={props.chargePointId}
-          className={"mt-20 flex-fw"}
-          autoFocus={true}
-          focused={true}
-          name={"name"}
-          required={true}
-          InputLabelProps={{ required: false }}
-          label={"Charge Point"}
-          placeholder={"Enter " + "subscribe name"}
-          onChange={(event) => handlerChange(event)}
-        /> */}
       </FormGroup>
     </Box>
   );
