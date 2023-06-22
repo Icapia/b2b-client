@@ -7,7 +7,7 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { ButtonClose, ButtonDefault, ButtonDelete } from "../Buttons/Buttons";
+import { ButtonClose, ButtonDefault, ButtonDelete } from "../Buttons";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
 

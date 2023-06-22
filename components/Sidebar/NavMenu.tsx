@@ -28,13 +28,13 @@ export const NavMenu = ({}) => {
             {SidebarData.map((el, index) => {
               return(
                 <li key={index} className={router.pathname === el.url ? 'sidebar__menu-item active' : 'sidebar__menu-item'}>
-                  <Link passHref href={el.url}>
-                  <a className='sidebar__menu-wrapper'>
+                  <Link href={el.url}>
+                  <div className='sidebar__menu-wrapper'>
                     <div className="sidebar__menu-item--image">
                       <Image src={el.image} width={24} height={24} alt={el.name}></Image>
                     </div>
                     <div>{el.name}</div>
-                  </a>
+                  </div>
                   </Link>
                 </li>
               )

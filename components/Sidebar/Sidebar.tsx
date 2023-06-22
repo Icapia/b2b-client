@@ -38,12 +38,8 @@ export default function Sidebar() {
     <div className={sidebar ? "sidebar sidebar__active" : "sidebar"}>
       <div className="sidebar__wrapper">
         <Link href={"/dashboard"}>
-          {sidebar ? (
-            <a>
-              <LogoM className="sidebar__logo"></LogoM>
-            </a>
-          ) : (
-            <a></a>
+          {sidebar && (
+            <LogoM className="sidebar__logo"></LogoM>
           )}
         </Link>
         <h2 style={{ color: "#fff" }}>{sidebar ? '' : 'ICAPIA EV'}</h2>

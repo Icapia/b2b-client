@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from "react";
 import { Modal } from "@mui/material";
-import { CloseModal } from "../CloseModal/CloseModal";
+import { CloseModal } from "../CloseModal";
 
 interface ModalI {
   isOpen: boolean,

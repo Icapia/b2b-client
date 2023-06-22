@@ -20,28 +20,18 @@ export default function Error() {
               Let’s go to dashboard so that start the way
               <br /> from the very beginning
             </p>
-            <Link href={'/'}>
-              <a className={'btn'}>Back to Dashboard</a>
+            <Link className={'btn'} href={'/'}>
+              Back to Dashboard
             </Link>
           </div>
           <div className='auth__policy'>
             This site is protected by reCAPTCHA and the{' '}
-            <Link href={'/privacy-policy'}>
-              <a
-                target={'_blank'}
-                className={'link'}
-              >
-                Privacy Policy
-              </a>
+            <Link className='link' href={'/privacy-policy'} target='_blank'>
+              Privacy Policy
             </Link>
             y and{' '}
-            <Link href={'/term-of-use'}>
-              <a
-                target={'_blank'}
-                className={'link'}
-              >
-                Term of Service
-              </a>
+            <Link className='link' href={'/term-of-use'} target={'_blank'}>
+              Term of Service
             </Link>{' '}
             apply.
           </div>

@@ -1,9 +1,5 @@
 import {
-  Box,
   FormGroup,
-  Grid,
-  InputAdornment,
-  Item,
   Modal,
   Stack,
   TextField,
@@ -12,11 +8,52 @@ import {
   ButtonClose,
   ButtonDefault,
   ButtonDelete,
-} from "../../Buttons/Buttons";
+} from "../../Buttons";
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useAtom } from "jotai";
+import { loginFormAtom } from "../../../store/authorization";
+import { GET_ME_GQL } from "../../../graphql/gql/queries/auth-queries.gql";
+import { LOGIN_USER_GQL } from "../../../graphql/gql/mutations/auth-mutations.gql";
 
-export const VerificationForm = (props) => {
+export const VerificationForm = () => {
+  const [form, setForm] = useAtom(loginFormAtom)
+
+  const handlerChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({...form, username: event?.target?.value})
+  }
+
+  const [mutationLogin, loginMutation] = useMutation(LOGIN_USER_GQL);
+
+  const handlerLogin = () => {
+    handleMutationLogin();
+  };
+
+  const handleMutationLogin = async () => {
+    await mutationLogin({
+      onCompleted: (data) => {
+        // setAuthUser(data.me);
+      },
+      refetchQueries: [
+        {
+          query: GET_ME_GQL,
+          variables: {},
+        },
+        "GetUserInfo",
+      ],
+      variables: {
+        input: {
+          username: form?.username,
+          password: form?.password,
+        },
+      },
+    });
+  };
+
+  const handlerBack = () => {
+    setForm({...form, isCodeSent: false})
+  };
+
   return (
     <>
       <Stack
@@ -35,7 +72,6 @@ export const VerificationForm = (props) => {
           <div className="modal__content-form modal__content-form--fullw mxw-700">
             <FormGroup className="modal__content-formGroup col-2 mt-20">
               <TextField
-                autoComplete={false}
                 className={"mt-20 flex-w"}
                 type={"email"}
                 focused={true}
@@ -44,12 +80,7 @@ export const VerificationForm = (props) => {
                 InputLabelProps={{ required: false }}
                 label={"Verification code"}
                 placeholder={"Verification code"}
-                onChange={(event) => props.handlerChange(event)}
-                // InputProps={{
-                //   startAdornment: (
-                //     <InputAdornment position="start">₽</InputAdornment>
-                //   ),
-                // }}
+                onChange={(event) => handlerChange(event)}
               />
             </FormGroup>
           </div>
@@ -63,8 +94,7 @@ export const VerificationForm = (props) => {
               disabled={false}
               className={"mt-20 flex-fw"}
               fullWidth={true}
-              minRows={5}
-              onClick={props.handleBack}
+              onClick={handlerBack}
             >
               Back
             </ButtonClose>
@@ -72,8 +102,7 @@ export const VerificationForm = (props) => {
               disabled={false}
               className={"mt-20 flex-fw"}
               fullWidth={true}
-              minRows={5}
-              onClick={props.handleLogin}
+              onClick={handlerLogin}
             >
               Login
             </ButtonDefault>

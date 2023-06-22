@@ -2,7 +2,7 @@ import {
   ButtonClose,
   ButtonDefault,
   ButtonDelete,
-} from "../components/Buttons/Buttons";
+} from "../components/Buttons";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 

@@ -11,7 +11,7 @@ import {
 import {
   ButtonClose,
   ButtonDefault,
-} from "../../Buttons/Buttons";
+} from "../../Buttons";
 import { useEffect, useState } from "react";
 
 import Message from "../../Messages/Message";

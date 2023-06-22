@@ -8,7 +8,7 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-import { ButtonBlack, ButtonClose, ButtonDefault, ButtonTransparent } from "../../../../Buttons/Buttons";
+import { ButtonBlack, ButtonClose, ButtonDefault, ButtonTransparent } from "../../../../Buttons";
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
 

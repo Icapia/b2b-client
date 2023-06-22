@@ -1,13 +1,13 @@
 import { FC, PropsWithChildren } from "react";
 import Head from "next/head";
-import Header from "../Header/Header";
+import { Header } from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
 import { sidebarAtom } from "../../store/sidebar";
 import { useAtom } from "jotai";
 
 interface MainLayoutI {
   name: string,
-  headerChild: React.ReactNode,
+  headerChild?: React.ReactNode,
 }
 
 export const MainLayout: FC<PropsWithChildren<MainLayoutI>> = ({
@@ -23,7 +23,7 @@ export const MainLayout: FC<PropsWithChildren<MainLayoutI>> = ({
         <title>{name}</title>
       </Head>
       <Sidebar></Sidebar>
-      <Header name={name} childComponent={headerChild}></Header>
+      <Header title={name} headerChild={headerChild}></Header>
       <main
         className={sidebar == false ? "content" : "content content--small"}
       >

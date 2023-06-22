@@ -1,25 +1,26 @@
 import {
-  Box,
   FormGroup,
-  Grid,
-  InputAdornment,
-  Item,
-  Modal,
   Stack,
   TextField,
 } from "@mui/material";
 import {
-  ButtonClose,
   ButtonDefault,
-  ButtonDelete,
-} from "../../Buttons/Buttons";
-import { gql, useMutation, useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
+} from "../../Buttons";
+import { ChangeEvent, useState } from "react";
+import { useAtom } from "jotai";
+import { loginFormAtom } from "../../../store/authorization";
 
-export const LoginForm = (props) => {
-  const [form, setForm] = useState({});
-  const [formButton, setFormButton] = useState(true);
+export const LoginForm = () => {
+  const [form, setForm] = useAtom(loginFormAtom)
 
+  const handlerChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({...form, username: event?.target?.value})
+  }
+
+  const handleSendCode = () => {
+    setForm({...form, isCodeSent: true})
+  };
+ 
   return (
     <>
       <Stack
@@ -38,7 +39,6 @@ export const LoginForm = (props) => {
           <div className="modal__content-form modal__content-form--fullw mxw-700">
             <FormGroup className="modal__content-formGroup col-2 mt-20">
               <TextField
-                autoComplete={false}
                 className={"mt-20"}
                 fullWidth
                 type={"email"}
@@ -48,7 +48,7 @@ export const LoginForm = (props) => {
                 InputLabelProps={{ required: false }}
                 label={"E-mail"}
                 placeholder={"test@test.com"}
-                onChange={(event) => props.handlerChange(event)}
+                onChange={(event) => {handlerChange(event)}}
               />
             </FormGroup>
           </div>
@@ -62,8 +62,7 @@ export const LoginForm = (props) => {
               disabled={false}
               className={"mt-20 flex-fw"}
               fullWidth={true}
-              minRows={5}
-              onClick={props.sendCode}
+              onClick={handleSendCode}
             >
               Send
             </ButtonDefault>

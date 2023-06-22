@@ -1,6 +1,6 @@
 import {
   ButtonDefault,
-} from "../components/Buttons/Buttons";
+} from "../components/Buttons";
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import { CreateOrganizationForm } from "../components/Organizations/CreateOrganization";

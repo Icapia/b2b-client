@@ -1,4 +1,4 @@
-import { ButtonBlack } from "../Buttons/Buttons";
+import { ButtonBlack } from "../Buttons";
 
 import Link from "next/link";
 

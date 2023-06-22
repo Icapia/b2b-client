@@ -6,7 +6,7 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import Sheet from "@mui/joy/Sheet";
 import Table from "@mui/joy/Table";
 import Typography from "@mui/joy/Typography";
-import { ButtonBlackTransparent } from "../Buttons/Buttons";
+import { ButtonBlackTransparent } from "../Buttons";
 import { useRouter } from "next/router";
 
 const color = {

@@ -9,7 +9,7 @@ import {
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
 
-import { ButtonDefault } from "../../../Buttons/Buttons";
+import { ButtonDefault } from "../../../Buttons";
 import { GET_SITE_GQL } from "../../../../graphql/gql/queries/sites-queries.gql";
 import { UPDATE_CHARGE_POINT_GQL } from "../../../../graphql/gql/mutations/charge-point-mutations.gql";
 

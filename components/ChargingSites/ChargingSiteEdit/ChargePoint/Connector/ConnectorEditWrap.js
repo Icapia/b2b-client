@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import Box from "@mui/material/Box";
-import { ButtonClose } from "../../../../Buttons/Buttons";
+import { ButtonClose } from "../../../../Buttons";
 import { ConnectorEditForm } from "./ConnectorEditForm";
 
 export function ConnectorsEditWrap(props) {

@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { ButtonBlack } from "../../components/Buttons/Buttons";
+import { ButtonBlack } from "../../components/Buttons";
 import { CREATE_CHARGE_POINT_GQL } from "../../graphql/gql/mutations/charge-point-mutations.gql";
 import { CREATE_CONNECTOR_GQL } from "../../graphql/gql/mutations/connector-mutations.gql";
 import { ChargingSiteEditForm } from "../../components/ChargingSites/ChargingSiteEdit/ChargingSiteEditForm";

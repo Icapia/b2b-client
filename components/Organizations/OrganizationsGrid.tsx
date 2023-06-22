@@ -1,10 +1,10 @@
 import {
-  DataGrid,
+  DataGrid, GridColDef,
 } from "@mui/x-data-grid";
 import { FC, useState } from "react";
 import { EditOrganization } from "./EditOrganization";
 import { ModalComponent } from "../Modal/Modal";
-import { ButtonTransparent } from "../Buttons/Buttons";
+import { ButtonTransparent } from "../Buttons";
 import { Organization } from "../../types/entities";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 
@@ -26,7 +26,7 @@ export const OrganizationsGrid: FC<OrganizationGrid> = ({
     setOpen(false);
   };
 
-  const columns = [
+  const columns: GridColDef<Organization>[] = [
     {
       field: "name",
       headerName: "Organization name",
@@ -89,7 +89,6 @@ export const OrganizationsGrid: FC<OrganizationGrid> = ({
         editMode="row"
         disableColumnMenu
         disableColumnSelector
-        disableExtendRowFullWidth={true}
         sx={{
           boxShadow: 0,
           border: 1,
@@ -99,8 +98,6 @@ export const OrganizationsGrid: FC<OrganizationGrid> = ({
             backgroundColor: "#FBFBFB",
           },
         }}
-        pageSize={12}
-        rowsPerPageOptions={[]}
         pagination
         rowHeight={50}
         onCellClick={() => {}}
