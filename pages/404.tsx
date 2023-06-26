@@ -26,12 +26,12 @@ export default function Error() {
           </div>
           <div className='auth__policy'>
             This site is protected by reCAPTCHA and the{' '}
-            <Link className='link' href={'/privacy-policy'} target='_blank'>
+            <Link className='link' href={'/privacy-policy'} target={'_blank'}>
               Privacy Policy
             </Link>
             y and{' '}
             <Link className='link' href={'/term-of-use'} target={'_blank'}>
-              Term of Service
+              Term of Service 
             </Link>{' '}
             apply.
           </div>

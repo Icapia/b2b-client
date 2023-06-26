@@ -4,17 +4,17 @@ import { styled } from "@mui/material/styles";
 
 export const ButtonDefault = styled(Button)(({ theme }) => ({
   fontSize: 14,
-  padding: "15px 40px",
+  padding: "14px 12px",
   border: "1px solid",
   lineHeight: 1.15,
   backgroundColor: "#E68512",
   borderColor: "#E68512",
-  borderRadius: 10,
+  borderRadius: 8,
   textTransform: "none",
   color: "#ffffff",
   boxShadow: "4px 4px 8px 0px rgba(207, 137, 93, 0.1);",
   fontFamily: ["Poppins", "sans-serif"].join(","),
-  fontWeight: 500,
+  fontWeight: 600,
   "&:hover": {
     backgroundColor: "#D47709",
     borderColor: "#D47709",
@@ -30,17 +30,17 @@ export const ButtonDefault = styled(Button)(({ theme }) => ({
 
 export const ButtonBlack = styled(Button)(({ theme }) => ({
   fontSize: 15,
-  padding: "15px 40px",
+  padding: "14px 12px",
   border: "1px solid",
   lineHeight: 1.15,
   backgroundColor: "#292929",
   borderColor: "#292929",
-  borderRadius: 10,
+  borderRadius: 8,
   textTransform: "none",
   color: "#ffffff",
   boxShadow: "4px 4px 8px 0px rgba(207, 137, 93, 0.1);",
   fontFamily: ["Poppins", "sans-serif"].join(","),
-  fontWeight: 500,
+  fontWeight: 600,
   "&:hover": {
     backgroundColor: "#202020",
     borderColor: "#202020",
@@ -66,7 +66,7 @@ export const ButtonTransparent = styled(Button)(({ theme }) => ({
   color: "#E68512",
   boxShadow: "none",
   fontFamily: ["Poppins", "sans-serif"].join(","),
-  fontWeight: 500,
+  fontWeight: 600,
   "&:hover": {
     color: "#A7A6A6",
     backgroundColor: "transparent",
@@ -75,7 +75,7 @@ export const ButtonTransparent = styled(Button)(({ theme }) => ({
 
 export const ButtonBlackTransparent = styled(Button)(({ theme }) => ({
   fontSize: 15,
-  padding: "8px 12px",
+  padding: "14px 12px",
   border: "1px solid",
   lineHeight: 1.15,
   backgroundColor: "transparent",
@@ -85,7 +85,7 @@ export const ButtonBlackTransparent = styled(Button)(({ theme }) => ({
   color: "#292929",
   boxShadow: "none",
   fontFamily: ["Poppins", "sans-serif"].join(","),
-  fontWeight: 500,
+  fontWeight: 600,
   "&:hover": {
     color: "#292929",
     backgroundColor: "transparent",
@@ -94,17 +94,17 @@ export const ButtonBlackTransparent = styled(Button)(({ theme }) => ({
 
 export const ButtonClose = styled(Button)(({ theme }) => ({
   fontSize: 15,
-  padding: "15px 43px",
+  padding: "14px 12px",
   border: "1px solid",
   lineHeight: 1.15,
   backgroundColor: "#E6E6E6",
   borderColor: "#E6E6E6",
   color: "#292929",
-  borderRadius: 10,
+  borderRadius: 8,
   textTransform: "none",
   boxShadow: "none",
   fontFamily: ["Poppins", "sans-serif"].join(","),
-  fontWeight: 500,
+  fontWeight: 600,
   "&:hover": {
     backgroundColor: "#E1E1E1",
     borderColor: "#E1E1E1",
@@ -132,7 +132,7 @@ export const ButtonEdit = styled(Button)(({ theme }) => ({
   textTransform: "none",
   boxShadow: "none",
   fontFamily: ["Poppins", "sans-serif"].join(","),
-  fontWeight: 500,
+  fontWeight: 600,
   "&:hover": {
     backgroundColor: "#fff",
     borderColor: "#CF895D",
@@ -189,7 +189,7 @@ export const ButtonDelete = styled(Button)(({ theme }) => ({
   boxShadow: "4px 4px 8px 0px rgba(207, 137, 93, 0.1);",
   color: "#FFF",
   fontFamily: ["Poppins", "sans-serif"].join(","),
-  fontWeight: 500,
+  fontWeight: 600,
   "&:hover": {
     backgroundColor: "#F86B5E",
     borderColor: "#F86B5E",
@@ -215,7 +215,7 @@ export const ButtonChat = styled(Button)(({ theme }) => ({
   textTransform: "none",
   boxShadow: "4px 4px 8px 0px rgba(207, 137, 93, 0.1);",
   fontFamily: ["Poppins", "sans-serif"].join(","),
-  fontWeight: 500,
+  fontWeight: 600,
   "&:hover": {
     backgroundColor: "#CF895D",
     borderColor: "#E3B687",
@@ -236,12 +236,12 @@ export const ButtonFrozzen = styled(Button)(({ theme }) => ({
   minHeight: "45px",
   backgroundColor: "#47E790",
   borderColor: "#47E790",
-  borderRadius: 10,
+  borderRadius: 8,
   textTransform: "none",
   boxShadow: "4px 4px 8px 0px rgba(207, 137, 93, 0.1);",
   color: "#FFF",
   fontFamily: ["Poppins", "sans-serif"].join(","),
-  fontWeight: 500,
+  fontWeight: 600,
   "&:hover": {
     backgroundColor: "#2ED97C",
     borderColor: "#2ED97C",
@@ -267,7 +267,7 @@ export const ButtonBlocked = styled(Button)(({ theme }) => ({
   boxShadow: "4px 4px 8px 0px rgba(207, 137, 93, 0.1);",
   color: "#FFF",
   fontFamily: ["Poppins", "sans-serif"].join(","),
-  fontWeight: 500,
+  fontWeight: 600,
   "&:hover": {
     backgroundColor: "#F6AA2B",
     borderColor: "#F6AA2B",

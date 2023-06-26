@@ -3,45 +3,37 @@ import {
   ButtonDefault,
   ButtonDelete,
 } from "../components/Buttons";
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 
 import { CREATE_SITE_GQL } from "../graphql/gql/mutations/site-mutations.gql";
-import ChargingSitesGrid from "../components/ChargingSites/ChargingSitesGrid";
-import { CreateOrganizationForm } from "../components/Organizations/CreateOrganization";
-import { CreateSiteForm } from "../components/ChargingSites/CreateSiteForm";
 import { GET_SITES_GQL } from "../graphql/gql/queries/sites-queries.gql";
 import { MainLayout } from "../components/Layouts/MainLayout";
-import { ModalComponent } from "../components/Modal/Modal";
 import { useRouter } from "next/router";
+import { CreateOneSiteResponse, Site } from "../types/entities";
+import { useAtom } from "jotai";
+import { getSitesAtom } from "../store/sites";
+import { SitesGrid } from "../components/ChargingSites/SiteGrid";
 
 const pageData = {
   pageTitle: "Charging sites",
 };
 
-export const ChargingSites = () => {
-  const [open, setOpen] = useState(false);
+export default function ChargingSites () {
+  const [, setOpen] = useState(false);
   const router = useRouter();
-
-  const sites = useQuery(GET_SITES_GQL, {
-    variables: {
-      filter: {},
-      sorting: [],
-      chargePointFilter: {},
-      chargePointSorting: [],
-      connectorFilter: {},
-      connectorSorting: [],
-    },
-  });
-
-  if (sites.data) console.log(sites.data.sites);
+  const [sites] = useAtom(getSitesAtom)
 
   const [mutationCreateSite, createSite] = useMutation(CREATE_SITE_GQL);
 
   const handleCreateSite = async () => {
     await mutationCreateSite({
-      onCompleted: (data) => {
-        router.push(`/charging-sites/${data.createOneSite.id}`);
+      onCompleted: (data: CreateOneSiteResponse) => {
+        const id = data?.createOneSite?.id || null;
+
+        if(id) {
+          router.push(`/charging-sites/${id}`);
+        }
       },
       variables: {
         input: {
@@ -74,6 +66,9 @@ export const ChargingSites = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  console.log('sites', sites.length)
+
   return (
     <MainLayout
       name={pageData.pageTitle}
@@ -83,10 +78,9 @@ export const ChargingSites = () => {
         </ButtonDefault>
       }
     >
-      {sites.data && (
-        <ChargingSitesGrid data={sites.data.sites}></ChargingSitesGrid>
+      {sites?.length > 0 && (
+        <SitesGrid sites={sites}></SitesGrid>
       )}
     </MainLayout>
   );
 }
-

@@ -1,15 +1,13 @@
-import { GET_USER_GQL, LOGIN_USER_GQL } from '@/graphql/authorization';
-import { ResponseAuth } from '@/types/entities';
+import { setContext } from '@apollo/client/link/context';
+import { LOGIN_USER_GQL } from '../graphql/gql/mutations/auth-mutations.gql';
+import { ResponseAuth } from '../types/entities';
 import { 
-	ApolloClient, 
+	ApolloClient,
 	FetchResult, 
 	InMemoryCache, 
 	NormalizedCacheObject, 
 	createHttpLink,
-	useMutation,
-} from '@apollo/client'
-import { setContext } from '@apollo/client/link/context';
-import { error } from 'console';
+} from '@apollo/client';
 
 class GraphQLService {
 

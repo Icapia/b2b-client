@@ -7,6 +7,8 @@ import { ModalComponent } from "../Modal/Modal";
 import { ButtonTransparent } from "../Buttons";
 import { Organization } from "../../types/entities";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import { useAtom } from "jotai";
+import { organizationEditAtom } from "../../store/organization";
 
 interface OrganizationGrid {
   data: Organization[]
@@ -15,14 +17,17 @@ interface OrganizationGrid {
 export const OrganizationsGrid: FC<OrganizationGrid> = ({
   data
 }) => {
-  const [isOpen, setOpen] = useState<boolean>(false);
+  const [isOpen, setOpen] = useAtom(organizationEditAtom)
+  const [edit, setEdit] = useState();
   const [id, setID] = useState<number>(0);
 
-  const handleClickOpen = (id: number) => {
+  const handlerClickOpen = (cell: any) => {
+    setEdit(cell);
+    setID(cell.id);
     setOpen(true);
-    setID(id);
   };
-  const handleClose = () => {
+
+  const handlerClose = () => {
     setOpen(false);
   };
 
@@ -65,7 +70,7 @@ export const OrganizationsGrid: FC<OrganizationGrid> = ({
         return (
           <>
             <ButtonTransparent
-              onClick={() => handleClickOpen(cellValues?.id)}
+              onClick={() => handlerClickOpen(cellValues)}
               size={"small"}
             >
               Edit
@@ -103,8 +108,8 @@ export const OrganizationsGrid: FC<OrganizationGrid> = ({
         onCellClick={() => {}}
         onCellDoubleClick={() => {}}
       ></DataGrid>
-      <ModalComponent onRequestClose={handleClose} isOpen={isOpen}>
-        <EditOrganization id={id} />
+      <ModalComponent onRequestClose={handlerClose} isOpen={isOpen}>
+        <EditOrganization id={id} edit={edit} />
       </ModalComponent>
     </div>
   );

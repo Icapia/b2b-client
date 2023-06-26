@@ -2,46 +2,59 @@ import {
   Box,
   FormGroup,
   Grid,
-  InputAdornment,
-  Modal,
   Stack,
   TextField,
 } from "@mui/material";
-import { ButtonClose, ButtonDefault, ButtonDelete } from "../Buttons";
-import { gql, useMutation, useQuery } from "@apollo/client";
-import { ChangeEvent, ChangeEventHandler, FC, useEffect, useState } from "react";
-
-import { CREATE_ORGANIZATION_GQL } from "../../graphql/gql/mutations/organization-mutations.gql";
+import { ButtonClose, ButtonDefault } from "../Buttons";
+import { useMutation } from "@apollo/client";
+import { ChangeEvent, FC, useState } from "react";
+import { UPDATE_ORGANIZATION_GQL } from "../../graphql/gql/mutations/organization-mutations.gql";
 import { GET_ORGANIZATIONS_GQL } from "../../graphql/gql/queries/organizations-queries.gql";
 import { snackbarState } from "../../store/snackbar";
 import { useAtom } from "jotai";
 import { OrganizationCreateForm } from "../../types/organization-types";
+import { organizationEditAtom } from "../../store/organization";
 
 interface EditOrganizationI {
   id: number,
+  edit: any,
 }
 
 export const EditOrganization: FC<EditOrganizationI> = ({
-  id
+  id,
+  edit
 }) => {
+  const [, setIsOpen] = useAtom(organizationEditAtom)
   const [form, setForm] = useState<OrganizationCreateForm>({
-    address: "",
-    email: "",
-    name: "",
-    zip: "",
-    phone_number: "",
+    address: edit?.row?.address,
+    email: edit?.row?.email,
+    name: edit?.row?.name,
+    zip_code: edit?.row?.zip_code,
+    phone_number: edit?.row?.phone_number,
   });
-  const [formButton, setFormButton] = useState(true);
   const [snackbar, setSnackbar] = useAtom(snackbarState)
 
-  const [mutationCreateOrganization, createOrganization] = useMutation(
-    CREATE_ORGANIZATION_GQL
+  const [mutationUpdateOrganization, updateOrganization] = useMutation(
+    UPDATE_ORGANIZATION_GQL
   );
 
-  const handleCreateOrganization = async () => {
-    await mutationCreateOrganization({
+  const handlerChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const name = event.target.name;
+    setForm({...form, [name]: event.target.value})
+  }
+
+  const handlerClose = () => {
+    setIsOpen(false)
+  }
+
+  const handlerCreate = async () => {
+    await mutationUpdateOrganization({
       onCompleted: () => {
-        // props.handleClose();
+        handlerClose();
+        setSnackbar({
+          message: 'Organization Updated',
+          type: "success",
+        })
       },
       refetchQueries: [
         {
@@ -55,26 +68,18 @@ export const EditOrganization: FC<EditOrganizationI> = ({
       ],
       variables: {
         input: {
-          organization: {
-            ...form,
-            zip_code: parseInt(form.zip),
-            location: {
-              type: "Point",
-              coordinates: [0, 0],
-            },
+          id: id,
+          update: {
+            name: form.name,
+            email: form.email,
+            phone_number: form.phone_number,
+            address: form.address,
+            zip_code: parseInt(form.zip_code),
           },
         },
       },
     });
-  };
-
-
-  const handlerChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const name = event.target.name;
-    setForm({...form, [name]: event.target.value})
   }
-  const handlerClose = () => {}
-  const handlerCreate = () => {}
 
   return (
     <Box>
@@ -95,6 +100,7 @@ export const EditOrganization: FC<EditOrganizationI> = ({
                 fullWidth
                 className={"mt-20 flex-w"}
                 type={"string"}
+                value={form?.name}
                 focused={true}
                 name={"name"}
                 required={true}
@@ -110,7 +116,8 @@ export const EditOrganization: FC<EditOrganizationI> = ({
                 className={"mt-20 flex-w"}
                 type={"number"}
                 focused={true}
-                name={"zip"}
+                value={form?.zip_code}
+                name={"zip_code"}
                 required={true}
                 InputLabelProps={{ required: false }}
                 label={"ZIP Code"}
@@ -124,6 +131,7 @@ export const EditOrganization: FC<EditOrganizationI> = ({
                 className={"mt-20 flex-fw"}
                 autoFocus={true}
                 focused={true}
+                value={form?.address}
                 name={"address"}
                 required={true}
                 InputLabelProps={{ required: false }}
@@ -138,6 +146,7 @@ export const EditOrganization: FC<EditOrganizationI> = ({
                 className={"mt-20 flex-w"}
                 type={"string"}
                 focused={true}
+                value={form?.phone_number}
                 name={"phone_number"}
                 required={true}
                 InputLabelProps={{ required: false }}
@@ -153,6 +162,7 @@ export const EditOrganization: FC<EditOrganizationI> = ({
                 type={"email"}
                 focused={true}
                 name={"email"}
+                value={form?.email}
                 required={true}
                 InputLabelProps={{ required: false }}
                 label={"E-mail"}
@@ -184,7 +194,7 @@ export const EditOrganization: FC<EditOrganizationI> = ({
           fullWidth={false}
           onClick={handlerCreate}
         >
-          {(createOrganization.loading && "Loading...") || "Create"}
+          {(updateOrganization?.loading && "Loading...") || "Update"}
         </ButtonDefault>
       </Stack>
     </Box>

@@ -15,12 +15,17 @@ import { useAtom } from "jotai";
 import { loginFormAtom } from "../../../store/authorization";
 import { GET_ME_GQL } from "../../../graphql/gql/queries/auth-queries.gql";
 import { LOGIN_USER_GQL } from "../../../graphql/gql/mutations/auth-mutations.gql";
+import { graphQlInstance } from "../../../services/gql";
+import { snackbarState } from "../../../store/snackbar";
+import { useRouter } from "next/router";
 
 export const VerificationForm = () => {
   const [form, setForm] = useAtom(loginFormAtom)
+  const [snackbar, setSnackbar] = useAtom(snackbarState)
+  const router = useRouter();
 
   const handlerChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({...form, username: event?.target?.value})
+    setForm({...form, password: event?.target?.value})
   }
 
   const [mutationLogin, loginMutation] = useMutation(LOGIN_USER_GQL);
@@ -30,24 +35,35 @@ export const VerificationForm = () => {
   };
 
   const handleMutationLogin = async () => {
-    await mutationLogin({
-      onCompleted: (data) => {
-        // setAuthUser(data.me);
-      },
-      refetchQueries: [
-        {
-          query: GET_ME_GQL,
-          variables: {},
-        },
-        "GetUserInfo",
-      ],
-      variables: {
-        input: {
-          username: form?.username,
-          password: form?.password,
-        },
-      },
-    });
+    try {
+      graphQlInstance.authUser(form.username, form.password)
+      router.push('/organization')
+    } catch (error: any) {
+      console.log(error)
+      setSnackbar({
+        message: error.message,
+        type: 'error'
+      })
+    }
+
+    // await mutationLogin({
+    //   onCompleted: (data) => {
+    //     // setAuthUser(data.me);
+    //   },
+    //   refetchQueries: [
+    //     {
+    //       query: GET_ME_GQL,
+    //       variables: {},
+    //     },
+    //     "GetUserInfo",
+    //   ],
+    //   variables: {
+    //     input: {
+    //       username: form?.username,
+    //       password: form?.password,
+    //     },
+    //   },
+    // });
   };
 
   const handlerBack = () => {

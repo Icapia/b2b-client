@@ -22,11 +22,6 @@ module.exports = {
         destination: "/organization",
         permanent: true,
       },
-      {
-        source: "/dashboard",
-        destination: "/organization",
-        permanent: true,
-      },
     ];
   },
 };

@@ -8,49 +8,23 @@ import {
   TextField,
   InputLabel
 } from "@mui/material";
-import {
-  ButtonClose,
-  ButtonDefault,
-} from "../../Buttons";
-import { useEffect, useState } from "react";
 
-import Message from "../../Messages/Message";
+import { ChangeEvent, FC } from "react";
+import { Organization } from "../../../types/entities";
+import { useAtom } from "jotai";
+import { editSiteAtom } from "../../../store/site";
 
-export const ChargingSiteEditForm = (props) => {
-  const [message, setMessage] = useState({
-    className: "messageBox",
-    message: "",
-  });
+interface ChargingSiteEditFormI {
+  organizations: Organization[],
+}
 
-  const {
-    id,
-    organizationId,
-    name,
-    zip_code,
-    address,
-    phone_number,
-    default_price,
-  } = props.data;
+export const ChargingSiteEditForm: FC<ChargingSiteEditFormI> = ({
+  organizations,
+}) => {
+  const [form, setForm] = useAtom(editSiteAtom)
 
-  const [form, setForm] = useState({
-    organizationId,
-    name,
-    zip_code,
-    address,
-    phone_number,
-    default_price,
-  });
-  const [formButton, setFormButton] = useState(true);
-
-  const handlerChange = (event) => {
+  const handlerChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [event.target.name]: event.target.value });
-  };
-
-  const handleMessage = () => {
-    setMessage({
-      className: "messageBox",
-      message: "Test Message",
-    });
   };
 
   return (
@@ -65,26 +39,25 @@ export const ChargingSiteEditForm = (props) => {
                 displayEmpty
                 labelId="organization-label"
                 id="organization"
-                value={form?.organizationId}
                 name="organizationId"
                 label="Organization"
-                onChange={(event) => handlerChange(event)}
+                onChange={() => {}}
               > 
-                {props.organizations.map((e) => {
+                {organizations?.length > 0 && (organizations?.map((e) => {
                   return (
                     <MenuItem
                       key={e.id}
                       value={e.id}
                     >{`${e.id} ${e.name}`}</MenuItem>
                   );
-                })}
+                }))}
               </Select>
             </FormControl>
           </Grid>
           <Grid item xs={6}>
             <TextField
               fullWidth
-              value={form.name}
+              value={form.site}
               className={"mt-20 flex-w"}
               type={"string"}
               focused={true}
@@ -93,7 +66,7 @@ export const ChargingSiteEditForm = (props) => {
               InputLabelProps={{ required: false }}
               label={"Site Name"}
               placeholder={`Enter Site Name`}
-              onChange={(event) => handlerChange(event)}
+              onChange={handlerChange}
             />
           </Grid>
           <Grid item xs={6}>
@@ -108,13 +81,13 @@ export const ChargingSiteEditForm = (props) => {
               InputLabelProps={{ required: false }}
               label={"ZIP Code"}
               placeholder={"5000"}
-              onChange={(event) => handlerChange(event)}
+              onChange={handlerChange}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
               fullWidth
-              value={form.address}
+              value={form.site_area}
               className={"mt-20 flex-fw"}
               autoFocus={true}
               focused={true}
@@ -123,7 +96,7 @@ export const ChargingSiteEditForm = (props) => {
               InputLabelProps={{ required: false }}
               label={"Address"}
               placeholder={"Enter " + "address"}
-              onChange={(event) => handlerChange(event)}
+              onChange={handlerChange}
             />
           </Grid>
           <Grid item xs={6}>
@@ -138,7 +111,7 @@ export const ChargingSiteEditForm = (props) => {
               InputLabelProps={{ required: false }}
               label={"Phone Number (optional)"}
               placeholder={"+1 111 111-11-11"}
-              onChange={(event) => handlerChange(event)}
+              onChange={handlerChange}
             />
           </Grid>
           <Grid item xs={6}>
@@ -153,17 +126,10 @@ export const ChargingSiteEditForm = (props) => {
               InputLabelProps={{ required: false }}
               label={"Default price, $/kWh"}
               placeholder={"5000"}
-              onChange={(event) => handlerChange(event)}
+              onChange={handlerChange}
             />
           </Grid>
         </Grid>
-        <ButtonClose
-          onClick={() => props.handleUpdateSite(id, form)}
-          className={"mt-20 "}
-          fullWidth
-        >
-          {`Update site`}
-        </ButtonClose>
       </FormGroup>
     </Box>
   );

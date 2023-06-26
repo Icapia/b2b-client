@@ -7,58 +7,44 @@ import {
   TextField,
   FormControl,
   InputLabel,
+  SelectChangeEvent,
 } from "@mui/material";
-import { ButtonBlack, ButtonClose, ButtonDefault, ButtonTransparent } from "../../../../Buttons";
-import { useMutation } from "@apollo/client";
-import { useState } from "react";
+import { ButtonTransparent } from "../Buttons";
+import { ChangeEvent, FC, useState } from "react";
+import { ConnectorT, ConnectorsType } from "../../types/site-types";
 
-import { GET_SITE_GQL } from "../../../../../graphql/gql/queries/sites-queries.gql";
-import { UPDATE_CONNECTOR_GQL } from "../../../../../graphql/gql/mutations/connector-mutations.gql";
+interface ConnectorEditFormI {
+  price: number,
+  siteId: string,
+  chargePointHardwareId: string,
+}
 
-export const ConnectorEditForm = (props) => {
-  const [message, setMessage] = useState({
-    className: "messageBox",
-    message: "",
+export const ConnectorEditForm: FC<ConnectorEditFormI> = ({
+  chargePointHardwareId,
+  price,
+  siteId,
+}) => {
+  const [connector, setConnector] = useState<ConnectorT>({
+    label: "",
+    chargePointHardwareId: chargePointHardwareId,
+    connectorId: 1,
+    connectorTypeName: "Type 1",
+    power: 0,
+    price: price,
+    chargePointId: 0,
+    siteId: siteId,
   });
 
-  const [form, setForm] = useState({ ...props.data });
-  const [formButton, setFormButton] = useState(true);
-
-  const handlerChange = (event) => {
-    setForm({ ...form, [event.target.name]: event.target.value });
+  const handlerSelectChange = (event: SelectChangeEvent<ConnectorsType>) => {
+    const value = event.target.value as ConnectorsType
+    setConnector({ ...connector, connectorTypeName: value });
   };
 
-  const [mutationUpdateConnector, updateConnector] =
-    useMutation(UPDATE_CONNECTOR_GQL);
+  const handlerChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setConnector({ ...connector, [event.target.name]: event.target.value });
+  }  
 
-  const handleUpdateConnector = async () => {
-    await mutationUpdateConnector({
-      refetchQueries: [
-        {
-          query: GET_SITE_GQL,
-          variables: props.getSiteVariables,
-        }, // DocumentNode object parsed with gql
-        "GetSite", // Query name
-      ],
-      variables: {
-        input: {
-          id: parseInt(props.data.id),
-          update: {
-            connectorTypeName: form.connectorTypeName,
-            price: parseFloat(form.price),
-            power: parseFloat(form.power),
-          },
-        },
-      },
-    });
-  };
-
-  const handleMessage = () => {
-    setMessage({
-      className: "messageBox",
-      message: "Test Message",
-    });
-  };
+  const handlerRemoveConnector = () => {}
 
   return (
     <Box
@@ -77,9 +63,9 @@ export const ConnectorEditForm = (props) => {
                 labelId="connector-label"
                 id="connector"
                 name={"connectorTypeName"}
-                value={form.connectorTypeName}
+                value={connector?.connectorTypeName}
                 defaultValue={"Type 1"}
-                onChange={(event) => handlerChange(event)}
+                onChange={(event: SelectChangeEvent<ConnectorsType>) => handlerSelectChange(event)}
               >
                 <MenuItem value={"Type 1"}>Type 1</MenuItem>
                 <MenuItem value={"Type 2"}>Type 2</MenuItem>
@@ -94,12 +80,10 @@ export const ConnectorEditForm = (props) => {
           <Grid item xs={6}>
             <TextField
               fullWidth
-              autoComplete={false}
-              value={form.id}
+              value={connector?.label}
               className={"mt-20 col-6"}
               type={"number"}
-              focused={true}
-              name={"priceR"}
+              name={"label"}
               required={true}
               InputLabelProps={{ required: false }}
               label={"Connector ID"}
@@ -110,11 +94,9 @@ export const ConnectorEditForm = (props) => {
           <Grid item xs={6}>
             <TextField
               fullWidth
-              autoComplete={false}
-              value={form.price}
+              value={connector?.price}
               className={"mt-20 flex-w"}
               type={"number"}
-              focused={true}
               name={"price"}
               required={true}
               InputLabelProps={{ required: false }}
@@ -126,11 +108,9 @@ export const ConnectorEditForm = (props) => {
           <Grid item xs={6}>
             <TextField
               fullWidth
-              autoComplete={false}
-              value={form.power}
+              value={connector?.power}
               className={"mt-20 flex-w"}
               type={"number"}
-              focused={true}
               name={"power"}
               required={true}
               InputLabelProps={{ required: false }}
@@ -140,12 +120,10 @@ export const ConnectorEditForm = (props) => {
             />
           </Grid>
           <Grid item xs={6} className={"mt-20 flex-w"}>
-            <ButtonBlack fullWidth onClick={handleUpdateConnector}>
-              {(updateConnector.loading && `Loading...`) || `Save`}
-            </ButtonBlack>
-          </Grid>
-          <Grid item xs={6} className={"mt-20 flex-w"}>
-            <ButtonTransparent fullWidth>
+            <ButtonTransparent 
+              fullWidth
+              onClick={handlerRemoveConnector}
+            >
               <img style={{marginRight: '5px'}} src="/image/icons/trash.svg"/>
               Remove
             </ButtonTransparent>

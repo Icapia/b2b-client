@@ -1,9 +1,4 @@
-$black: #232323;
-$brown: #e68512;
-$brownHover: #e3b687;
-$white: #ffffff;
-$grey: #f8f8f8;
-$text: #a7a6a6;
+@import "variables.scss";
 
 * {
   font-family: "Poppins", sans-serif !important;
@@ -63,7 +58,6 @@ body::-webkit-scrollbar-thumb {
   left: 0;
   top: 0;
   width: calc(15vw);
-  transition: width 0.2s linear;
   background-color: #232323;
 
   &__user {
@@ -338,6 +332,8 @@ body::-webkit-scrollbar-thumb {
   align-items: center;
   position: relative;
   padding: 8px 0px;
+  cursor: pointer;
+  font-weight: 500;
 
   &::before {
     content: "";
@@ -366,7 +362,6 @@ body::-webkit-scrollbar-thumb {
   top: 15px;
   left: calc(15vw + 10px);
   width: calc(85vw - 40px);
-  transition: all 0.15s linear;
 
   @media(max-width: 600px) {
     position: relative;
@@ -408,7 +403,7 @@ body::-webkit-scrollbar-thumb {
     flex: 1 1 15%;
 
     & h3 {
-      font-weight: 500;
+      font-weight: 600;
       font-size: 24px;
       line-height: 115%;
       color: $black;
@@ -574,10 +569,9 @@ body::-webkit-scrollbar-thumb {
 // End Header
 .content {
   position: absolute;
-  top: 130px;
+  top: 100px;
   left: calc(15vw + 10px);
   width: calc(85vw - 40px);
-  transition: all 0.15s linear;
 
   padding-right: 60px;
   padding-left: 60px;
@@ -725,7 +719,7 @@ body::-webkit-scrollbar-thumb {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   justify-content: space-between;
 
   & .auth__forgot {
@@ -1141,7 +1135,7 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     flex-direction: row;
     column-gap: 25px;
-    align-items: start;
+    align-items: flex-start;
     margin-bottom: 20px;
 
     &--fullw {
@@ -1921,7 +1915,7 @@ body::-webkit-scrollbar-thumb {
     min-width: 600px;
     display: flex;
     flex-direction: row;
-    align-items: start;
+    align-items: flex-start;
     justify-content: space-between;
     transition: 0.1s linear;
 
@@ -2260,7 +2254,7 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   flex-direction: column;
   grid-row-gap: 10px;
-  align-items: start;
+  align-items: flex-start;
 
   &__header {
     display: flex;
@@ -2662,4 +2656,11 @@ body::-webkit-scrollbar-thumb {
 
   &__right {
   }
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
 }

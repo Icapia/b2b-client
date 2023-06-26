@@ -1,11 +1,14 @@
+import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
+import { sidebarAtom } from '../../store/sidebar';
 
 
 export const NavMenu = ({}) => {
   const router = useRouter();
+  const [sidebar] = useAtom(sidebarAtom);
 
   const SidebarData = [
     {
@@ -28,12 +31,12 @@ export const NavMenu = ({}) => {
             {SidebarData.map((el, index) => {
               return(
                 <li key={index} className={router.pathname === el.url ? 'sidebar__menu-item active' : 'sidebar__menu-item'}>
-                  <Link href={el.url}>
+                  <Link href={el.url} legacyBehavior>
                   <div className='sidebar__menu-wrapper'>
                     <div className="sidebar__menu-item--image">
-                      <Image src={el.image} width={24} height={24} alt={el.name}></Image>
+                      <Image src={el.image} width={24} height={24} alt={el.name}/>
                     </div>
-                    <div>{el.name}</div>
+                    <div>{!sidebar ? el.name : ''}</div>
                   </div>
                   </Link>
                 </li>

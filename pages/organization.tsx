@@ -9,19 +9,22 @@ import { MainLayout } from "../components/Layouts/MainLayout";
 import { ModalComponent } from "../components/Modal/Modal";
 import { OrganizationsGrid } from "../components/Organizations/OrganizationsGrid";
 import { OrganizationsGridFilter } from "../components/Organizations/OrganizationsFilter";
+import { useAtom } from "jotai";
+import { organizationCreateAtom } from "../store/organization";
 
 const pageData = {
   pageTitle: "Organization",
 };
 
 export default function Organizations() {
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useAtom(organizationCreateAtom)
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handlerOpen = () => {
+    setIsOpen(true);
   };
-  const handleClose = () => {
-    setOpen(false);
+
+  const handlerClose = () => {
+    setIsOpen(false);
   };
 
   const organizations = useQuery(GET_ORGANIZATIONS_GQL, {
@@ -31,26 +34,21 @@ export default function Organizations() {
     },
   });
 
-  if (organizations.data) console.log(organizations.data);
-
   return (
     <MainLayout
       name={pageData.pageTitle}
       headerChild={
-        <ButtonDefault onClick={handleClickOpen}>
+        <ButtonDefault onClick={handlerOpen}>
           Create Organization
         </ButtonDefault>
       }
     >
       {organizations.data && (
         <>
-          <OrganizationsGridFilter
-            length={organizations?.data?.length}
-          ></OrganizationsGridFilter>
           <OrganizationsGrid
             data={organizations.data.organizations}
-          ></OrganizationsGrid>
-          <ModalComponent onRequestClose={handleClose} isOpen={isOpen}>
+          />
+          <ModalComponent onRequestClose={handlerClose} isOpen={isOpen}>
             <CreateOrganizationForm />
           </ModalComponent>
         </>

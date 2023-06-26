@@ -1,4 +1,4 @@
-@import '../../assets/styles/base/variable.scss';
+@import "../../styles/variables.scss";
 
 .snackbar {
 	max-width: 300px;
@@ -45,7 +45,7 @@
   }
 
   &.warning {
-    background-color: $orange;
+    background-color: $brown;
   }
 
   &.success {
@@ -54,12 +54,12 @@
 
   &.info {
     backdrop-filter: blur(10px);
-    background-color: $black600;
+    background-color: $black;
   }
 
   &.infoDark {
     backdrop-filter: blur(10px);
-    background-color: $black800;
+    background-color: $black;
   }
 
   .message {

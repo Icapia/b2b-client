@@ -1,0 +1,192 @@
+@import "../../../../styles/variables.scss";
+
+.adornment {
+	display: block;
+	position: absolute;
+	right: 12px;
+	user-select: none;
+	top: 50%;
+	color: rgba(0, 0, 0, 0.4);
+	transform: translateY(-50%);
+	line-height: 115%;
+
+	&.dark {
+		color: rgba(256, 256, 256, 0.4);
+	}
+}
+
+.input__wrapper {
+	position: relative;
+
+  &.isInvalid {
+		border: 1px solid #d9302d;
+
+		&:focus {
+			border-color: #c61b18;
+		}
+	}
+
+	&.isValid {
+		border: 1px solid #369b4f;
+
+		&:focus {
+			border-color: #25b449;
+		}
+	}
+}
+
+.input {
+	border: 1px solid rgb(0 0 0 / 20%);
+	border-radius: 12px;
+	width: 100%;
+	padding: 16px 22px;
+	transition: all 0.15s ease-in-out 0s;
+	position: relative;
+	transition: 0.2s all ease;
+	font-size: 16px;
+	font-family: 'Poppins', sans-serif;
+
+	&:hover {
+		border-color: $black;
+		outline: none;
+	}
+
+	&:focus {
+		border-color: $black;
+		outline: none;
+	}
+
+	&:disabled:hover {
+		border-color: rgb(0 0 0 / 20%);
+		outline: none;
+	}
+
+	&.error {
+		border-color: #f45959;
+	}
+
+	&.dark {
+		border: 1px solid rgba(255, 255, 255, 0.04);
+		background-color: rgba(255, 255, 255, 0.04);
+		color: $white;
+		transition: 0.2s all ease;
+
+		&:hover {
+			border-color: rgb(255 255 255 / 50%);
+			outline: none;
+		}
+
+		&:focus {
+			border-color: rgba(255, 255, 255, 0.8);
+		}
+	}
+
+	&.validate {
+		color: #9b3636;
+		border: 1px solid #9b3636;
+		transition: 0.2s all ease;
+
+		&:focus {
+			border-color: #9b3636;
+		}
+	}
+
+	&.isValid {
+		border: 1px solid #369b4f;
+
+		&:focus {
+			border-color: #25b449;
+		}
+	}
+
+	&.subscribe {
+		background: $white;
+		border-radius: 20px;
+		height: 54px;
+		padding: 10px 24px;
+		width: 100%;
+		color: $black;
+		margin-bottom: 25px;
+	}
+
+	&.percent {
+		margin: 0 24px;
+		width: 145px;
+	}
+
+	@media screen and (max-width: 1024px) {
+		font-size: 16px;
+		border-radius: 12px;
+		padding: 14px;
+	}
+
+	@media screen and (max-width: 550px) {
+		&.percent {
+			margin: 0 5px 0 10px;
+			width: 80px;
+			font-size: 14px;
+			padding: 14px;
+		}
+	}
+}
+
+.validationText {
+	position: absolute;
+	left: 0px;
+	bottom: -25px;
+	height: 22px;
+	font-size: 14px;
+
+	&_err {
+		color: #9b3636;
+		font-weight: 500;
+		font-size: 15px;
+	}
+
+	@media screen and (max-width: 1024px) {
+		font-size: 12px;
+		top: 57px;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	.input--textarea {
+		height: 130px;
+	}
+
+	.input--select {
+		background-size: 11px;
+		background-position: 95% 50%;
+	}
+}
+
+.input--select {
+	background-image: url("data:image/svg+xml,%3Csvg width='16' height='10' viewBox='0 0 16 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 1.5C15 1.5 10.856 8.5 8 8.5C5.145 8.5 1 1.5 1 1.5' stroke='%23969696' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+	background-repeat: no-repeat;
+	appearance: none;
+	background-position: calc(100% - 25px) 50%;
+}
+
+.input.input--site {
+	padding-left: 57px;
+	background-image: url("data:image/svg+xml,%3Csvg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.5003 0.416504C5.83758 0.416504 0.416992 5.83709 0.416992 12.4998C0.416992 19.1626 5.83758 24.5832 12.5003 24.5832C19.1631 24.5832 24.5837 19.1626 24.5837 12.4998C24.5837 5.83709 19.1631 0.416504 12.5003 0.416504ZM2.83366 12.4998C2.83366 11.4135 3.02216 10.3708 3.35445 9.39563L5.25033 11.2915L7.66699 13.7082V16.1248L10.0837 18.5415L11.292 19.7498V22.0831C6.53237 21.485 2.83366 17.4202 2.83366 12.4998ZM20.1491 18.388C19.36 17.7525 18.1638 17.3332 17.3337 17.3332V16.1248C17.3337 15.4839 17.079 14.8692 16.6258 14.416C16.1726 13.9628 15.5579 13.7082 14.917 13.7082H10.0837V10.0832C10.7246 10.0832 11.3393 9.82856 11.7925 9.37534C12.2457 8.92213 12.5003 8.30744 12.5003 7.6665V6.45817H13.7087C14.3496 6.45817 14.9643 6.20356 15.4175 5.75035C15.8707 5.29713 16.1253 4.68244 16.1253 4.0415V3.54488C19.6633 4.98159 22.167 8.45192 22.167 12.4998C22.1668 14.6322 21.4568 16.7038 20.1491 18.388Z' fill='%23C8C8C8'/%3E%3C/svg%3E%0A");
+	background-repeat: no-repeat;
+	background-position: 19px 50%;
+	background-size: auto 47%;
+}
+
+.input.input--discord {
+	background-image: url("data:image/svg+xml,%3Csvg width='24' height='19' viewBox='0 0 24 19' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.242 2.18576C18.7262 1.49024 17.1007 0.977822 15.4012 0.684337C15.3703 0.678672 15.3394 0.692828 15.3234 0.721138C15.1144 1.09295 14.8828 1.578 14.7206 1.95926C12.8927 1.68559 11.0741 1.68559 9.28367 1.95926C9.12148 1.56953 8.88152 1.09295 8.67153 0.721138C8.65559 0.693772 8.62467 0.679617 8.59372 0.684337C6.89513 0.976884 5.26967 1.48931 3.75294 2.18576C3.73981 2.19142 3.72855 2.20086 3.72108 2.21312C0.637926 6.8193 -0.206681 11.3123 0.207655 15.7495C0.20953 15.7712 0.221716 15.792 0.23859 15.8052C2.27277 17.299 4.24322 18.2059 6.17708 18.8071C6.20803 18.8165 6.24082 18.8052 6.26052 18.7797C6.71797 18.155 7.12576 17.4963 7.47539 16.8036C7.49602 16.763 7.47632 16.7149 7.43415 16.6989C6.78734 16.4535 6.17145 16.1543 5.57901 15.8146C5.53215 15.7873 5.5284 15.7202 5.57151 15.6881C5.69618 15.5947 5.82088 15.4975 5.93993 15.3994C5.96147 15.3815 5.99148 15.3777 6.0168 15.389C9.90891 17.166 14.1226 17.166 17.9688 15.389C17.9941 15.3767 18.0241 15.3805 18.0466 15.3984C18.1656 15.4966 18.2903 15.5947 18.4159 15.6881C18.459 15.7202 18.4562 15.7873 18.4094 15.8146C17.8169 16.1609 17.201 16.4535 16.5533 16.6979C16.5111 16.714 16.4924 16.763 16.513 16.8036C16.8701 17.4953 17.2779 18.154 17.7269 18.7788C17.7457 18.8052 17.7794 18.8165 17.8104 18.8071C19.7536 18.2059 21.724 17.299 23.7582 15.8052C23.776 15.792 23.7873 15.7721 23.7892 15.7504C24.285 10.6205 22.9586 6.16438 20.2729 2.21406C20.2663 2.20086 20.2551 2.19142 20.242 2.18576ZM8.05661 13.0477C6.88482 13.0477 5.9193 11.9719 5.9193 10.6507C5.9193 9.32952 6.86609 8.25373 8.05661 8.25373C9.25647 8.25373 10.2126 9.33897 10.1939 10.6507C10.1939 11.9719 9.24709 13.0477 8.05661 13.0477ZM15.959 13.0477C14.7872 13.0477 13.8217 11.9719 13.8217 10.6507C13.8217 9.32952 14.7684 8.25373 15.959 8.25373C17.1589 8.25373 18.115 9.33897 18.0963 10.6507C18.0963 11.9719 17.1589 13.0477 15.959 13.0477Z' fill='%23C8C8C8'/%3E%3C/svg%3E%0A");
+	background-repeat: no-repeat;
+	background-position: 19px 50%;
+	background-size: auto 37%;
+	padding-left: 57px;
+}
+
+.input.input--tg {
+	background-image: url("data:image/svg+xml,%3Csvg width='24' height='20' viewBox='0 0 24 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2.03739 8.29332C8.23887 5.59144 12.3742 3.81019 14.4433 2.94958C20.351 0.492359 21.5786 0.0655145 22.3787 0.0514198C22.5547 0.0483198 22.9481 0.0919322 23.203 0.298746C23.4182 0.473375 23.4774 0.709274 23.5058 0.874841C23.5341 1.04041 23.5694 1.41758 23.5413 1.71228C23.2212 5.07603 21.8359 13.2389 21.1312 17.0064C20.833 18.6005 20.2458 19.1351 19.6774 19.1874C18.442 19.301 17.504 18.371 16.3075 17.5866C14.4352 16.3593 13.3774 15.5953 11.5601 14.3977C9.45976 13.0136 10.8213 12.2529 12.0183 11.0097C12.3315 10.6844 17.7745 5.73353 17.8799 5.28441C17.893 5.22824 17.9053 5.01887 17.7809 4.90831C17.6565 4.79775 17.4729 4.83556 17.3404 4.86563C17.1527 4.90825 14.1616 6.88519 8.3674 10.7965C7.51841 11.3794 6.74943 11.6635 6.06044 11.6486C5.30089 11.6322 3.83981 11.2191 2.75365 10.8661C1.42144 10.433 0.362616 10.2041 0.454816 9.46861C0.502839 9.08554 1.03036 8.69378 2.03739 8.29332Z' fill='%23C8C8C8'/%3E%3C/svg%3E%0A");
+	background-repeat: no-repeat;
+	background-position: 21px 50%;
+	background-size: auto 37%;
+	padding-left: 57px;
+}

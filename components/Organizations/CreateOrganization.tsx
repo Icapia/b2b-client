@@ -16,17 +16,15 @@ import { GET_ORGANIZATIONS_GQL } from "../../graphql/gql/queries/organizations-q
 import { snackbarState } from "../../store/snackbar";
 import { useAtom } from "jotai";
 import { OrganizationCreateForm } from "../../types/organization-types";
-
-interface OrganizationI {
-
-}
+import { organizationCreateAtom } from "../../store/organization";
 
 export const CreateOrganizationForm = () => {
+  const [, setIsOpen] = useAtom(organizationCreateAtom)
   const [form, setForm] = useState<OrganizationCreateForm>({
     address: "",
     email: "",
     name: "",
-    zip: "",
+    zip_code: "",
     phone_number: "",
   });
   const [formButton, setFormButton] = useState(true);
@@ -36,10 +34,29 @@ export const CreateOrganizationForm = () => {
     CREATE_ORGANIZATION_GQL
   );
 
-  const handleCreateOrganization = async () => {
+  const handlerChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const name = event.target.name;
+    setForm({...form, [name]: event.target.value})
+  }
+
+  const handlerClose = () => {
+    setIsOpen(false)
+  }
+
+  const handlerCreate = async () => {
     await mutationCreateOrganization({
       onCompleted: () => {
-        // props.handleClose();
+        handlerClose()
+        setSnackbar({
+          message: "Organization Created",
+          type: "success"
+        })
+      },
+      onError: (e) => {
+        setSnackbar({
+          message: e?.message,
+          type: "error"
+        })
       },
       refetchQueries: [
         {
@@ -48,14 +65,14 @@ export const CreateOrganizationForm = () => {
             filter: {},
             sorting: [],
           },
-        }, // DocumentNode object parsed with gql
-        "GetOrganizations", // Query name
+        },
+        "GetOrganizations",
       ],
       variables: {
         input: {
           organization: {
             ...form,
-            zip_code: parseInt(form.zip),
+            zip_code: parseInt(form.zip_code),
             location: {
               type: "Point",
               coordinates: [0, 0],
@@ -64,15 +81,7 @@ export const CreateOrganizationForm = () => {
         },
       },
     });
-  };
-
-
-  const handlerChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const name = event.target.name;
-    setForm({...form, [name]: event.target.value})
   }
-  const handlerClose = () => {}
-  const handlerCreate = () => {}
 
   return (
     <Box>
@@ -108,7 +117,7 @@ export const CreateOrganizationForm = () => {
                 className={"mt-20 flex-w"}
                 type={"number"}
                 focused={true}
-                name={"zip"}
+                name={"zip_code"}
                 required={true}
                 InputLabelProps={{ required: false }}
                 label={"ZIP Code"}

@@ -1,11 +1,9 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useAtom } from 'jotai'
-import { snackbarState } from '@/store/snackbar';
-import { darkModeAtom } from '@/store/dark-theme'
-import { simplifyErrorMessage } from '@/helpers/errorsCatch';
-import { SNACKBAR_TIMEOUT } from '@/helpers/constants';
 import cn from 'classnames';
 import styles from './index.module.scss';
+import { snackbarState } from '../../store/snackbar';
+import { darkModeAtom } from '../../store/dark-theme';
 
 type Position = ['top' | 'bottom', 'left' | 'right'];
 
@@ -33,7 +31,7 @@ export const Snackbar: React.FC<SnackbarPositionProps> = ({ position = ['top', '
           ...prevState,
           open: false,
         }));
-      }, SNACKBAR_TIMEOUT);
+      }, 1000);
     }
 
     return () => {
@@ -75,7 +73,7 @@ export const Snackbar: React.FC<SnackbarPositionProps> = ({ position = ['top', '
 		<div className={snackbarClass()} onClick={handleClickSnackBar}>
 			<img src={snackbarIcon} alt="icon" />
 			<div className={cn(styles.message)}>
-				{simplifyErrorMessage(snackbar.message!)}
+				{snackbar.message}
 			</div>
 		</div>
 	);

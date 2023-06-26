@@ -4,6 +4,7 @@ import { Header } from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
 import { sidebarAtom } from "../../store/sidebar";
 import { useAtom } from "jotai";
+import { Snackbar } from "../Snackbar";
 
 interface MainLayoutI {
   name: string,
@@ -29,6 +30,7 @@ export const MainLayout: FC<PropsWithChildren<MainLayoutI>> = ({
       >
         {children}
       </main>
+      <Snackbar position={['top', 'right']}/>
     </main>
   );
 }

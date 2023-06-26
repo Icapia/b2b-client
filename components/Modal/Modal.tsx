@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from "react";
 import { Modal } from "@mui/material";
-import { CloseModal } from "../CloseModal";
+import Close from '../../public/image/sidebar-icons/Close.svg'
 
 interface ModalI {
   isOpen: boolean,
@@ -17,7 +17,9 @@ export const ModalComponent: FC<PropsWithChildren<ModalI>> = ({
       <div className="modal__wrapper">
         <div className="modal__content topline topline-35">
           {children}
-          <CloseModal onClick={onRequestClose} />
+          <div onClick={onRequestClose} className="modal__close">
+            <Close onClick={onRequestClose} width={24} height={24}></Close>
+          </div>
         </div>
       </div>
     </Modal>

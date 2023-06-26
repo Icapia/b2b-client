@@ -23,7 +23,6 @@ export type Organization = {
   __typename: string,
 }
 
-
 export type Connector = {
   id: string,
   connectorTypeName: string,
@@ -59,4 +58,11 @@ export type ResponseOrganizations = {
 
 export type ResponseSites = {
   sites: Site[]
+}
+
+export type CreateOneSiteResponse = {
+  createOneSite: {
+    id: string,
+    __typename: string,
+  }
 }
