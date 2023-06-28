@@ -24,48 +24,7 @@ export const CreateSiteForm = () => {
     // props.onChange({ ...form });
   };
 
-  const handlerCreateSite = async () => {
-    // await mutationCreateSite({
-    //   onCompleted: () => {
-    //     handlerClose()
-    //   },
-    //   refetchQueries: [
-    //     {
-    //       query: GET_SITES_GQL,
-    //       variables: {
-    //         filter: {},
-    //         sorting: [],
-    //         chargePointFilter: {},
-    //         chargePointSorting: [],
-    //         connectorFilter: {},
-    //         connectorSorting: [],
-    //       },
-    //     }, // DocumentNode object parsed with gql
-    //     "GetSites", // Query name
-    //   ],
-    //   variables: {
-    //     input: {
-    //     //   site: {
-    //     //     name: form.name,
-    //     //     site_area: form.site_area,
-    //     //     address: form.address,
-    //     //     zip_code: parseInt(form.zip_code),
-    //     //     location: {
-    //     //       type: "Point",
-    //     //       coordinates: [parseFloat(form.long), parseFloat(form.lat)],
-    //     //     },
-    //     //     site: "",
-    //     //     information: "",
-    //     //     dynamic_asset: "",
-    //     //     asset_type: "",
-    //     //     instant_power: 0,
-    //     //     battery: "",
-    //     //     default_price: parseFloat(form.default_price),
-    //     //   },
-    //     // },
-    //   },},
-    // });
-  };
+  const handlerCreateSite = async () => {};
   const handlerClose = () => {}
   
   return (

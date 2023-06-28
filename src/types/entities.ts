@@ -21,42 +21,42 @@ export type Organization = {
   zip_code: number,
 }
 
-export type Connector = {
-  id: string,
-  connectorTypeName: string,
-  price: number,
-  power: number,
-  statusName: string,
-}
+// export type Connector = {
+//   id: string,
+//   connectorTypeName: string,
+//   price: number,
+//   power: number,
+//   statusName: string,
+// }
 
-export type ChargePointStatus = 'connected' | 'available' | 'charging' | 'finishing' | 'unavailable' | 'faulted'
+// export type ChargePointStatus = 'connected' | 'available' | 'charging' | 'finishing' | 'unavailable' | 'faulted'
 
-export type ChargePoint = {
-  id: string,
-  chargePointHardwareId: string,
-  instantPower: number,
-  connectors: Connector[],
-  siteId: number,
-  status: ChargePointStatus,
-}
+// // export type ChargePoint = {
+//   id: string,
+//   chargePointHardwareId: string,
+//   instantPower: number,
+//   connectors: Connector[],
+//   siteId: number,
+//   status: ChargePointStatus,
+// }
 
-export type Site = {
-  id: string,
-  site: string,
-  site_area: string,
-  chargePoints: ChargePoint[],
-}
+// export type Site = {
+//   id: string,
+//   site: string,
+//   site_area: string,
+//   chargePoints: ChargePoint[],
+// }
 
-export type ResponseOrganizations = {
-  organizations: Organization[]
-}
+// export type ResponseOrganizations = {
+//   organizations: Organization[]
+// }
 
-export type ResponseSites = {
-  sites: Site[]
-}
+// export type ResponseSites = {
+//   sites: Site[]
+// }
 
-export type CreateOneSiteResponse = {
-  createOneSite: {
-    id: string,
-  }
-}
+// export type CreateOneSiteResponse = {
+//   createOneSite: {
+//     id: string,
+//   }
+// }

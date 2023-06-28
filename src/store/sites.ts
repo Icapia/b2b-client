@@ -1,14 +1,11 @@
 import { atom } from 'jotai';
 import { GET_SITES_GQL } from '../graphql/gql/queries/sites-queries.gql'
-import { Site } from '../types/entities';
 import { atomsWithQuery } from 'jotai-tanstack-query'
 import { graphQlInstance } from '@/services/gql';
 import { loadable } from 'jotai/utils';
 import { SiteT } from '@/types/site-types';
 
-export const sitesAtom = atom<Site[]>([]);
 export const siteIdAtom = atom<string>('');
-export const siteAtom = atom<Site[] | null>(null)
 
 export const [getSitesAtom] = atomsWithQuery((get) => ({
   queryKey: [
@@ -19,11 +16,17 @@ export const [getSitesAtom] = atomsWithQuery((get) => ({
       query: GET_SITES_GQL,
       variables: {
         filter: {},
-        sorting: [],
+        sorting: [
+          { field: "id", direction: "ASC" }
+        ],
         chargePointFilter: {},
-        chargePointSorting: [],
+        chargePointSorting: [
+          { field: 'id', direction: 'ASC' }
+        ],
         connectorFilter: {},
-        connectorSorting: [],
+        connectorSorting: [
+          { field: 'connectorId', direction: 'ASC' }
+        ],
       },
     })
 

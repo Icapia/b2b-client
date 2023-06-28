@@ -1,7 +1,6 @@
 import { IconButton, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { FC, useState } from "react";
-import { ChargePoint } from "../../../../types/entities";
 import { ButtonBlackTransparent } from "../../../Buttons";
 import Sheet from "@mui/joy/Sheet";
 import Table from "@mui/joy/Table";
@@ -87,7 +86,7 @@ export const SiteGridRow: FC<SiteGridRowI> = ({
             >
               <Table
                 borderAxis="bothBetween"
-                className={'charging-table'}
+                className={'charging-table charging-table--small'}
                 size="sm"
                 aria-label="purchases"
                 sx={{
@@ -136,13 +135,13 @@ export const SiteGridRow: FC<SiteGridRowI> = ({
                     return (
                       <tr key={index}>
                         <td scope="row">
-                          <Typography fontSize={15} fontWeight={500}>
+                          <Typography fontSize={15} fontWeight={600}>
                           {e?.connectorTypeName}
                           </Typography>
                         </td>
                         <td>
-                          <Typography fontSize={15} fontWeight={500}>
-                          {e?.price}
+                          <Typography fontSize={15} fontWeight={400}>
+                          {'$' + e?.price + '/kWh'}
                           </Typography>
                         </td>
                         <td>
@@ -151,8 +150,8 @@ export const SiteGridRow: FC<SiteGridRowI> = ({
                           </Typography>
                         </td>
                         <td style={{textAlign: 'right'}}>
-                          <Typography fontSize={15} fontWeight={500}>
-                          {e?.power}
+                          <Typography fontSize={15} fontWeight={400}>
+                          {e?.power + ' kWh/h'}
                           </Typography>
                         </td>
                       </tr>

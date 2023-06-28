@@ -70,7 +70,7 @@ export const ConnectorEditForm: FC<ConnectorEditFormI> = ({
               <InputLabel id="connector-label">Connector Type</InputLabel>
               <Select
                 fullWidth
-                style={{ backgroundColor: "#FAFAFA" }}
+                style={{ backgroundColor: "#FFFFFF" }}
                 label={"Connector Type"}
                 labelId="connector-label"
                 id="connector"
@@ -94,12 +94,12 @@ export const ConnectorEditForm: FC<ConnectorEditFormI> = ({
               fullWidth
               value={connector?.label}
               className={"mt-20 col-6"}
-              type={"number"}
               name={"label"}
+              focused
               required={true}
               InputLabelProps={{ required: false }}
-              label={"Connector ID"}
-              placeholder={"5000"}
+              label={"Connector Label"}
+              placeholder={"Enter Label"}
               onChange={(event) => handlerChangeLabel(event)}
             />
           </Grid>
