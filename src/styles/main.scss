@@ -2670,21 +2670,13 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
 
-  &__wrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+
+  @media(max-width: 1600px) {
+    background-position: 120% 0px;
   }
 
-  &__left {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: auto 200px auto auto;
-  }
-
-  &__right {
+  @media(max-width: 1200px) {
+    background-size: 0px;
   }
 }
 

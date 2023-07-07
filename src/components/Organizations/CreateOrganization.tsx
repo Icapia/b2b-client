@@ -31,7 +31,7 @@ export const CreateOrganizationForm = () => {
   const [, setSnackbar] = useAtom(snackbarState)
 
   const [mutationCreateOrganization, createOrganization] = useMutation(
-    CREATE_ORGANIZATION_GQL
+    CREATE_ORGANIZATION_GQL,
   );
 
   const handlerChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -70,6 +70,13 @@ export const CreateOrganizationForm = () => {
           },
         },
       },
+      refetchQueries: () => [{
+        query: GET_ORGANIZATIONS_GQL,
+        variables: {
+          filter: {},
+          sorting: [],
+        },
+      }]
     });
 
     setUpdate(!update)

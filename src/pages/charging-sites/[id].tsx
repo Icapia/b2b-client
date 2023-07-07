@@ -87,6 +87,7 @@ export default function ChargingSite() {
             type: 'success',
             open: true,
           })
+          router.push('/charging-sites')
         },
         onError: (error: Error) => {
           console.log('Error', error)
@@ -109,7 +110,24 @@ export default function ChargingSite() {
               chargepoints: form?.chargePoints,
             }
           }
-        }
+        },
+        refetchQueries: () => [{
+          query: GET_SITES_GQL,
+          variables: {
+            filter: {},
+            sorting: [
+              { field: "id", direction: "ASC" }
+            ],
+            chargePointFilter: {},
+            chargePointSorting: [
+              { field: 'id', direction: 'ASC' }
+            ],
+            connectorFilter: {},
+            connectorSorting: [
+              { field: 'connectorId', direction: 'ASC' }
+            ],
+          },
+        }]
       })
     } catch (error: any) {
       setSnackbar({

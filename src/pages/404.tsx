@@ -17,11 +17,11 @@ export default function Error() {
             <h1>404</h1>
             <p className={'text'}>
               Seems something went wrong. <br />
-              Let’s go to dashboard so that start the way
+              Let’s go to organizations so that start the way
               <br /> from the very beginning
             </p>
             <Link className={'btn'} href={'/'}>
-              Back to Dashboard
+              Back to Organizations
             </Link>
           </div>
           <div className='auth__policy'>

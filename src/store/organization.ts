@@ -16,7 +16,6 @@ export const [getOrganizations] = atomsWithQuery((get) => ({
   ],
   queryFn: async ({ queryKey: [, updateOrganizationRequest] }) => {
     const response = await graphQlInstance?.client?.query({
-      partialRefetch: true,
       query: GET_ORGANIZATIONS_GQL,
       variables: {
         filter: {},
@@ -26,6 +25,7 @@ export const [getOrganizations] = atomsWithQuery((get) => ({
 
     return response.data.organizations as Organization[]
 	},
+  refetchInterval: 500,
 }))
 
 export const asyncGetOrganization = loadable(getOrganizations)

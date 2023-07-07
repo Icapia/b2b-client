@@ -36,13 +36,14 @@ class GraphQLService {
 				headers: {
 					...headers,
 					authorization: token ? `Bearer ${token}` : "",
+					'Access-Control-Allow-Origin': '*',
 				},
 			};
 		});
 		
 		const client = new ApolloClient({
 			link: authLink.concat(httpLink),
-			cache: new InMemoryCache()
+			cache: new InMemoryCache(),
 		})
 
 		GraphQLService.instance = new GraphQLService(client)
@@ -61,6 +62,7 @@ class GraphQLService {
 				headers: {
 					...headers,
 					authorization: token ? `Bearer ${token}` : "",
+					'Access-Control-Allow-Origin': '*',
 				},
 			};
 		});

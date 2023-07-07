@@ -59,7 +59,7 @@ export const ChargingSiteEditForm: FC<ChargingSiteEditFormI> = ({
                     <MenuItem
                       key={e.id}
                       value={e.id}
-                    >{`${e.id} ${e.name}`}</MenuItem>
+                    >{e.name}</MenuItem>
                   );
                 }))}
               </Select>

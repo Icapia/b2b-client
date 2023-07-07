@@ -8,6 +8,7 @@ import { OrganizationsGrid } from "@/components/Organizations/OrganizationsGrid"
 import { ModalComponent } from "@/components/Modal/Modal";
 import { CreateOrganizationForm } from "@/components/Organizations/CreateOrganization";
 import { Loader } from "@/components/Loader";
+import { useEffect } from "react";
 
 export default function Organizations() {
   const [isOpen, setIsOpen] = useAtom(organizationCreateAtom)
@@ -20,6 +21,10 @@ export default function Organizations() {
   const handlerClose = () => {
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    console.log(organizations)
+  }, [organizations])
 
   return (
     <MainLayout
