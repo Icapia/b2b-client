@@ -24,7 +24,7 @@ export const Sidebar = () => {
   return (
     <div className={sidebar ? "sidebar sidebar__active" : "sidebar"}>
       <div className="sidebar__wrapper">
-        <Link href={"/dashboard"} legacyBehavior>
+        <Link href={"/organizations"} legacyBehavior>
           <div className={cn(styles.logo)}>
             <img src="/image/logo-m.svg" alt="" />
             {!sidebar && (

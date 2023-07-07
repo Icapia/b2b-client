@@ -10,11 +10,11 @@ import { graphQlInstance } from '@/services/gql';
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ErrorBoundaryContainer>
-      <Provider>
-        <ApolloProvider client={graphQlInstance.client}>
+      <ApolloProvider client={graphQlInstance.client}>
+        <Provider>
           <Component {...pageProps} />
-        </ApolloProvider>
-      </Provider>
+        </Provider>
+      </ApolloProvider>
     </ErrorBoundaryContainer>
   )
 }

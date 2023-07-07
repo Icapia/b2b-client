@@ -12,25 +12,20 @@ export default function Home() {
   return (
     <div className='login'>
       <div className='login__wrapper'>
-        <div className='login__item login__left'>
-          <Stack
-            direction='column'
-            justifyContent='space-between'
-            alignItems='flex-start'
-            spacing={2}
-          >
-            {(login?.isCodeSent && <VerificationCode />) || <MailForm />}
-            <div>
-              <div style={{ fontSize: '9px' }}>
-                This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of
-                Service apply.
-              </div>
+        <Stack
+          direction='column'
+          justifyContent='space-between'
+          alignItems='flex-start'
+          spacing={2}
+        >
+          {(login?.isCodeSent && <VerificationCode />) || <MailForm />}
+          <div>
+            <div style={{ fontSize: '9px' }}>
+              This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of
+              Service apply.
             </div>
-          </Stack>
-        </div>
-        <div className='login__item login__right'>
-          <span></span>
-        </div>
+          </div>
+        </Stack>
       </div>
     </div>
   );

@@ -32,6 +32,7 @@ export const [getSitesAtom] = atomsWithQuery((get) => ({
 
     return response.data.sites as SiteT[]
 	},
+  refetchInterval: 500,
 }))
 
 export const getSitesAsyncAtom = loadable(getSitesAtom)

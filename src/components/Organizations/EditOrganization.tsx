@@ -9,11 +9,12 @@ import { ButtonClose, ButtonDefault } from "../Buttons";
 import { useMutation } from "@apollo/client";
 import { ChangeEvent, FC, useState } from "react";
 import { UPDATE_ORGANIZATION_GQL } from "../../graphql/gql/mutations/organization-mutations.gql";
-import { GET_ORGANIZATIONS_GQL } from "../../graphql/gql/queries/organizations-queries.gql";
 import { snackbarState } from "../../store/snackbar";
 import { useAtom } from "jotai";
 import { OrganizationCreateForm } from "../../types/organization-types";
-import { organizationEditAtom, updateOrganizationRequest } from "../../store/organization";
+import { asyncGetOrganization, getOrganizations, organizationEditAtom, updateOrganizationRequest } from "../../store/organization";
+import { graphQlInstance } from "@/services/gql";
+import { GET_ORGANIZATIONS_GQL } from "@/graphql/gql/queries/organizations-queries.gql";
 
 interface EditOrganizationI {
   id: number,
@@ -49,10 +50,11 @@ export const EditOrganization: FC<EditOrganizationI> = ({
   }
 
   const handlerCreate = async () => {
-    await mutationUpdateOrganization({
-      onCompleted: () => {
+    const res = await mutationUpdateOrganization({
+      onCompleted: async () => {
         setUpdate(!update);
         setSnackbar({
+          open: true,
           message: 'Organization Updated',
           type: "success",
         })
@@ -70,8 +72,14 @@ export const EditOrganization: FC<EditOrganizationI> = ({
           },
         },
       },
+      refetchQueries: () => [{
+        query: GET_ORGANIZATIONS_GQL,
+        variables: {
+          filter: {},
+          sorting: [],
+        },
+      }]
     });
-
   }
 
   return (
