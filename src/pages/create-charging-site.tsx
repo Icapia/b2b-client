@@ -69,6 +69,10 @@ export default function CreateChargingSite() {
               address: form?.address,
               id: form?.id,
               name: form?.name,
+              location: {
+                type: 'Point',
+                coordinates: [form.location.coordinates[0], form.location.coordinates[1]],
+              },
               zip_code: form?.zip_code,
               phone_number: form?.phone_number,
               default_price: form?.default_price,
