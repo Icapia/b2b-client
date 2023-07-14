@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const GET_SITES_GQL = gql`
   query getSites(
@@ -28,9 +28,9 @@ export const GET_SITES_GQL = gql`
           statusName
           power
           chargePointId
-					chargePointHardwareId
-	 				label
-					siteId
+          chargePointHardwareId
+          label
+          siteId
         }
       }
     }
@@ -52,6 +52,7 @@ export const GET_SITE_GQL = gql`
       zip_code
       address
       site_area
+      location
       phone_number
       default_price
       chargePoints(filter: $chargePointFilter, sorting: $chargePointSorting) {
@@ -66,9 +67,9 @@ export const GET_SITE_GQL = gql`
           statusName
           power
           chargePointId
-					chargePointHardwareId
-	 				label
-					siteId
+          chargePointHardwareId
+          label
+          siteId
         }
       }
     }
