@@ -9,7 +9,7 @@ export const siteAtom = atom<SiteT>({
   zip_code: '',
   location: {
     type: 'Point',
-    coordinates: [0, 0],
+    coordinates: [0.0, 0.0],
   },
   default_price: 0,
   organizationId: null,
