@@ -25,7 +25,7 @@ class GraphQLService {
     }
 
     const httpLink = createHttpLink({
-      uri: 'http://34.94.174.181:3012/graphql',
+      uri: 'http://34.94.253.188:3012/graphql',
     });
 
     const authLink = setContext((_, { headers }) => {
@@ -51,7 +51,7 @@ class GraphQLService {
 
   static updateInstance() {
     const httpLink = createHttpLink({
-      uri: 'http://34.94.174.181:3012/graphql',
+      uri: 'http://34.94.253.188:3012/graphql',
     });
 
     const authLink = setContext((_, { headers }) => {
