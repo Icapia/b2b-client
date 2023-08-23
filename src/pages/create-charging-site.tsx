@@ -3,9 +3,11 @@ import { ChargePoint } from '@/components/ChargePoint'
 import { ChargingSiteEditForm } from '@/components/ChargingSites/ChargingSiteEdit/ChargingSiteEditForm'
 import { Loader } from '@/components/Loader'
 import { CREATE_AND_UPDATE_SITE_GQL } from '@/graphql/gql/mutations/site-mutations.gql'
+import { GET_SITES_GQL } from '@/graphql/gql/queries/sites-queries.gql'
 import { MainLayout } from '@/layouts/MainLayout'
 import { siteAtom } from '@/store/edit-site'
 import { asyncGetOrganization } from '@/store/organization'
+import { snackbarState } from '@/store/snackbar'
 import { ChargePointT } from '@/types/site-types'
 import { useMutation } from '@apollo/client'
 import { Divider } from '@mui/material'
@@ -18,6 +20,7 @@ export default function CreateChargingSite() {
 	const [form, setForm] = useAtom(siteAtom)
 	const [mounted, setMounted] = useState(false)
 	const [request, result] = useMutation(CREATE_AND_UPDATE_SITE_GQL)
+	const [, setSnackbar] = useAtom(snackbarState)
 	const router = useRouter()
 
 	useEffect(() => {
@@ -28,7 +31,7 @@ export default function CreateChargingSite() {
 		const chargepoint: ChargePointT = {
 			id: null,
 			siteId: null,
-			chargePointHardwareId: '',
+			chargePointHardwareId: null,
 			connectors: [
 				{
 					id: null,
@@ -36,7 +39,7 @@ export default function CreateChargingSite() {
 					chargePointId: null,
 					siteId: null,
 					label: '',
-					chargePointHardwareId: '',
+					chargePointHardwareId: null,
 					connectorId: 1,
 					power: 0,
 					price: form?.default_price,
@@ -57,7 +60,14 @@ export default function CreateChargingSite() {
 		try {
 			request({
 				onCompleted: () => {
-					router.push('/charging-sites')
+					setSnackbar({
+						message: 'Site Created',
+						type: 'success',
+						open: true,
+					})
+					setTimeout(() => {
+						router.push('/charging-sites')
+					}, 2000)
 				},
 				onError: (error: Error) => {
 					console.log('Error', error)
@@ -83,6 +93,19 @@ export default function CreateChargingSite() {
 						},
 					},
 				},
+				refetchQueries: () => [
+					{
+						query: GET_SITES_GQL,
+						variables: {
+							filter: {},
+							sorting: [{ field: 'id', direction: 'ASC' }],
+							chargePointFilter: {},
+							chargePointSorting: [{ field: 'id', direction: 'ASC' }],
+							connectorFilter: {},
+							connectorSorting: [{ field: 'connectorId', direction: 'ASC' }],
+						},
+					},
+				],
 			})
 		} catch (error: any) {
 			console.log(error?.message)

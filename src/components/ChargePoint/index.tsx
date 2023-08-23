@@ -35,9 +35,12 @@ export const ChargePoint: FC<ChargePointI> = ({
 				className={cn(styles.summary)}
 				expandIcon={<ExpandMoreIcon />}
 			>
-				<Typography fontWeight={500}>
-					{'Charger #' + (chargepoint.id || index)}
+				<Typography style={{ width: '100%' }} fontWeight={500}>
+					{'Charger #' + (chargepoint.id || index + 1)}
 				</Typography>
+				<span style={{ display: 'block', minWidth: '100px' }}>
+					More details
+				</span>
 			</AccordionSummary>
 			<AccordionDetails>
 				<Box sx={{ flexGrow: 1 }}>

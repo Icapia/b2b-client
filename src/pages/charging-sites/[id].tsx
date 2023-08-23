@@ -40,8 +40,6 @@ export default function ChargingSite() {
 	const [organizations] = useAtom(getSiteOrganizationAtom)
 	const [request, result] = useMutation(CREATE_AND_UPDATE_SITE_GQL)
 
-	console.log(site)
-
 	useEffect(() => {
 		if (site.state === 'hasData') {
 			setForm({
@@ -59,7 +57,7 @@ export default function ChargingSite() {
 		const chargepoint: ChargePointT = {
 			id: null,
 			siteId: null,
-			chargePointHardwareId: '',
+			chargePointHardwareId: null,
 			connectors: [
 				{
 					id: null,
@@ -67,7 +65,7 @@ export default function ChargingSite() {
 					chargePointId: null,
 					siteId: null,
 					label: '',
-					chargePointHardwareId: '',
+					chargePointHardwareId: null,
 					connectorId: 1,
 					power: 0,
 					price: form?.default_price,
@@ -85,6 +83,7 @@ export default function ChargingSite() {
 	}
 
 	const handlerSave = () => {
+		console.log(form)
 		try {
 			request({
 				onCompleted: () => {
@@ -93,7 +92,9 @@ export default function ChargingSite() {
 						type: 'success',
 						open: true,
 					})
-					router.push('/charging-sites')
+					setTimeout(() => {
+						router.push('/charging-sites')
+					}, 2000)
 				},
 				onError: (error: Error) => {
 					console.log('Error', error)
