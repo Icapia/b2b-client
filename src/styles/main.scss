@@ -1835,8 +1835,8 @@ body {
 	color: $white !important;
 }
 
-.css-1hk6021-MuiDataGrid-root .MuiDataGrid-columnHeader:focus-within,
-.css-1hk6021-MuiDataGrid-root .MuiDataGrid-cell:focus-within {
+.MuiDataGrid-columnHeader:focus-within,
+.MuiDataGrid-cell:focus-within {
 	outline: none !important;
 }
 

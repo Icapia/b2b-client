@@ -1,19 +1,19 @@
+import { siteAtom } from "@/store/edit-site"
 import {
   Box,
+  FormControl,
   FormGroup,
   Grid,
+  InputLabel,
   MenuItem,
   Select,
-  TextField,
-  FormControl,
-  InputLabel,
   SelectChangeEvent,
-} from "@mui/material";
-import { ButtonRedTransparent } from "../Buttons";
-import { ChangeEvent, FC, useState } from "react";
-import { ChargePointT, ConnectorT, ConnectorsType } from "../../types/site-types";
-import { useAtom } from "jotai";
-import { siteAtom } from "@/store/edit-site";
+  TextField,
+} from "@mui/material"
+import { useAtom } from "jotai"
+import { ChangeEvent, FC } from "react"
+import { ChargePointT, ConnectorT, ConnectorsType } from "../../types/site-types"
+import { ButtonRedTransparent } from "../Buttons"
 
 interface ConnectorEditFormI {
   connectorId: number,
@@ -50,7 +50,8 @@ export const ConnectorEditForm: FC<ConnectorEditFormI> = ({
 
   const handlerChangePriceOrPower = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const name = event.target.name as "price" | "power"
-    const value = parseInt(event.target.value)
+    const value = parseFloat(event.target.value)
+
     onChangePriceOrPower(connectorId, value, name)
   }  
 

@@ -44,12 +44,12 @@ export const SitesGrid: React.FC<SiteGridI> = ({ sites }) => {
 								<thead className='charging-table--header'>
 									<tr>
 										<th style={{ width: 40 }} aria-label='empty' />
-										<th style={{ width: '15%' }}>Charger</th>
-										<th style={{ width: '15%' }}>Address</th>
-										<th style={{ width: '10%' }}>Site Name</th>
+										<th style={{ width: '13%' }}>Charger</th>
+										<th style={{ width: '17%' }}>Address</th>
+										<th style={{ width: '25%' }}>Site Name</th>
 										<th style={{ width: '20%' }}>Connectors</th>
-										<th style={{ width: '10%' }}>Status</th>
-										<th style={{ textAlign: 'right', width: '27%' }}>
+										<th style={{ width: '15%' }}>Status</th>
+										<th style={{ textAlign: 'right', width: '10%' }}>
 											Default Price
 										</th>
 									</tr>

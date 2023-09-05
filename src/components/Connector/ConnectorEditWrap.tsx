@@ -88,17 +88,19 @@ export const ConnectorsEditWrap: FC<ConnectorEditWrapI> = ({
 		value: number,
 		name: 'price' | 'power'
 	) => {
-		const array = [...connectors]
+		const _connectors = [...connectors]
+		const _connector = {..._connectors[id]};
 
 		if (name === 'price') {
-			array[id].price = value
+			_connector.price = value;
 		}
 
 		if (name === 'power') {
-			array[id].power = value
+			_connector.power = value
 		}
 
-		setConnectors(array)
+		_connectors[id] = _connector		
+		setConnectors(_connectors)
 	}
 
 	const handleClose = () => {
