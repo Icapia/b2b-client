@@ -7,13 +7,13 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent,
-  TextField,
+  SelectChangeEvent
 } from "@mui/material"
 import { useAtom } from "jotai"
 import { ChangeEvent, FC } from "react"
 import { ChargePointT, ConnectorT, ConnectorsType } from "../../types/site-types"
 import { ButtonRedTransparent } from "../Buttons"
+import { Input } from '../UI/Input/Input'
 
 interface ConnectorEditFormI {
   connectorId: number,
@@ -91,45 +91,33 @@ export const ConnectorEditForm: FC<ConnectorEditFormI> = ({
             
           </Grid>
           <Grid item xs={6}>
-            <TextField
-              fullWidth
+            <Input
               value={connector?.label}
-              className={"mt-20 col-6"}
-              name={"label"}
-              focused
-              required={true}
-              InputLabelProps={{ required: false }}
-              label={"Connector Label"}
-              placeholder={"Enter Label"}
-              onChange={(event) => handlerChangeLabel(event)}
+              type='string'
+              name='label'
+              label='Connector Label'
+              placeholder='Enter Label'
+              onChange={handlerChangeLabel}
             />
           </Grid>
           <Grid item xs={6}>
-            <TextField
-              fullWidth
+            <Input
               value={connector?.price}
-              className={"mt-20 flex-w"}
-              type={"number"}
-              name={"price"}
-              required={true}
-              InputLabelProps={{ required: false }}
-              label={"Price, $/kWh"}
-              placeholder={"0"}
-              onChange={(event) => handlerChangePriceOrPower(event)}
+              type='number'
+              name='price'
+              label='Price, $/kWh'
+              placeholder='0.0'
+              onChange={handlerChangePriceOrPower}
             />
           </Grid>
           <Grid item xs={6}>
-            <TextField
-              fullWidth
+            <Input
               value={connector?.power}
-              className={"mt-20 flex-w"}
-              type={"number"}
-              name={"power"}
-              required={true}
-              InputLabelProps={{ required: false }}
-              label={"Power, kW"}
-              placeholder={"0"}
-              onChange={(event) => handlerChangePriceOrPower(event)}
+              type='number'
+              name='power'
+              label='Power, kW'
+              placeholder='0.0'
+              onChange={handlerChangePriceOrPower}
             />
           </Grid>
           <Grid

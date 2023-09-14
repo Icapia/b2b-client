@@ -1,3 +1,4 @@
+import { Input } from '@/components/UI/Input/Input'
 import { siteAtom } from '@/store/edit-site'
 import { FormGroup, TextField } from '@mui/material'
 import cn from 'classnames'
@@ -33,19 +34,13 @@ export const ChargePointForm: FC<ChargePointFormI> = ({
 
 	return (
 		<FormGroup className={cn(styles.col)}>
-			<TextField
-				fullWidth
-				value={chargepoint?.chargePointHardwareId}
-				autoFocus
-				className={'flex-w'}
-				type={'string'}
-				name={'chargePointHardwareId'}
-				required={true}
-				focused
-				InputLabelProps={{ required: false }}
-				label={'Charger ID'}
-				placeholder={`Charger ID`}
-				onChange={e => handlerChange(e)}
+			<Input
+				value={chargepoint?.chargePointHardwareId ?? ''}
+				type='string'
+				name='chargePointHardwareId'
+				label='Charger ID'
+				placeholder='Charger ID'
+				onChange={handlerChange}
 			/>
 
 			<TextField

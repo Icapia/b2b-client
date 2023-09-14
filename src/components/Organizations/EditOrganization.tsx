@@ -1,20 +1,19 @@
+import { GET_ORGANIZATIONS_GQL } from "@/graphql/gql/queries/organizations-queries.gql"
+import { useMutation } from "@apollo/client"
 import {
   Box,
   FormGroup,
   Grid,
-  Stack,
-  TextField,
-} from "@mui/material";
-import { ButtonClose, ButtonDefault } from "../Buttons";
-import { useMutation } from "@apollo/client";
-import { ChangeEvent, FC, useState } from "react";
-import { UPDATE_ORGANIZATION_GQL } from "../../graphql/gql/mutations/organization-mutations.gql";
-import { snackbarState } from "../../store/snackbar";
-import { useAtom } from "jotai";
-import { OrganizationCreateForm } from "../../types/organization-types";
-import { asyncGetOrganization, getOrganizations, organizationEditAtom, updateOrganizationRequest } from "../../store/organization";
-import { graphQlInstance } from "@/services/gql";
-import { GET_ORGANIZATIONS_GQL } from "@/graphql/gql/queries/organizations-queries.gql";
+  Stack
+} from "@mui/material"
+import { useAtom } from "jotai"
+import { ChangeEvent, FC, useState } from "react"
+import { UPDATE_ORGANIZATION_GQL } from "../../graphql/gql/mutations/organization-mutations.gql"
+import { organizationEditAtom, updateOrganizationRequest } from "../../store/organization"
+import { snackbarState } from "../../store/snackbar"
+import { OrganizationCreateForm } from "../../types/organization-types"
+import { ButtonClose, ButtonDefault } from "../Buttons"
+import { Input } from '../UI/Input/Input'
 
 interface EditOrganizationI {
   id: number,
@@ -84,10 +83,10 @@ export const EditOrganization: FC<EditOrganizationI> = ({
 
   return (
     <Box>
-      <h2>Add new organization</h2>
+      <h2>Update organization</h2>
       <h5>Notification:</h5>
       <p>
-        After creating a user, login data will be sent to E-mail
+        After updating the organization, the changes will take effect in a couple of minutes
       </p>
       <div className="modal__content-form modal__content-form--fullw mxw-700">
         <FormGroup className="modal__content-formGroup col-2 mt-20">
@@ -97,77 +96,55 @@ export const EditOrganization: FC<EditOrganizationI> = ({
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           >
             <Grid item xs={6}>
-              <TextField
-                fullWidth
-                className={"mt-20 flex-w"}
-                type={"string"}
-                value={form?.name}
-                focused={true}
-                name={"name"}
-                required={true}
-                InputLabelProps={{ required: false }}
-                label={"Organization Name"}
-                placeholder={"Enter name"}
+              <Input
+                value={form.name}
+                type={'string'}
+                name={'name'}
+                label={'Organization Name'}
+                placeholder={'Enter name'}
                 onChange={handlerChange}
               />
             </Grid>
             <Grid item xs={6}>
-              <TextField
-                fullWidth
-                className={"mt-20 flex-w"}
-                type={"number"}
-                focused={true}
-                value={form?.zip_code}
-                name={"zip_code"}
-                required={true}
-                InputLabelProps={{ required: false }}
-                label={"ZIP Code"}
-                placeholder={"Enter zip code"}
+              <Input
+                value={form.zip_code}
+                type={'number'}
+                name={'zip_code'}
+                validation='zip'
+                label={'ZIP Code'}
+                placeholder={'Enter zip code'}
                 onChange={handlerChange}
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                fullWidth
-                className={"mt-20 flex-fw"}
-                autoFocus={true}
-                focused={true}
-                value={form?.address}
-                name={"address"}
-                required={true}
-                InputLabelProps={{ required: false }}
-                label={"Organization Address"}
-                placeholder={"Enter " + "address"}
+              <Input
+                value={form.address}
+                type={'string'}
+                name={'address'}
+                label={'Organization Address'}
+                placeholder={'Enter address'}
                 onChange={handlerChange}
               />
             </Grid>
             <Grid item xs={6}>
-              <TextField
-                fullWidth
-                className={"mt-20 flex-w"}
-                type={"string"}
-                focused={true}
-                value={form?.phone_number}
-                name={"phone_number"}
-                required={true}
-                InputLabelProps={{ required: false }}
-                label={"Phone Number"}
-                placeholder={"Enter phone"}
+             <Input
+                value={form.phone_number}
+                type={'string'}
+                validation='phone'
+                name={'phone_number'}
+                label={'Phone Number'}
+                placeholder={'Enter phone'}
                 onChange={handlerChange}
               />
             </Grid>
             <Grid item xs={6}>
-              <TextField
-                fullWidth
-                className={"mt-20 flex-w"}
-                type={"email"}
-                focused={true}
-                name={"email"}
-                value={form?.email}
-                required={true}
-                InputLabelProps={{ required: false }}
-                label={"E-mail"}
-                placeholder={"Enter email"}
+              <Input
+                value={form.email}
+                type={'email'}
+                validation='email'
+                name={'email'}
+                label={'E-mail'}
+                placeholder={'Enter email'}
                 onChange={handlerChange}
               />
             </Grid>

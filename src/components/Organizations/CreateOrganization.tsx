@@ -1,14 +1,15 @@
-import { Box, FormGroup, Grid, InputAdornment, Modal, Stack, TextField } from '@mui/material';
-import { ButtonClose, ButtonDefault, ButtonDelete } from '../Buttons';
-import { gql, useMutation, useQuery } from '@apollo/client';
-import { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react';
+import { useMutation } from '@apollo/client'
+import { Box, FormGroup, Grid, Stack } from '@mui/material'
+import { ChangeEvent, useState } from 'react'
+import { ButtonClose, ButtonDefault } from '../Buttons'
 
-import { CREATE_ORGANIZATION_GQL } from '../../graphql/gql/mutations/organization-mutations.gql';
-import { GET_ORGANIZATIONS_GQL } from '../../graphql/gql/queries/organizations-queries.gql';
-import { snackbarState } from '../../store/snackbar';
-import { useAtom } from 'jotai';
-import { OrganizationCreateForm } from '../../types/organization-types';
-import { organizationCreateAtom, updateOrganizationRequest } from '../../store/organization';
+import { useAtom } from 'jotai'
+import { CREATE_ORGANIZATION_GQL } from '../../graphql/gql/mutations/organization-mutations.gql'
+import { GET_ORGANIZATIONS_GQL } from '../../graphql/gql/queries/organizations-queries.gql'
+import { organizationCreateAtom, updateOrganizationRequest } from '../../store/organization'
+import { snackbarState } from '../../store/snackbar'
+import { OrganizationCreateForm } from '../../types/organization-types'
+import { Input } from '../UI/Input/Input'
 
 export const CreateOrganizationForm = () => {
   const [, setIsOpen] = useAtom(organizationCreateAtom);
@@ -78,7 +79,7 @@ export const CreateOrganizationForm = () => {
     <Box>
       <h2>Add new organization</h2>
       <h5>Notification:</h5>
-      <p>After creating a user, login data will be sent to E-mail</p>
+      <p>After updating the organization, the changes will take effect in a couple of minutes</p>
       <div className='modal__content-form modal__content-form--fullw mxw-700'>
         <FormGroup className='modal__content-formGroup col-2 mt-20'>
           <Grid
@@ -90,14 +91,10 @@ export const CreateOrganizationForm = () => {
               item
               xs={6}
             >
-              <TextField
-                fullWidth
-                className={'mt-20 flex-w'}
+              <Input
+                value={form.name}
                 type={'string'}
-                focused={true}
                 name={'name'}
-                required={true}
-                InputLabelProps={{ required: false }}
                 label={'Organization Name'}
                 placeholder={'Enter name'}
                 onChange={handlerChange}
@@ -107,14 +104,11 @@ export const CreateOrganizationForm = () => {
               item
               xs={6}
             >
-              <TextField
-                fullWidth
-                className={'mt-20 flex-w'}
+              <Input
+                value={form.zip_code}
                 type={'number'}
-                focused={true}
                 name={'zip_code'}
-                required={true}
-                InputLabelProps={{ required: false }}
+                validation='zip'
                 label={'ZIP Code'}
                 placeholder={'Enter zip code'}
                 onChange={handlerChange}
@@ -124,16 +118,12 @@ export const CreateOrganizationForm = () => {
               item
               xs={12}
             >
-              <TextField
-                fullWidth
-                className={'mt-20 flex-fw'}
-                autoFocus={true}
-                focused={true}
+              <Input
+                value={form.address}
+                type={'string'}
                 name={'address'}
-                required={true}
-                InputLabelProps={{ required: false }}
                 label={'Organization Address'}
-                placeholder={'Enter ' + 'address'}
+                placeholder={'Enter address'}
                 onChange={handlerChange}
               />
             </Grid>
@@ -141,14 +131,11 @@ export const CreateOrganizationForm = () => {
               item
               xs={6}
             >
-              <TextField
-                fullWidth
-                className={'mt-20 flex-w'}
+              <Input
+                value={form.phone_number}
                 type={'string'}
-                focused={true}
+                validation='phone'
                 name={'phone_number'}
-                required={true}
-                InputLabelProps={{ required: false }}
                 label={'Phone Number'}
                 placeholder={'Enter phone'}
                 onChange={handlerChange}
@@ -158,14 +145,11 @@ export const CreateOrganizationForm = () => {
               item
               xs={6}
             >
-              <TextField
-                fullWidth
-                className={'mt-20 flex-w'}
+              <Input
+                value={form.email}
                 type={'email'}
-                focused={true}
+                validation='email'
                 name={'email'}
-                required={true}
-                InputLabelProps={{ required: false }}
                 label={'E-mail'}
                 placeholder={'Enter email'}
                 onChange={handlerChange}

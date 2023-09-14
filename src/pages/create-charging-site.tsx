@@ -56,8 +56,24 @@ export default function CreateChargingSite() {
 		})
 	}
 
+	console.log(form)
+
 	const handlerSave = () => {
 		try {
+			if(
+				form.location.coordinates[0] > 180 
+				|| form.location.coordinates[0] < -180
+			) {
+				throw new Error('Longitude Must be within (-180; 180)')
+			}
+
+			if(
+				form.location.coordinates[1] > 90 
+				|| form.location.coordinates[1] < -90
+			) {
+				throw new Error('Latitude Must be within (-90; 90)')
+			}
+
 			request({
 				onCompleted: () => {
 					setSnackbar({

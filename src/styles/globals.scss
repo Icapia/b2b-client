@@ -67,8 +67,12 @@ body {
 
     & fieldset {
       outline: none !important;
-      border-color: #E9794A !important;
+      border-color: $text !important;
     }
+  }
+
+  &.Mui-error fieldset {
+    border: 1px solid $red !important;
   }
 }
 

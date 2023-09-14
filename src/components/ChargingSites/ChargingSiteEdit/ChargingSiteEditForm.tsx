@@ -3,18 +3,16 @@ import {
 	FormControl,
 	FormGroup,
 	Grid,
-	InputAdornment,
 	InputLabel,
 	MenuItem,
-	OutlinedInput,
 	Select,
-	SelectChangeEvent,
-	TextField,
+	SelectChangeEvent
 } from '@mui/material'
 
+import { Input } from '@/components/UI/Input/Input'
 import { siteAtom } from '@/store/edit-site'
 import { useAtom } from 'jotai'
-import { ChangeEvent, FC } from 'react'
+import { ChangeEvent, FC, useState } from 'react'
 import { Location, Organization } from '../../../types/entities'
 import styles from './index.module.scss'
 
@@ -26,6 +24,7 @@ export const ChargingSiteEditForm: FC<ChargingSiteEditFormI> = ({
 	organizations,
 }) => {
 	const [form, setForm] = useAtom(siteAtom)
+	const [selected, setSelected] = useState(parseInt(organizations[0]?.id) ?? 0);
 
 	const handlerChange = (
 		event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -63,13 +62,12 @@ export const ChargingSiteEditForm: FC<ChargingSiteEditFormI> = ({
 							<InputLabel id='organization-label'>Organization</InputLabel>
 							<Select
 								sx={{ backgroundColor: 'white' }}
-								displayEmpty
 								labelId='organization-label'
 								id='organization'
 								name='organizationId'
 								label='Organization'
+								defaultValue={selected}
 								autoFocus
-								value={parseInt(form.organizationId ?? '')}
 								onChange={(e: SelectChangeEvent<number>) => {
 									handlerChangeSelect(e)
 								}}
@@ -86,113 +84,82 @@ export const ChargingSiteEditForm: FC<ChargingSiteEditFormI> = ({
 						</FormControl>
 					</Grid>
 					<Grid item xs={6}>
-						<TextField
-							fullWidth
+						<Input
 							value={form.name}
-							className={'mt-20 flex-w'}
-							type={'string'}
-							focused={true}
-							name={'name'}
-							required={true}
-							InputLabelProps={{ required: false }}
-							label={'Site Name'}
-							placeholder={`Enter Site Name`}
+							type='string'
+							name='name'
+							label='Site Name'
+							placeholder='Enter Site Name'
 							onChange={handlerChange}
 						/>
 					</Grid>
 					<Grid item xs={6}>
-						<TextField
-							fullWidth
+						<Input
 							value={form.zip_code}
-							className={'mt-20 flex-w'}
-							type={'string'}
-							focused={true}
-							name={'zip_code'}
-							required={true}
-							InputLabelProps={{ required: false }}
-							label={'ZIP Code'}
-							placeholder={'94540'}
+							type='number'
+							name='zip_code'
+							label='ZIP Code'
+							placeholder='99999'
 							onChange={handlerChange}
 						/>
 					</Grid>
 					<Grid item xs={12}>
-						<TextField
-							fullWidth
+						<Input
 							value={form.address}
-							className={'mt-20 flex-fw'}
-							autoFocus={true}
-							focused={true}
-							name={'address'}
-							required={true}
-							InputLabelProps={{ required: false }}
-							label={'Address'}
-							placeholder={'Enter Site Address'}
+							type='string'
+							name='address'
+							label='Address'
+							placeholder='Enter Site Address'
 							onChange={handlerChange}
 						/>
 					</Grid>
 					<Grid item xs={6}>
-						<TextField
-							fullWidth
+						<Input
 							value={form.phone_number}
-							className={'mt-20 flex-w'}
-							type={'text'}
-							focused={true}
-							name={'phone_number'}
-							required={true}
-							InputLabelProps={{ required: false }}
-							label={'Phone Number (optional)'}
-							placeholder={'+1 111 111-11-11'}
+							type='number'
+							name='phone_number'
+							validation='phone'
+							label='Phone Number (optional)'
+							placeholder='+1 111 111-11-11'
 							onChange={handlerChange}
 						/>
 					</Grid>
 					<Grid item xs={6}>
-						<FormControl focused fullWidth className='mt-20'>
-							<InputLabel htmlFor='default_price'>
-								Default price, $/kWh
-							</InputLabel>
-							<OutlinedInput
-								value={form.default_price}
-								type={'number'}
-								name={'default_price'}
-								label={'Default price, $/kWh'}
-								placeholder={'0.0'}
-								endAdornment={
-									<InputAdornment position='end'>$/kWh</InputAdornment>
-								}
-								onChange={handlerChange}
-							/>
-						</FormControl>
+						<Input
+							value={form.default_price}
+							type='number'
+							validation='price'
+							name='default_price'
+							label='Default price, $/kWh'
+							placeholder='0.0'
+							adornment='$/kWh'
+							onChange={handlerChange}
+						/>
 					</Grid>
 
 					<Grid item xs={6}>
-						<FormControl focused fullWidth className='mt-20'>
-							<InputLabel htmlFor='default_price'>
-								Coordinates (Longitude)
-							</InputLabel>
-							<OutlinedInput
-								value={form.location.coordinates[0]}
-								type={'number'}
-								name={'longitude'}
-								label={'Coordinates (Longitude)'}
-								placeholder={'000.000'}
-								onChange={handlerChangeCoordinates}
-							/>
-						</FormControl>
+						<Input
+							value={form.location.coordinates[0]}
+							type='number'
+							name='longitude'
+							label='Coordinates (Longitude)'
+							validation='longitude'
+							placeholder='000.000'
+							adornment='Longitude'
+							onChange={handlerChangeCoordinates}
+						/>
 					</Grid>
 					<Grid item xs={6}>
-						<FormControl focused fullWidth className='mt-20'>
-							<InputLabel htmlFor='default_price'>
-								Coordinates (Latitude)
-							</InputLabel>
-							<OutlinedInput
-								value={form.location.coordinates[1]}
-								type={'number'}
-								name={'latitude'}
-								label={'Coordinates (Latitude)'}
-								placeholder={'000.000'}
-								onChange={handlerChangeCoordinates}
-							/>
-						</FormControl>
+						<Input
+							value={form.location.coordinates[1]}
+							type='number'
+							name='latitude'
+							validation='latitude'
+							label='Coordinates (Latitude)'
+							placeholder='000.000'
+							adornment='Latitude'
+							onChange={handlerChangeCoordinates}
+						/>
 					</Grid>
 				</Grid>
 			</FormGroup>
