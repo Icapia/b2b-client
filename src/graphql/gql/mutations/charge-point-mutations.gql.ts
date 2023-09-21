@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from "@apollo/client"
 
 export const CREATE_CHARGE_POINT_GQL = gql`
   mutation createChargePoint($input: CreateOneChargePointInput!) {
@@ -17,8 +17,16 @@ export const UPDATE_CHARGE_POINT_GQL = gql`
 `;
 
 export const DELETE_CHARGE_POINT_GQL = gql`
-  mutation deleteChargePoint($input: DeleteOneChargePointInput!) {
-    deleteOneChargePoint(input: $input) {
+  mutation deleteOneChargePoint($input: DeleteOneChargePointInput!){
+    deleteOneChargePoint(input: $input){
+      id
+    }
+  }
+`;
+
+export const DELETE_CONNECTOR_GQL = gql`
+  mutation deleteOneConnector($input: DeleteOneConnectorInput!){
+    deleteOneConnector(input: $input){
       id
     }
   }

@@ -2,7 +2,7 @@ import { Loader } from '@/components/Loader'
 import { siteAtom } from '@/store/edit-site'
 import { snackbarState } from '@/store/snackbar'
 import { useMutation } from '@apollo/client'
-import { Divider } from '@mui/material'
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider } from '@mui/material'
 import { useAtom, useSetAtom } from 'jotai'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
@@ -10,10 +10,11 @@ import {
 	ButtonBlack,
 	ButtonClose,
 	ButtonDefault,
+	ButtonRemove
 } from '../../components/Buttons'
 import { ChargePoint } from '../../components/ChargePoint'
 import { ChargingSiteEditForm } from '../../components/ChargingSites/ChargingSiteEdit/ChargingSiteEditForm'
-import { CREATE_AND_UPDATE_SITE_GQL } from '../../graphql/gql/mutations/site-mutations.gql'
+import { CREATE_AND_UPDATE_SITE_GQL, DELETE_ONE_SITE_GQL } from '../../graphql/gql/mutations/site-mutations.gql'
 import { GET_SITES_GQL } from '../../graphql/gql/queries/sites-queries.gql'
 import { MainLayout } from '../../layouts/MainLayout'
 import {
@@ -39,6 +40,9 @@ export default function ChargingSite() {
 	const [site] = useAtom(getSiteAtom)
 	const [organizations] = useAtom(getSiteOrganizationAtom)
 	const [request, result] = useMutation(CREATE_AND_UPDATE_SITE_GQL)
+	const [isRemove, setIsRemove] = useState(false);
+
+	const [deleteSiteMutation, deleteSite] = useMutation(DELETE_ONE_SITE_GQL);
 
 	useEffect(() => {
 		if (site.state === 'hasData') {
@@ -165,6 +169,64 @@ export default function ChargingSite() {
 		router.back()
 	}
 
+	const handleDeleteSite = async () => {
+		try {
+			handleCloseRemoveDialog()
+			deleteSiteMutation({
+				onCompleted: () => {
+					setSnackbar({
+						message: 'The site was successfully deleted',
+						type: 'success',
+						open: true,
+					});
+					setTimeout(() => {
+						router.push('/charging-sites')
+					}, 2000)
+				},
+				onError: (e) => {
+					setSnackbar({
+						message: e?.message,
+						type: 'error',
+						open: true,
+					});
+				},
+				variables: {
+					"input": {
+						"id": id
+					}
+				},
+				refetchQueries: () => [
+					{
+						query: GET_SITES_GQL,
+						variables: {
+							filter: {},
+							sorting: [{ field: 'id', direction: 'ASC' }],
+							chargePointFilter: {},
+							chargePointSorting: [{ field: 'id', direction: 'ASC' }],
+							connectorFilter: {},
+							connectorSorting: [{ field: 'connectorId', direction: 'ASC' }],
+						},
+					},
+				],
+			})
+		} catch (e: any) {
+			console.error(e)
+			setSnackbar({
+				message: e?.message,
+				type: 'error',
+				open: true,
+			});
+		}
+	}
+
+	const handleCloseRemoveDialog = () => {
+		setIsRemove(false)
+	}
+
+	const handleOpenRemoveDialog = () => {
+		setIsRemove(true)
+	}
+
 	return (
 		mounted && (
 			<>
@@ -207,6 +269,34 @@ export default function ChargingSite() {
 					<ButtonBlack fullWidth onClick={handlerAddChargePoint}>
 						{`+ Add new Charger`}
 					</ButtonBlack>
+
+					<ButtonRemove 
+						fullWidth
+						onClick={handleOpenRemoveDialog}
+						className='mt-20'
+					>
+						<img style={{marginRight: '5px'}} src="/image/icons/trash.svg"/>
+						Delete Site
+					</ButtonRemove>
+					<Dialog
+						open={isRemove}
+						onClose={handleCloseRemoveDialog}
+						aria-labelledby='alert-dialog-title'
+						aria-describedby='alert-dialog-description'
+					>
+						<DialogTitle id='alert-dialog-title'>{'Remove site'}</DialogTitle>
+						<DialogContent>
+							<DialogContentText id='alert-dialog-description'>
+								Are you sure you want to remove the site?
+							</DialogContentText>
+						</DialogContent>
+						<DialogActions>
+							<Button onClick={handleDeleteSite} autoFocus>
+								Yes
+							</Button>
+							<Button onClick={handleCloseRemoveDialog}>No</Button>
+						</DialogActions>
+					</Dialog>
 				</MainLayout>
 			</>
 		)

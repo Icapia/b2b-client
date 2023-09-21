@@ -111,6 +111,45 @@ export const ButtonRedTransparent = styled(Button)(({ theme }) => ({
 	},
 }))
 
+export const ButtonRemove = styled(Button)(({ theme }) => ({
+	fontSize: 15,
+	padding: '14px 12px',
+	border: '1px solid',
+	lineHeight: 1.15,
+	backgroundColor: 'transparent',
+	borderColor: '#F29B8F',
+	borderRadius: 8,
+	textTransform: 'none',
+	color: '#F29B8F',
+	boxShadow: 'none',
+	fontFamily: ['Poppins', 'sans-serif'].join(','),
+	fontWeight: 600,
+	'&:hover': {
+		color: '#F29B8F',
+		backgroundColor: 'rgba(242, 155, 143, .15)',
+	},
+}))
+
+export const ButtonRemoveSmall = styled(Button)(({ theme }) => ({
+	fontSize: 15,
+	padding: '10px 12px',
+	marginLeft: '10px',
+	border: '1px solid',
+	lineHeight: 1.15,
+	backgroundColor: 'transparent',
+	borderColor: '#F29B8F',
+	borderRadius: 8,
+	textTransform: 'none',
+	color: '#F29B8F',
+	boxShadow: 'none',
+	fontFamily: ['Poppins', 'sans-serif'].join(','),
+	fontWeight: 600,
+	'&:hover': {
+		color: '#F29B8F',
+		backgroundColor: 'rgba(242, 155, 143, .15)',
+	},
+}))
+
 export const ButtonBlackTransparent = styled(Button)(({ theme }) => ({
 	fontSize: 15,
 	padding: '14px 12px',

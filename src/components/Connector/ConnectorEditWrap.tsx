@@ -1,4 +1,7 @@
+import { DELETE_CONNECTOR_GQL } from '@/graphql/gql/mutations/charge-point-mutations.gql'
 import { siteAtom } from '@/store/edit-site'
+import { snackbarState } from '@/store/snackbar'
+import { useMutation } from '@apollo/client'
 import {
 	Button,
 	Dialog,
@@ -35,6 +38,8 @@ export const ConnectorsEditWrap: FC<ConnectorEditWrapI> = ({
 		chargepoint?.connectors || []
 	)
 	const [deleteId, setDeleteId] = useState(0)
+	const [mutationDeleteConnector, deleteConnector] = useMutation(DELETE_CONNECTOR_GQL)
+	const [, setSnackbar] = useAtom(snackbarState)
 
 	const handlerAddNewConnector = () => {
 		const index = chargepoint.connectors?.length || 0
@@ -61,6 +66,49 @@ export const ConnectorsEditWrap: FC<ConnectorEditWrapI> = ({
 	}
 
 	const handleRemove = () => {
+		try {
+			const connector = connectors.filter((el, index) => {
+				return index === deleteId
+			});
+			const connectorID = connector[0].id;
+
+			if(!connectorID?.toString()) {
+				throw new Error('Invalid Connector ID')
+			}
+
+			mutationDeleteConnector({
+				onCompleted: () => {
+					handleRemoveFromArray()
+					setSnackbar({
+						message: 'The connector was successfully deleted',
+						type: 'success',
+						open: true,
+					});
+				},
+				onError: (e) => {
+					setSnackbar({
+						message: e?.message,
+						type: 'error',
+						open: true,
+					});
+				},
+				variables: {
+          "input": {
+            "id": connectorID
+          }
+        },
+			})
+		} catch (e: any) {
+			console.error(e)
+			setSnackbar({
+				message: e?.message,
+				type: 'error',
+				open: true,
+			});
+		}
+	}
+
+	const handleRemoveFromArray = () => {
 		const filtered = Array.from(connectors).filter((el, index) => {
 			return index !== deleteId
 		})
@@ -164,7 +212,13 @@ export const ConnectorsEditWrap: FC<ConnectorEditWrapI> = ({
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={handleRemove} autoFocus>
+					<Button onClick={() => {
+						if(form.id === null) {
+							handleRemoveFromArray()
+						} else {
+							handleRemove()
+						}
+					}} autoFocus>
 						Yes
 					</Button>
 					<Button onClick={handleClose}>No</Button>

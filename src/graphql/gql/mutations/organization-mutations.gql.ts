@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from "@apollo/client"
 
 export const CREATE_ORGANIZATION_GQL = gql`
   mutation createOrganization($input: CreateOneOrganizationInput!) {
@@ -11,6 +11,14 @@ export const CREATE_ORGANIZATION_GQL = gql`
 export const UPDATE_ORGANIZATION_GQL = gql`
   mutation updateOrganization($input: UpdateOneOrganizationInput!) {
     updateOneOrganization(input: $input) {
+      id
+    }
+  }
+`;
+
+export const DELETE_ORGANIZATION_GQL = gql`
+  mutation deleteOneOrganization($input: DeleteOneOrganizationInput!){
+    deleteOneOrganization(input:$input){
       id
     }
   }

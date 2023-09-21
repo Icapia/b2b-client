@@ -1,18 +1,14 @@
+import { DELETE_SITE_GQL } from '@/graphql/gql/mutations/site-mutations.gql'
 import { GET_ORGANIZATIONS_GQL } from "@/graphql/gql/queries/organizations-queries.gql"
 import { useMutation } from "@apollo/client"
-import {
-  Box,
-  FormGroup,
-  Grid,
-  Stack
-} from "@mui/material"
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormGroup, Grid, Stack } from '@mui/material'
 import { useAtom } from "jotai"
 import { ChangeEvent, FC, useState } from "react"
-import { UPDATE_ORGANIZATION_GQL } from "../../graphql/gql/mutations/organization-mutations.gql"
+import { DELETE_ORGANIZATION_GQL, UPDATE_ORGANIZATION_GQL } from "../../graphql/gql/mutations/organization-mutations.gql"
 import { organizationEditAtom, updateOrganizationRequest } from "../../store/organization"
 import { snackbarState } from "../../store/snackbar"
 import { OrganizationCreateForm } from "../../types/organization-types"
-import { ButtonClose, ButtonDefault } from "../Buttons"
+import { ButtonClose, ButtonDefault, ButtonRemoveSmall } from "../Buttons"
 import { Input } from '../UI/Input/Input'
 
 interface EditOrganizationI {
@@ -38,6 +34,13 @@ export const EditOrganization: FC<EditOrganizationI> = ({
   const [mutationUpdateOrganization, updateOrganization] = useMutation(
     UPDATE_ORGANIZATION_GQL
   );
+  const [mutationDeleteSiteOrganization, deleteSiteOrganization] = useMutation(
+    DELETE_SITE_GQL
+  );
+  const [mutationDeleteOrganization, deleteOrganization] = useMutation(
+    DELETE_ORGANIZATION_GQL
+  );
+  const [isRemove, setIsRemove] = useState(false);
 
   const handlerChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const name = event.target.name;
@@ -79,6 +82,85 @@ export const EditOrganization: FC<EditOrganizationI> = ({
         },
       }]
     });
+  }
+
+  const handleCloseRemoveDialog = () => {
+		setIsRemove(false)
+	}
+
+	const handleOpenRemoveDialog = () => {
+		setIsRemove(true)
+	}
+
+  const handleDeleteSiteOrganization = () => {
+    try {
+      handleCloseRemoveDialog()
+			mutationDeleteSiteOrganization({
+				onCompleted: () => {
+					handleDeleteOrganization()
+				},
+				onError: (e) => {
+					setSnackbar({
+						message: e?.message,
+						type: 'error',
+						open: true,
+					});
+				},
+				variables: {
+          "input": {
+            "filter": {"organizationId": {"eq": parseInt(id.toString())}},
+            "update": {"organizationId": parseInt(id.toString())}
+          }
+        },
+			})
+		} catch (e: any) {
+			console.error(e)
+			setSnackbar({
+				message: e?.message,
+				type: 'error',
+				open: true,
+			});
+		}
+  }
+
+  const handleDeleteOrganization = () => {
+    try {
+			mutationDeleteOrganization({
+				onCompleted: () => {
+					setSnackbar({
+						message: 'The organization was successfully deleted',
+						type: 'success',
+						open: true,
+					});
+				},
+				onError: (e) => {
+					setSnackbar({
+						message: e?.message,
+						type: 'error',
+						open: true,
+					});
+				},
+				variables: {
+          "input": {
+            "id": id
+          }
+        },
+				refetchQueries: () => [{
+          query: GET_ORGANIZATIONS_GQL,
+          variables: {
+            filter: {},
+            sorting: [],
+          },
+        }]
+			})
+		} catch (e: any) {
+			console.error(e)
+			setSnackbar({
+				message: e?.message,
+				type: 'error',
+				open: true,
+			});
+		}
   }
 
   return (
@@ -157,14 +239,24 @@ export const EditOrganization: FC<EditOrganizationI> = ({
         alignItems="center"
         spacing={2}
       >
-        <ButtonClose
-          disabled={false}
-          className={"mt-20 flex-fw"}
-          fullWidth={false}
-          onClick={handlerClose}
-        >
-          Cancel
-        </ButtonClose>
+        <div>
+          <ButtonClose
+            disabled={false}
+            className={"mt-20 flex-fw"}
+            fullWidth={false}
+            onClick={handlerClose}
+          >
+            Cancel
+          </ButtonClose>
+          <ButtonRemoveSmall 
+						className={"mt-20 flex-fw"}
+            fullWidth={false}
+						onClick={handleOpenRemoveDialog}
+					>
+						<img style={{marginRight: '5px'}} src="/image/icons/trash.svg"/>
+						Delete Organization
+					</ButtonRemoveSmall>
+        </div>
 
         <ButtonDefault
           disabled={false}
@@ -175,6 +267,27 @@ export const EditOrganization: FC<EditOrganizationI> = ({
           {(updateOrganization?.loading && "Loading...") || "Update"}
         </ButtonDefault>
       </Stack>
+      <Dialog
+        open={isRemove}
+        onClose={handleCloseRemoveDialog}
+        aria-labelledby='alert-dialog-title'
+        aria-describedby='alert-dialog-description'
+      >
+        <DialogTitle id='alert-dialog-title'>
+          {'Remove organization'}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id='alert-dialog-description'>
+            Are you sure you want to remove the site?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDeleteSiteOrganization} autoFocus>
+            Yes
+          </Button>
+          <Button onClick={handleCloseRemoveDialog}>No</Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };
