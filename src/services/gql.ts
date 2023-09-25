@@ -25,7 +25,7 @@ class GraphQLService {
 		}
 
     const httpLink = createHttpLink({
-      uri: 'http://34.94.253.188:3012/graphql',
+      uri: 'https://dev.icapia.com/graphql',
     });
 
 		const authLink = setContext((_, { headers }) => {
