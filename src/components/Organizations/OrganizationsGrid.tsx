@@ -100,11 +100,12 @@ export const OrganizationsGrid: FC<OrganizationGrid> = ({ data }) => {
 						backgroundColor: '#FBFBFB',
 					},
 				}}
-				pagination
 				rowHeight={50}
+				hideFooterPagination
+				pageSizeOptions={[]}
 				onCellClick={() => {}}
 				onCellDoubleClick={() => {}}
-			></DataGrid>
+			/>
 			<ModalComponent onRequestClose={handlerClose} isOpen={isOpen}>
 				<EditOrganization id={id} edit={edit} />
 			</ModalComponent>
