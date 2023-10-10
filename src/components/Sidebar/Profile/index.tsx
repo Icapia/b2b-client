@@ -18,7 +18,7 @@ export const Profile = () => {
 	return (
 		<div className={cn(styles.wrapper)}>
 			<div className={cn(styles.avatar)}>
-				<Image width={40} height={40} src={`/image/user-avatar-m.png`} alt='' />
+				<Image width={40} height={40} src={`/b2b/image/user-avatar-m.png`} alt='' />
 			</div>
 			{!sidebar && (
 				<div className={cn(styles.profile)}>

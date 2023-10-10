@@ -33,14 +33,16 @@ export const ChargingSiteEditForm: FC<ChargingSiteEditFormI> = ({
 	}
 
 	const handlerChangeCoordinates = (event: ChangeEvent<HTMLInputElement>) => {
-		const isLongitude = event.target.name === 'longitude'
+		const isLatitude = event.target.name === 'latitude'
 
 		const coordinates: Location = {
 			type: 'Point',
 			coordinates: [
-				isLongitude ? event.target.valueAsNumber : form.location.coordinates[0],
-				!isLongitude
-					? event.target.valueAsNumber
+				isLatitude ? 
+					parseFloat(event.target.value) 
+					: form.location.coordinates[0],
+				!isLatitude
+					? parseFloat(event.target.value) 
 					: form.location.coordinates[1],
 			],
 		}
@@ -52,6 +54,8 @@ export const ChargingSiteEditForm: FC<ChargingSiteEditFormI> = ({
 		const value = (event?.target?.value as string) || null
 		setForm({ ...form, organizationId: value })
 	}
+
+	console.log("Form",form)
 
 	return (
 		<Box className={styles.container}>
@@ -140,24 +144,24 @@ export const ChargingSiteEditForm: FC<ChargingSiteEditFormI> = ({
 					<Grid item xs={6}>
 						<Input
 							value={form.location.coordinates[0]}
-							type='number'
-							name='longitude'
-							label='Coordinates (Longitude)'
-							validation='longitude'
+							type='text'
+							name='latitude'
+							validation='latitude'
+							label='Coordinates (Latitude)'
 							placeholder='000.000'
-							adornment='Longitude'
+							adornment='Latitude'
 							onChange={handlerChangeCoordinates}
 						/>
 					</Grid>
 					<Grid item xs={6}>
 						<Input
 							value={form.location.coordinates[1]}
-							type='number'
-							name='latitude'
-							validation='latitude'
-							label='Coordinates (Latitude)'
+							type='text'
+							name='longitude'
+							label='Coordinates (Longitude)'
+							validation='longitude'
 							placeholder='000.000'
-							adornment='Latitude'
+							adornment='Longitude'
 							onChange={handlerChangeCoordinates}
 						/>
 					</Grid>

@@ -1,36 +1,38 @@
+import { loginFormAtom, loginLoader } from "@/store/login"
 import {
   FormGroup,
   Stack,
   TextField,
-} from "@mui/material";
+} from "@mui/material"
+import { useAtom } from "jotai"
+import { useRouter } from "next/router"
+import { ChangeEvent } from "react"
+import { graphQlInstance } from "../../services/gql"
+import { snackbarState } from "../../store/snackbar"
 import {
   ButtonClose,
   ButtonDefault,
-} from "../Buttons";
-import { ChangeEvent } from "react";
-import { useAtom } from "jotai";
-import { graphQlInstance } from "../../services/gql";
-import { snackbarState } from "../../store/snackbar";
-import { useRouter } from "next/router";
-import { loginAtom } from "@/store/login";
+} from "../Buttons"
 
 export const VerificationCode = () => {
-  const [loginForm, setLoginForm] = useAtom(loginAtom)
+  const [loginForm, setLoginForm] = useAtom(loginFormAtom)
   const [, setSnackbar] = useAtom(snackbarState)
   const router = useRouter();
+  const [loader, setLoader] = useAtom(loginLoader);
 
   const handlerChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setLoginForm({...loginForm, password: event?.target?.value})
   }
 
-  const handlerLogin = () => {
-    handleMutationLogin();
+  const handlerLogin = async () => {
+    setLoader(true);
+    await handleMutationLogin();
+    setLoader(false);
   };
 
   const handleMutationLogin = async () => {
     try {
-      graphQlInstance.authUser(loginForm.username, loginForm.password)
-      router.push('/organizations')
+      await graphQlInstance.authUser(loginForm.username, loginForm.password)
     } catch (error: any) {
       console.log(error)
       setSnackbar({

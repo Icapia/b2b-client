@@ -2,7 +2,6 @@ import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FC } from 'react';
 import { sidebarAtom } from '../../store/sidebar';
 
 export const NavMenu = ({}) => {
@@ -11,12 +10,12 @@ export const NavMenu = ({}) => {
 
   const SidebarData = [
     {
-      image: '/image/sidebar-icons/Chart.svg',
+      image: '/b2b/image/sidebar-icons/Chart.svg',
       name: 'Charging sites',
       url: '/charging-sites',
     },
     {
-      image: '/image/sidebar-icons/User_box.svg',
+      image: '/b2b/image/sidebar-icons/User_box.svg',
       name: 'Organization',
       url: '/organizations',
     },

@@ -1,14 +1,13 @@
+import { Loader } from "@/components/Loader"
+import { ModalComponent } from "@/components/Modal/Modal"
+import { CreateOrganizationForm } from "@/components/Organizations/CreateOrganization"
+import { OrganizationsGrid } from "@/components/Organizations/OrganizationsGrid"
+import { useAtom } from "jotai"
 import {
   ButtonDefault,
-} from "../components/Buttons";
-import { MainLayout } from "../layouts/MainLayout";
-import { useAtom } from "jotai";
-import { asyncGetOrganization, getOrganizations, organizationCreateAtom } from "../store/organization";
-import { OrganizationsGrid } from "@/components/Organizations/OrganizationsGrid";
-import { ModalComponent } from "@/components/Modal/Modal";
-import { CreateOrganizationForm } from "@/components/Organizations/CreateOrganization";
-import { Loader } from "@/components/Loader";
-import { useEffect } from "react";
+} from "../components/Buttons"
+import { MainLayout } from "../layouts/MainLayout"
+import { asyncGetOrganization, organizationCreateAtom } from "../store/organization"
 
 export default function Organizations() {
   const [isOpen, setIsOpen] = useAtom(organizationCreateAtom)
@@ -21,10 +20,6 @@ export default function Organizations() {
   const handlerClose = () => {
     setIsOpen(false);
   };
-
-  useEffect(() => {
-    console.log(organizations)
-  }, [organizations])
 
   return (
     <MainLayout

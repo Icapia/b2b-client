@@ -111,6 +111,7 @@ export const Input: FC<InputI> = ({
 				className={'mt-20 flex-w'}
 				error={fieldState.invalid}
 				focused={true}
+				style={{WebkitAppearance: 'none'}}
 				onChange={(event) => {
 					field.onChange(event)
 					onChange(event)

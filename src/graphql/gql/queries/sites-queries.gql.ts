@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_SITES_GQL = gql`
   query getSites(
@@ -15,6 +15,7 @@ export const GET_SITES_GQL = gql`
       zip_code
       phone_number
       default_price
+      location
       address
       chargePoints(filter: $chargePointFilter, sorting: $chargePointSorting) {
         id
@@ -23,6 +24,7 @@ export const GET_SITES_GQL = gql`
         status
         connectors(filter: $connectorFilter, sorting: $connectorSorting) {
           id
+          connectorId
           connectorTypeName
           price
           statusName
@@ -62,6 +64,7 @@ export const GET_SITE_GQL = gql`
         status
         connectors(filter: $connectorFilter, sorting: $connectorSorting) {
           id
+          connectorId
           connectorTypeName
           price
           statusName

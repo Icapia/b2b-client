@@ -1,15 +1,17 @@
-import { NavMenu } from "./NavMenu";
-import { useAtom } from "jotai";
-import { sidebarAtom } from "../../store/sidebar";
-import { Profile } from "./Profile";
-import { graphQlInstance } from "@/services/gql";
-import { useRouter } from "next/router";
-import Link from "next/link";
+import { graphQlInstance } from "@/services/gql"
+import { loginFormAtom } from '@/store/login'
 import cn from 'classnames'
+import { useAtom } from "jotai"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { sidebarAtom } from "../../store/sidebar"
+import { NavMenu } from "./NavMenu"
+import { Profile } from "./Profile"
 import styles from './index.module.scss'
 
 export const Sidebar = () => {
   const [sidebar, setSidebar] = useAtom(sidebarAtom)
+  const [, setLoginForm] = useAtom(loginFormAtom)
   const router = useRouter()
   
   const handlerToggleSidebar = () => {
@@ -18,7 +20,15 @@ export const Sidebar = () => {
 
   const handlerDisconnect = () => {
     graphQlInstance.removeAccessToken()
-    router.push('/')
+    setLoginForm({
+      username: '',
+      password: '',
+      isCodeSent: false,
+      accessToken: null,
+    })
+    router.push({
+      pathname: '/login',
+    })
   }
 
   return (
@@ -26,7 +36,7 @@ export const Sidebar = () => {
       <div className="sidebar__wrapper">
         <Link href={"/organizations"} legacyBehavior>
           <div className={cn(styles.logo)}>
-            <img src="/image/logo-m.svg" alt="" />
+            <img src="/b2b/image/logo-m.svg" alt="" />
             {!sidebar && (
               <div className={cn(styles.logo__info)}>
                 <h2 style={{ color: "#fff" }}>{sidebar ? '' : 'ICAPIA EV'}</h2>
@@ -43,14 +53,14 @@ export const Sidebar = () => {
             className={cn(styles.item)}
             onClick={handlerDisconnect}
           >
-            <img src="/image/logout-white.svg"/>
+            <img src="/b2b/image/logout-white.svg"/>
             {sidebar ? <span></span> : <span>Disconnect</span>}
           </div>
           <div
             className={cn(styles.item)}
             onClick={handlerToggleSidebar}
           >
-            <img src="/image/sidebar-icons/SidebarToggle.svg"/>
+            <img src="/b2b/image/sidebar-icons/SidebarToggle.svg"/>
             {sidebar ? <span></span> : <span>Toggle sidebar</span>}
           </div>
         </div>

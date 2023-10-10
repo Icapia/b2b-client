@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { useAtom } from 'jotai'
 import cn from 'classnames';
-import styles from './index.module.scss';
-import { snackbarState } from '../../store/snackbar';
+import { useAtom } from 'jotai';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { darkModeAtom } from '../../store/dark-theme';
+import { snackbarState } from '../../store/snackbar';
+import styles from './index.module.scss';
 
 type Position = ['top' | 'bottom', 'left' | 'right'];
 
@@ -58,7 +58,7 @@ export const Snackbar: React.FC<SnackbarPositionProps> = ({ position = ['top', '
     [styles.visible]: isVisible,
   }), [snackbar.type, isVisible, position]);
 
-  const snackbarIcon = `/image/icons/snackbar/${snackbar.type === 'warning'
+  const snackbarIcon = `/b2b/image/icons/snackbar/${snackbar.type === 'warning'
     ? 'warn.svg'
     : snackbar.type === 'success'
       ? 'success.svg'
