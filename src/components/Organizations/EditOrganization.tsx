@@ -92,13 +92,10 @@ export const EditOrganization: FC<EditOrganizationI> = ({
 		setIsRemove(true)
 	}
 
-  const handleDeleteSiteOrganization = () => {
+  const handleDeleteSiteOrganization = async () => {
     try {
       handleCloseRemoveDialog()
-			mutationDeleteSiteOrganization({
-				onCompleted: () => {
-					handleDeleteOrganization()
-				},
+			await mutationDeleteSiteOrganization({
 				onError: (e) => {
 					setSnackbar({
 						message: e?.message,
@@ -113,6 +110,8 @@ export const EditOrganization: FC<EditOrganizationI> = ({
           }
         },
 			})
+
+      await handleDeleteOrganization()
 		} catch (e: any) {
 			console.error(e)
 			setSnackbar({
@@ -123,9 +122,9 @@ export const EditOrganization: FC<EditOrganizationI> = ({
 		}
   }
 
-  const handleDeleteOrganization = () => {
+  const handleDeleteOrganization = async () => {
     try {
-			mutationDeleteOrganization({
+			await mutationDeleteOrganization({
 				onCompleted: () => {
 					setSnackbar({
 						message: 'The organization was successfully deleted',
@@ -253,7 +252,7 @@ export const EditOrganization: FC<EditOrganizationI> = ({
             fullWidth={false}
 						onClick={handleOpenRemoveDialog}
 					>
-						<img style={{marginRight: '5px'}} src="/image/icons/trash.svg"/>
+						<img style={{marginRight: '5px'}} src="/b2b/image/icons/trash.svg"/>
 						Delete Organization
 					</ButtonRemoveSmall>
         </div>

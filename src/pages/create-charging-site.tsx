@@ -56,8 +56,6 @@ export default function CreateChargingSite() {
 		})
 	}
 
-	console.log(form)
-
 	const handlerSave = () => {
 		try {
 			if(

@@ -1,13 +1,20 @@
-import { atom } from "jotai";
+import { graphQlInstance } from '@/services/gql'
+import { atom } from "jotai"
 
-export type LoginForm = {
+export type ILoginForm = {
   username: string;
   password: string;
   isCodeSent: boolean,
+  accessToken: string | null,
 }
 
-export const loginAtom = atom<LoginForm>({
+const bearerToken = graphQlInstance.getBearer();
+
+export const loginLoader = atom<boolean>(true);
+
+export const loginFormAtom = atom<ILoginForm>({
   username: '',
   password: '',
-  isCodeSent: false
+  isCodeSent: false,
+  accessToken: bearerToken,
 })

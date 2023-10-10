@@ -42,6 +42,8 @@ export default function ChargingSite() {
 	const [request, result] = useMutation(CREATE_AND_UPDATE_SITE_GQL)
 	const [isRemove, setIsRemove] = useState(false);
 
+	console.log(site)
+
 	const [deleteSiteMutation, deleteSite] = useMutation(DELETE_ONE_SITE_GQL);
 
 	useEffect(() => {
@@ -89,18 +91,20 @@ export default function ChargingSite() {
 	const handlerSave = () => {
 		try {
 			if(
-				form.location.coordinates[0] > 180 
-				|| form.location.coordinates[0] < -180
+				form.location.coordinates[0] > 90 
+				|| form.location.coordinates[0] < -90
+			) {
+				throw new Error('Latitude Must be within (-90; 90)')
+			}
+
+			if(
+				form.location.coordinates[1] > 180 
+				|| form.location.coordinates[1] < -180
 			) {
 				throw new Error('Longitude Must be within (-180; 180)')
 			}
 
-			if(
-				form.location.coordinates[1] > 90 
-				|| form.location.coordinates[1] < -90
-			) {
-				throw new Error('Latitude Must be within (-90; 90)')
-			}
+			console.log(form)
 
 			request({
 				onCompleted: () => {
@@ -110,7 +114,7 @@ export default function ChargingSite() {
 						open: true,
 					})
 					setTimeout(() => {
-						router.push('/charging-sites')
+						// router.push('/charging-sites')
 					}, 2000)
 				},
 				onError: (error: Error) => {
@@ -131,8 +135,8 @@ export default function ChargingSite() {
 							location: {
 								type: 'Point',
 								coordinates: [
-									form.location.coordinates[1],
 									form.location.coordinates[0],
+									form.location.coordinates[1],
 								],
 							},
 							zip_code: form?.zip_code,
@@ -275,7 +279,7 @@ export default function ChargingSite() {
 						onClick={handleOpenRemoveDialog}
 						className='mt-20'
 					>
-						<img style={{marginRight: '5px'}} src="/image/icons/trash.svg"/>
+						<img style={{marginRight: '5px'}} src="/b2b/image/icons/trash.svg"/>
 						Delete Site
 					</ButtonRemove>
 					<Dialog

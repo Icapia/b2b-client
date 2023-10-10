@@ -1,19 +1,21 @@
+import { loginFormAtom } from '@/store/login'
 import {
   FormGroup,
   Stack,
   TextField,
-} from "@mui/material";
+} from "@mui/material"
+import { useAtom } from "jotai"
+import { ChangeEvent } from "react"
 import {
   ButtonDefault,
-} from "../Buttons";
-import { ChangeEvent } from "react";
-import { useAtom } from "jotai";
-import { loginAtom } from "@/store/login";
+} from "../Buttons"
 
-export const MailForm = () => {
-  const [loginForm, setLoginForm] = useAtom(loginAtom)
+export const LoginForm = () => {
+  const [loginForm, setLoginForm] = useAtom(loginFormAtom)
 
-  const handlerChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handlerChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setLoginForm({...loginForm, username: event?.target?.value})
   }
 

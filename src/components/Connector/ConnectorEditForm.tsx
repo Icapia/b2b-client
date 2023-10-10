@@ -1,13 +1,13 @@
 import { siteAtom } from "@/store/edit-site"
 import {
-  Box,
-  FormControl,
-  FormGroup,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent
+    Box,
+    FormControl,
+    FormGroup,
+    Grid,
+    InputLabel,
+    MenuItem,
+    Select,
+    SelectChangeEvent
 } from "@mui/material"
 import { useAtom } from "jotai"
 import { ChangeEvent, FC } from "react"
@@ -129,7 +129,7 @@ export const ConnectorEditForm: FC<ConnectorEditFormI> = ({
             <ButtonRedTransparent 
               onClick={() => {handlerRemoveConnector(connectorId)}}
             >
-              <img style={{marginRight: '5px'}} src="/image/icons/trash.svg"/>
+              <img style={{marginRight: '5px'}} src="/b2b/image/icons/trash.svg"/>
               Remove
             </ButtonRedTransparent>
           </Grid>

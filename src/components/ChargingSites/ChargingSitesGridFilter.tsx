@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { ButtonBlack } from "../Buttons";
 
-import Link from "next/link";
 import { SiteT } from "@/types/site-types";
+import Link from "next/link";
 
 interface ChargingSitesGridFilterI {
   site: SiteT
@@ -26,7 +26,7 @@ export const ChargingSitesGridFilter: FC<ChargingSitesGridFilterI> =({
         <div className="filter__filters">
           <Link href={`/charging-sites/${site?.id}`}>
             <ButtonBlack>
-              <img style={{marginRight: "4px"}} src={'/image/icons/settings.svg'}/>
+              <img style={{marginRight: "4px"}} src={'/b2b/image/icons/settings.svg'}/>
               Manage site
             </ButtonBlack>
           </Link>

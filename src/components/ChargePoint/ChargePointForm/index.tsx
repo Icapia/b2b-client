@@ -128,7 +128,7 @@ export const ChargePointForm: FC<ChargePointFormI> = ({
 				fullWidth
 				onClick={handleOpenRemoveDialog}
 			>
-				<img style={{marginRight: '5px'}} src="/image/icons/trash.svg"/>
+				<img style={{marginRight: '5px'}} src="/b2b/image/icons/trash.svg"/>
 				Delete Charger
 			</ButtonRemove>
 			<Dialog

@@ -1,5 +1,5 @@
-import { FC, PropsWithChildren } from "react";
 import { Modal } from "@mui/material";
+import { FC, PropsWithChildren } from "react";
 
 interface ModalI {
   isOpen: boolean,
@@ -17,7 +17,7 @@ export const ModalComponent: FC<PropsWithChildren<ModalI>> = ({
         <div className="modal__content topline topline-35">
           {children}
           <div onClick={onRequestClose} className="modal__close">
-            <img width={24} height={24} src="/image/sidebar-icons/Close.svg" alt="" />
+            <img width={24} height={24} src="/b2b/image/sidebar-icons/Close.svg" alt="" />
           </div>
         </div>
       </div>
