@@ -2,16 +2,20 @@ import { Loader } from "@/components/Loader"
 import { ModalComponent } from "@/components/Modal/Modal"
 import { CreateOrganizationForm } from "@/components/Organizations/CreateOrganization"
 import { OrganizationsGrid } from "@/components/Organizations/OrganizationsGrid"
+import { isSSR } from '@/store/dark-theme'
 import { useAtom } from "jotai"
+import { useEffect } from 'react'
 import {
   ButtonDefault,
 } from "../components/Buttons"
 import { MainLayout } from "../layouts/MainLayout"
-import { asyncGetOrganization, organizationCreateAtom } from "../store/organization"
+import { asyncGetOrganization, organizationCreateAtom, updateOrganizationRequest } from "../store/organization"
 
 export default function Organizations() {
   const [isOpen, setIsOpen] = useAtom(organizationCreateAtom)
   const [organizations] = useAtom(asyncGetOrganization)
+  const bearerToken = isSSR ? null : localStorage.getItem("Bearer");
+  const [update, setUpdate] = useAtom(updateOrganizationRequest)
 
   const handlerOpen = () => {
     setIsOpen(true);
@@ -20,6 +24,10 @@ export default function Organizations() {
   const handlerClose = () => {
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    setUpdate(!update)
+  }, [bearerToken])
 
   return (
     <MainLayout

@@ -4,14 +4,14 @@ import {
   InMemoryCache,
   NormalizedCacheObject,
   createHttpLink,
-} from "@apollo/client";
+} from "@apollo/client"
 
-import { LOGIN_USER_GQL } from "@/graphql/gql/mutations/auth-mutations.gql";
-import { ResponseAuth } from "@/types/entities";
-import { isSSR } from "@/store/dark-theme";
-import { setContext } from "@apollo/client/link/context";
+import { LOGIN_USER_GQL } from "@/graphql/gql/mutations/auth-mutations.gql"
+import { isSSR } from "@/store/dark-theme"
+import { ResponseAuth } from "@/types/entities"
+import { setContext } from "@apollo/client/link/context"
 
-class GraphQLService {
+export class GraphQLService {
   private static instance: GraphQLService;
 
   public client: ApolloClient<NormalizedCacheObject>;
@@ -117,5 +117,3 @@ class GraphQLService {
 }
 
 export const graphQlInstance = GraphQLService.getInstance();
-
-console.log(graphQlInstance);

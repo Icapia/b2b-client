@@ -1,9 +1,9 @@
-import { atom } from "jotai";
-import { atomsWithQuery } from "jotai-tanstack-query";
-import { GET_ORGANIZATIONS_GQL } from "../graphql/gql/queries/organizations-queries.gql";
-import { Organization } from "../types/entities";
-import { graphQlInstance } from "@/services/gql";
-import { loadable } from "jotai/utils";
+import { GraphQLService } from "@/services/gql"
+import { atom } from "jotai"
+import { atomsWithQuery } from "jotai-tanstack-query"
+import { loadable } from "jotai/utils"
+import { GET_ORGANIZATIONS_GQL } from "../graphql/gql/queries/organizations-queries.gql"
+import { Organization } from "../types/entities"
 
 export const organizationCreateAtom = atom<boolean>(false)
 export const organizationEditAtom = atom<boolean>(false)
@@ -15,7 +15,10 @@ export const [getOrganizations] = atomsWithQuery((get) => ({
     get(updateOrganizationRequest)
   ],
   queryFn: async ({ queryKey: [, updateOrganizationRequest] }) => {
-    const response = await graphQlInstance?.client?.query({
+    const isUpdate = updateOrganizationRequest;
+    const graphQl = GraphQLService.getInstance();
+
+    const response = await graphQl?.client?.query({
       query: GET_ORGANIZATIONS_GQL,
       variables: {
         filter: {},
