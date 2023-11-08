@@ -9,27 +9,25 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
 export default function Login() {
-	const router = useRouter();
-	const bearerToken = graphQlInstance.getBearer();
-  const [loader, setLoader] = useAtom(loginLoader);
-	const [loginForm] = useAtom(loginFormAtom)
+  const router = useRouter()
+  const bearerToken = graphQlInstance.getBearer()
+  const [loader, setLoader] = useAtom(loginLoader)
+  const [loginForm] = useAtom(loginFormAtom)
 
-	useEffect(() => {
+  useEffect(() => {
     setLoader(true)
 
-		if(bearerToken) {
-			router.push({ pathname: '/organizations' });
-		} else {
+    if (bearerToken) {
+      router.push({ pathname: '/organizations' })
+    } else {
       setLoader(false)
     }
-	}, [bearerToken])
+  }, [bearerToken])
 
-  console.log(loginForm)
-
-	return (
-		<div className='login'>
+  return (
+    <div className='login'>
       {
-        loader ? <Loader/> : (
+        loader ? <Loader /> : (
           <div className='login__wrapper'>
             <Stack
               direction='column'
@@ -49,5 +47,5 @@ export default function Login() {
         )
       }
     </div>
-	)
+  )
 }	

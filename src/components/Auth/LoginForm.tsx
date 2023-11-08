@@ -1,4 +1,6 @@
+import { LOGIN_SEND_CODE_GQL } from '@/graphql/gql/mutations/auth-mutations.gql'
 import { loginFormAtom } from '@/store/login'
+import { useMutation } from '@apollo/client'
 import {
   FormGroup,
   Stack,
@@ -12,17 +14,28 @@ import {
 
 export const LoginForm = () => {
   const [loginForm, setLoginForm] = useAtom(loginFormAtom)
+  const [mutationSendCode] = useMutation(LOGIN_SEND_CODE_GQL)
 
   const handlerChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setLoginForm({...loginForm, username: event?.target?.value})
+    setLoginForm({ ...loginForm, email: event?.target?.value })
   }
 
-  const handleSendCode = () => {
-    setLoginForm({...loginForm, isCodeSent: true})
-  };
- 
+  const handleSendCode = async () => {
+    const res = await mutationSendCode({
+      variables: {
+        "input": {
+          "email": loginForm.email
+        }
+      }
+    })
+    console.log('Mutation response', res)
+    if (res.data) {
+      setLoginForm({ ...loginForm, isCodeSent: true })
+    }
+  }
+
   return (
     <>
       <Stack
@@ -50,7 +63,7 @@ export const LoginForm = () => {
                 InputLabelProps={{ required: false }}
                 label={"E-mail"}
                 placeholder={"test@test.com"}
-                onChange={(event) => {handlerChange(event)}}
+                onChange={(event) => { handlerChange(event) }}
               />
             </FormGroup>
           </div>
@@ -72,5 +85,5 @@ export const LoginForm = () => {
         </div>
       </Stack>
     </>
-  );
-};
+  )
+}

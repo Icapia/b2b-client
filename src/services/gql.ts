@@ -6,7 +6,7 @@ import {
   createHttpLink,
 } from "@apollo/client"
 
-import { LOGIN_USER_GQL } from "@/graphql/gql/mutations/auth-mutations.gql"
+import { LOGIN_AUTH_GQL } from "@/graphql/gql/mutations/auth-mutations.gql"
 import { isSSR } from "@/store/dark-theme"
 import { ResponseAuth } from "@/types/entities"
 import { setContext } from "@apollo/client/link/context"
@@ -80,11 +80,11 @@ export class GraphQLService {
     try {
       const { data: response }: FetchResult<ResponseAuth> =
         await this.client.mutate({
-          mutation: LOGIN_USER_GQL,
+          mutation: LOGIN_AUTH_GQL,
           variables: {
             input: {
-              username: email,
-              password: code,
+              email: email,
+              code: code,
             },
           },
         });

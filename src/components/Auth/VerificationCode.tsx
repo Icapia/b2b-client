@@ -17,22 +17,22 @@ import {
 export const VerificationCode = () => {
   const [loginForm, setLoginForm] = useAtom(loginFormAtom)
   const [, setSnackbar] = useAtom(snackbarState)
-  const router = useRouter();
-  const [loader, setLoader] = useAtom(loginLoader);
+  const router = useRouter()
+  const [loader, setLoader] = useAtom(loginLoader)
 
   const handlerChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setLoginForm({...loginForm, password: event?.target?.value})
+    setLoginForm({ ...loginForm, code: event?.target?.value })
   }
 
   const handlerLogin = async () => {
-    setLoader(true);
-    await handleMutationLogin();
-    setLoader(false);
-  };
+    setLoader(true)
+    await handleMutationLogin()
+    setLoader(false)
+  }
 
   const handleMutationLogin = async () => {
     try {
-      await graphQlInstance.authUser(loginForm.username, loginForm.password)
+      await graphQlInstance.authUser(loginForm.email, loginForm.code)
     } catch (error: any) {
       console.log(error)
       setSnackbar({
@@ -40,11 +40,11 @@ export const VerificationCode = () => {
         type: 'error'
       })
     }
-  };
+  }
 
   const handlerBack = () => {
-    setLoginForm({...loginForm, isCodeSent: false})
-  };
+    setLoginForm({ ...loginForm, isCodeSent: false })
+  }
 
   return (
     <>
@@ -102,5 +102,5 @@ export const VerificationCode = () => {
         </div>
       </Stack>
     </>
-  );
-};
+  )
+}
