@@ -12,42 +12,42 @@ import { OrganizationCreateForm } from '../../types/organization-types'
 import { Input } from '../UI/Input/Input'
 
 export const CreateOrganizationForm = () => {
-  const [, setIsOpen] = useAtom(organizationCreateAtom);
-  const [update, setUpdate] = useAtom(updateOrganizationRequest);
+  const [, setIsOpen] = useAtom(organizationCreateAtom)
+  const [update, setUpdate] = useAtom(updateOrganizationRequest)
   const [form, setForm] = useState<OrganizationCreateForm>({
     address: '',
     email: '',
     name: '',
     zip_code: '',
     phone_number: '',
-  });
-  const [, setSnackbar] = useAtom(snackbarState);
+  })
+  const [, setSnackbar] = useAtom(snackbarState)
 
-  const [mutationCreateOrganization, createOrganization] = useMutation(CREATE_ORGANIZATION_GQL);
+  const [mutationCreateOrganization, createOrganization] = useMutation(CREATE_ORGANIZATION_GQL)
 
   const handlerChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const name = event.target.name;
-    setForm({ ...form, [name]: event.target.value });
-  };
+    const name = event.target.name
+    setForm({ ...form, [name]: event.target.value })
+  }
 
   const handlerClose = () => {
-    setIsOpen(false);
-  };
+    setIsOpen(false)
+  }
 
   const handlerCreate = async () => {
     await mutationCreateOrganization({
       onCompleted: () => {
-        handlerClose();
+        handlerClose()
         setSnackbar({
           message: 'Organization Created',
           type: 'success',
-        });
+        })
       },
       onError: (e) => {
         setSnackbar({
           message: e?.message,
           type: 'error',
-        });
+        })
       },
       variables: {
         input: {
@@ -70,10 +70,10 @@ export const CreateOrganizationForm = () => {
           },
         },
       ],
-    });
+    })
 
-    setUpdate(!update);
-  };
+    setUpdate(!update)
+  }
 
   return (
     <Box>
@@ -183,5 +183,5 @@ export const CreateOrganizationForm = () => {
         </ButtonDefault>
       </Stack>
     </Box>
-  );
-};
+  )
+}

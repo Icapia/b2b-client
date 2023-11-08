@@ -28,23 +28,23 @@ export const EditOrganization: FC<EditOrganizationI> = ({
     name: edit?.row?.name,
     zip_code: edit?.row?.zip_code,
     phone_number: edit?.row?.phone_number,
-  });
+  })
   const [, setSnackbar] = useAtom(snackbarState)
 
   const [mutationUpdateOrganization, updateOrganization] = useMutation(
     UPDATE_ORGANIZATION_GQL
-  );
+  )
   const [mutationDeleteSiteOrganization, deleteSiteOrganization] = useMutation(
     DELETE_SITE_GQL
-  );
+  )
   const [mutationDeleteOrganization, deleteOrganization] = useMutation(
     DELETE_ORGANIZATION_GQL
-  );
-  const [isRemove, setIsRemove] = useState(false);
+  )
+  const [isRemove, setIsRemove] = useState(false)
 
   const handlerChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const name = event.target.name;
-    setForm({...form, [name]: event.target.value})
+    const name = event.target.name
+    setForm({ ...form, [name]: event.target.value })
   }
 
   const handlerClose = () => {
@@ -54,13 +54,13 @@ export const EditOrganization: FC<EditOrganizationI> = ({
   const handlerCreate = async () => {
     const res = await mutationUpdateOrganization({
       onCompleted: async () => {
-        setUpdate(!update);
+        setUpdate(!update)
         setSnackbar({
           open: true,
           message: 'Organization Updated',
           type: "success",
         })
-        handlerClose();
+        handlerClose()
       },
       variables: {
         input: {
@@ -81,85 +81,85 @@ export const EditOrganization: FC<EditOrganizationI> = ({
           sorting: [],
         },
       }]
-    });
+    })
   }
 
   const handleCloseRemoveDialog = () => {
-		setIsRemove(false)
-	}
+    setIsRemove(false)
+  }
 
-	const handleOpenRemoveDialog = () => {
-		setIsRemove(true)
-	}
+  const handleOpenRemoveDialog = () => {
+    setIsRemove(true)
+  }
 
   const handleDeleteSiteOrganization = async () => {
     try {
       handleCloseRemoveDialog()
-			await mutationDeleteSiteOrganization({
-				onError: (e) => {
-					setSnackbar({
-						message: e?.message,
-						type: 'error',
-						open: true,
-					});
-				},
-				variables: {
+      await mutationDeleteSiteOrganization({
+        onError: (e) => {
+          setSnackbar({
+            message: e?.message,
+            type: 'error',
+            open: true,
+          })
+        },
+        variables: {
           "input": {
-            "filter": {"organizationId": {"eq": parseInt(id.toString())}},
-            "update": {"organizationId": parseInt(id.toString())}
+            "filter": { "organizationId": { "eq": parseInt(id.toString()) } },
+            "update": { "organizationId": parseInt(id.toString()) }
           }
         },
-			})
+      })
 
       await handleDeleteOrganization()
-		} catch (e: any) {
-			console.error(e)
-			setSnackbar({
-				message: e?.message,
-				type: 'error',
-				open: true,
-			});
-		}
+    } catch (e: any) {
+      console.error(e)
+      setSnackbar({
+        message: e?.message,
+        type: 'error',
+        open: true,
+      })
+    }
   }
 
   const handleDeleteOrganization = async () => {
     try {
-			await mutationDeleteOrganization({
-				onCompleted: () => {
-					setSnackbar({
-						message: 'The organization was successfully deleted',
-						type: 'success',
-						open: true,
-					});
-				},
-				onError: (e) => {
-					setSnackbar({
-						message: e?.message,
-						type: 'error',
-						open: true,
-					});
-				},
-				variables: {
+      await mutationDeleteOrganization({
+        onCompleted: () => {
+          setSnackbar({
+            message: 'The organization was successfully deleted',
+            type: 'success',
+            open: true,
+          })
+        },
+        onError: (e) => {
+          setSnackbar({
+            message: e?.message,
+            type: 'error',
+            open: true,
+          })
+        },
+        variables: {
           "input": {
             "id": id
           }
         },
-				refetchQueries: () => [{
+        refetchQueries: () => [{
           query: GET_ORGANIZATIONS_GQL,
           variables: {
             filter: {},
             sorting: [],
           },
         }]
-			})
-		} catch (e: any) {
-			console.error(e)
-			setSnackbar({
-				message: e?.message,
-				type: 'error',
-				open: true,
-			});
-		}
+      })
+    } catch (e: any) {
+      console.error(e)
+      setSnackbar({
+        message: e?.message,
+        type: 'error',
+        open: true,
+      })
+    }
   }
 
   return (
@@ -208,7 +208,7 @@ export const EditOrganization: FC<EditOrganizationI> = ({
               />
             </Grid>
             <Grid item xs={6}>
-             <Input
+              <Input
                 value={form.phone_number}
                 type={'string'}
                 validation='phone'
@@ -247,14 +247,14 @@ export const EditOrganization: FC<EditOrganizationI> = ({
           >
             Cancel
           </ButtonClose>
-          <ButtonRemoveSmall 
-						className={"mt-20 flex-fw"}
+          <ButtonRemoveSmall
+            className={"mt-20 flex-fw"}
             fullWidth={false}
-						onClick={handleOpenRemoveDialog}
-					>
-						<img style={{marginRight: '5px'}} src="/b2b/image/icons/trash.svg"/>
-						Delete Organization
-					</ButtonRemoveSmall>
+            onClick={handleOpenRemoveDialog}
+          >
+            <img style={{ marginRight: '5px' }} src="/b2b/image/icons/trash.svg" />
+            Delete Organization
+          </ButtonRemoveSmall>
         </div>
 
         <ButtonDefault
@@ -288,5 +288,5 @@ export const EditOrganization: FC<EditOrganizationI> = ({
         </DialogActions>
       </Dialog>
     </Box>
-  );
-};
+  )
+}
