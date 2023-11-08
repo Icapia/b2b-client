@@ -13,7 +13,7 @@ export const Sidebar = () => {
   const [sidebar, setSidebar] = useAtom(sidebarAtom)
   const [, setLoginForm] = useAtom(loginFormAtom)
   const router = useRouter()
-  
+
   const handlerToggleSidebar = () => {
     setSidebar(!sidebar)
   }
@@ -21,8 +21,8 @@ export const Sidebar = () => {
   const handlerDisconnect = () => {
     graphQlInstance.removeAccessToken()
     setLoginForm({
-      username: '',
-      password: '',
+      email: '',
+      code: '',
       isCodeSent: false,
       accessToken: null,
     })
@@ -45,27 +45,27 @@ export const Sidebar = () => {
             )}
           </div>
         </Link>
-        <Profile/>
-        <NavMenu/>
-          
+        <Profile />
+        <NavMenu />
+
         <div className={cn(styles.container)}>
           <div
             className={cn(styles.item)}
             onClick={handlerDisconnect}
           >
-            <img src="/b2b/image/logout-white.svg"/>
+            <img src="/b2b/image/logout-white.svg" />
             {sidebar ? <span></span> : <span>Disconnect</span>}
           </div>
           <div
             className={cn(styles.item)}
             onClick={handlerToggleSidebar}
           >
-            <img src="/b2b/image/sidebar-icons/SidebarToggle.svg"/>
+            <img src="/b2b/image/sidebar-icons/SidebarToggle.svg" />
             {sidebar ? <span></span> : <span>Toggle sidebar</span>}
           </div>
         </div>
-        
+
       </div>
     </div>
-  );
+  )
 }
