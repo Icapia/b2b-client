@@ -37,5 +37,13 @@
       font-weight: 600;
       opacity: 1;
     }
+
+    &.email {
+      max-width: 145px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
 }
+

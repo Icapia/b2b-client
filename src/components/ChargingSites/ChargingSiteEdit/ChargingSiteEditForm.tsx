@@ -24,7 +24,7 @@ export const ChargingSiteEditForm: FC<ChargingSiteEditFormI> = ({
 	organizations,
 }) => {
 	const [form, setForm] = useAtom(siteAtom)
-	const [selected, setSelected] = useState(parseInt(organizations[0]?.id) ?? 0);
+	const [selected, setSelected] = useState(parseInt(organizations[0]?.id) ?? 0)
 
 	const handlerChange = (
 		event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -38,11 +38,11 @@ export const ChargingSiteEditForm: FC<ChargingSiteEditFormI> = ({
 		const coordinates: Location = {
 			type: 'Point',
 			coordinates: [
-				isLatitude ? 
-					parseFloat(event.target.value) 
+				isLatitude ?
+					parseFloat(event.target.value)
 					: form.location.coordinates[0],
 				!isLatitude
-					? parseFloat(event.target.value) 
+					? parseFloat(event.target.value)
 					: form.location.coordinates[1],
 			],
 		}
@@ -55,7 +55,7 @@ export const ChargingSiteEditForm: FC<ChargingSiteEditFormI> = ({
 		setForm({ ...form, organizationId: value })
 	}
 
-	console.log("Form",form)
+	console.log("Form", form)
 
 	return (
 		<Box className={styles.container}>
@@ -143,7 +143,7 @@ export const ChargingSiteEditForm: FC<ChargingSiteEditFormI> = ({
 
 					<Grid item xs={6}>
 						<Input
-							value={form.location.coordinates[0]}
+							value={form.location.coordinates?.[0]}
 							type='text'
 							name='latitude'
 							validation='latitude'
@@ -155,7 +155,7 @@ export const ChargingSiteEditForm: FC<ChargingSiteEditFormI> = ({
 					</Grid>
 					<Grid item xs={6}>
 						<Input
-							value={form.location.coordinates[1]}
+							value={form.location.coordinates?.[1]}
 							type='text'
 							name='longitude'
 							label='Coordinates (Longitude)'

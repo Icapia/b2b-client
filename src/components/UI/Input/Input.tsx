@@ -69,7 +69,7 @@ export const Input: FC<InputI> = ({
 		field.value = value
 	}, [value])
 
-	if(adornment) {
+	if (adornment) {
 		return (
 			<FormControl focused fullWidth className='mt-20'>
 				<InputLabel htmlFor={name}>
@@ -78,7 +78,7 @@ export const Input: FC<InputI> = ({
 				<OutlinedInput
 					{...field}
 					error={fieldState.invalid}
-					value={field.value || ''}
+					value={field.value || value}
 					type={type || 'text'}
 					name={name}
 					label={label}
@@ -97,7 +97,7 @@ export const Input: FC<InputI> = ({
 	}
 
 	return (
-		<div style={{width: '100%'}}>
+		<div style={{ width: '100%' }}>
 			<TextField
 				fullWidth
 				{...field}
@@ -111,7 +111,7 @@ export const Input: FC<InputI> = ({
 				className={'mt-20 flex-w'}
 				error={fieldState.invalid}
 				focused={true}
-				style={{WebkitAppearance: 'none'}}
+				style={{ WebkitAppearance: 'none' }}
 				onChange={(event) => {
 					field.onChange(event)
 					onChange(event)

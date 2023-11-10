@@ -11,15 +11,18 @@ import styles from './index.module.scss'
 
 export const Profile = () => {
 	const [sidebar] = useAtom(sidebarAtom)
-	const [user, setUser] = useAtom(userAtom);
-	const bearerToken = isSSR ? null : localStorage.getItem("Bearer");
+	const [user, setUser] = useAtom(userAtom)
+	const bearerToken = isSSR ? null : localStorage.getItem("Bearer")
+	const userName = user.name || `User #${user.sub}`
 
 	useEffect(() => {
-    if(bearerToken) {
+		if (bearerToken) {
 			const _user: IUser = jwt_decode(bearerToken)
-			setUser(_user);
+			setUser(_user)
 		}
 	}, [bearerToken])
+
+	console.log(user)
 
 	return (
 		<div className={cn(styles.wrapper)}>
@@ -28,8 +31,8 @@ export const Profile = () => {
 			</div>
 			{!sidebar && (
 				<div className={cn(styles.profile)}>
-					<span className={cn(styles.name)}>{user?.name}</span>
-					<span>{user?.email}</span>
+					<span className={cn(styles.name)}>{userName}</span>
+					<span className={cn(styles.email)}>{user?.email}</span>
 				</div>
 			)}
 		</div>
